@@ -98,7 +98,8 @@
 .course_category_tree .controls div {padding-right:2em;font-size:75%;}
 .course_category_tree .category {background-color:#FFF;background-image:url([[pix:theme|hgradient]]);background-repeat:repeat-x;border:1px solid #ddd;margin-bottom:10px;}
 /*.course_category_tree .category .subcategories {background-color:inherit;padding-left:11px;border-width:1px 0 1px 1px;border-color:#FFF;border-style:solid;margin-top:8px;}*/
-.course_category_tree .category.with_children .category_label {background-position:3px 3px;margin-left:6px;}
+.course_category_tree .category.with_children.collapsed .category_label,
+.course_category_tree .category.with_children .category_label {background-position:0px 8px;margin-left:6px;}
 .course_category_tree .category_link .category_link {font-size:95%;}
 .course_category_tree .category_label {padding-left:13px;}
 .course_category_tree .category_link {display:block;margin:1px 5px 5px 5px;font-size:120%;font-weight:bold;}
@@ -113,11 +114,7 @@
 
 /* Publication */
 #page-course-publish-metadata .metadatatext {width:400px;}
-#page-course-publish-metadata .hubscreenshot {
-    display:inline;
-    float:left;
-    margin-right:10px;
-}
+#page-course-publish-metadata .hubscreenshot {display:inline;float:left;margin-right:10px;}
 #page-course-publish-metadata .hubscreenshot img {vertical-align:bottom;}
 #page-course-publish-metadata .hubdescription {}
 #page-course-publish-metadata .hubinfo {display:block; margin-bottom:20px;}
