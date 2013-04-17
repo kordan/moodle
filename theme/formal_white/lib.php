@@ -154,6 +154,10 @@ function formal_white_set_blockcolumnwidth($css, $blockcolumnwidth) {
     $tag = '[[calculated:minwidth]]';
     $css = str_replace($tag, $calculated.'px', $css);
 
+    $calculated = $blockcolumnwidth - 80; // 80 is the room I leave for the ok button, margins, spaces...
+    $tag = '[[calculated:searchforuminputwidth]]';
+    $css = str_replace($tag, $calculated.'px', $css);
+
     return $css;
 }
 

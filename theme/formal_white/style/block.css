@@ -9,6 +9,9 @@
 .block .content {background-color:[[setting:blockcontentbgc]];}
 .block img.icon {padding-right:0}
 
+/* block block search forums */
+.block_search_forums input[type="text"] {width:[[calculated:searchforuminputwidth]];}
+
 /* block login */
 .block_login .btn {margin-top:0.5em;text-align:center;}
 .block_login .content {padding:[[static:lb_contentpadding]];} /* to overwrite canvas->blocks->padding: 5px 10% 5px 0; */
