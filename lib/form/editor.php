@@ -275,6 +275,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element {
 
         $id           = $this->_attributes['id'];
         $elname       = $this->_attributes['name'];
+        $elclass = (isset($this->_attributes['class'])) ? ' class="'.$this->_attributes['class'].'"' : '';
 
         $subdirs      = $this->_options['subdirs'];
         $maxbytes     = $this->_options['maxbytes'];
@@ -291,8 +292,18 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element {
             $maxfiles = 0;
         }
 
-        $str = $this->_getTabs();
-        $str .= '<div>';
+        // original code
+        // $str = $this->_getTabs();
+        // $str .= '<div>';
+
+        $str = $this->_getTabs() . '<div' . $elclass . '>';
+
+        // The next solution can't work because...
+        // attributes "id" and "name" are already in use in the child html element
+        // so they are not allowed here because of their uniqueness
+        // $attrString = $this->_getAttrString($this->_attributes);
+        // echo '$attrString = '.$attrString.'<br />';
+        // $str = $this->_getTabs() . '<div' . $attrString . '>';
 
         $editor = editors_get_preferred_editor($format);
         $strformats = format_text_menu();
