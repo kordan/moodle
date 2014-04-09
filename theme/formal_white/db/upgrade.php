@@ -46,6 +46,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 function xmldb_theme_formal_white_upgrade($oldversion) {
+    global $CFG;
 
     // Moodle v2.2.0 release upgrade line
     // Put any upgrade step following this
@@ -83,9 +84,49 @@ function xmldb_theme_formal_white_upgrade($oldversion) {
     // Moodle v2.5.0 release upgrade line.
     // Put any upgrade step following this.
 
-
     // Moodle v2.6.0 release upgrade line.
     // Put any upgrade step following this.
+
+    if ($oldversion < 2014040900) {
+        // Migrate logo URL.
+        $settingnames = array('customlogourl', 'frontpagelogourl');
+        foreach ($settingnames as $settingname) {
+            $logo = get_config('theme_formal_white', $settingname);
+            if ($logo === '') {
+                // No logo means nothing to do.
+            } else {
+                // migrate relative path to absolute one
+                if (strtolower(substr($logo, 0, 4)) != 'http') { // https is taken into account
+                    $logo = $CFG->wwwroot.'/'.$logo;
+                }
+                if ($logo = clean_param($logo, PARAM_URL)) {
+                    require_once("$CFG->libdir/filelib.php");
+                    if ($content = download_file_content($logo)) {
+                        $filename = preg_replace('/^.*\//', '', $logo);
+                        if (!$filename = clean_param($filename, PARAM_FILE)) {
+                            // Some name is better than no name...
+                            $filename = 'logo.jpg';
+                        }
+                        $fs = get_file_storage();
+                        // 'filearea' has the same name of the setting
+                        $record = array(
+                            'contextid' => context_system::instance()->id, 'component' => 'theme_formal_white',
+                            'filearea' => $settingname, 'itemid' => 0, 'filepath' => '/', 'filename' => $filename);
+                        $fs->create_file_from_string($record, $content);
+                        set_config($settingname, '/'.$filename, 'theme_formal_white');
+                        unset($content);
+                    } else {
+                        // Prompt for new logo, the old setting was invalid.
+                        unset_config('theme_formal_white', $settingname);
+                    }
+                } else {
+                    // Prompt for new logo, the old setting was invalid.
+                    unset_config('theme_formal_white', $settingname);
+                }
+            }
+        }
+        upgrade_plugin_savepoint(true, 2014040900, 'theme', 'formal_white');
+    }
 
     return true;
 }
