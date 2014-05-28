@@ -1,0 +1,44 @@
+body {
+    padding-top: 42px;
+}
+
+body.has_dock div#dock {
+    background-color:#F8F8F8;
+}
+
+#dock {
+    width: 44px;
+}
+
+.container-fluid {
+    padding:0;
+}
+
+.navbar-text {
+    margin-right: 25px;
+}
+
+.navbar .brand {
+    margin-left:0;
+}
+
+.block {
+    padding: 0;
+}
+
+.block .header h2 {
+    padding: 10px 15px;
+}
+
+.block .header .block_action {
+    padding: 8px 15px;
+}
+
+.mform fieldset.collapsible legend a.fheader {
+    margin-left: 0;
+}
+
+/* ------------------- */
+/* Custom CSS Settings */
+/* ------------------- */
+[[setting:customcss]]

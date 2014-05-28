@@ -1,0 +1,35 @@
+html, body {
+    background-color:[[setting:pagebackground]];
+}
+
+a.logo {
+    background: url([[setting:logo]]) no-repeat 0 0;
+    display: block;
+    float: left;
+    height: 75px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.dir-rtl a.logo {
+    background: url([[setting:logo]]) no-repeat 100% 0;
+    display: block;
+    float: right;
+}
+
+.block .header .title,
+.course-content .navigationtitle,
+#dock #dockeditempanel .dockeditempanel_hd,
+.generaltable th.header,
+table#defineroletable tr.rolecapheading,
+.capdefault,
+.questionbankwindow h2,
+.courses .coursebox.even:hover, .course_category_tree .courses > .paging:hover,
+.courses .coursebox.odd:hover, .course_category_tree .courses > .paging:hover {
+    background-image: -moz-linear-gradient(top,[[setting:begincolor]],[[setting:endcolor]]); /* For Firefox 3.6 to 15 */
+    background-image: -webkit-gradient(linear,0 0,0 100%,from([[setting:begincolor]]),to([[setting:endcolor]])); /* For Safari 5.1 to 6.0 */
+    background-image: -webkit-linear-gradient(top,[[setting:begincolor]],[[setting:endcolor]]); /* For Safari 5.1 to 6.0 */
+    background-image: -o-linear-gradient(top,[[setting:begincolor]],[[setting:endcolor]]); /* For Opera 11.1 to 12.0 */
+    background-image: linear-gradient(to bottom,[[setting:begincolor]],[[setting:endcolor]]); /* Standard syntax (must be last) */
+}
