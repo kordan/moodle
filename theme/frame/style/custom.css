@@ -14,6 +14,10 @@ body.has_dock div#dock {
     padding:0;
 }
 
+.nonavbar {
+    padding-top: 3px;
+}
+
 .navbar-text {
     margin-right: 25px;
 }
