@@ -166,7 +166,11 @@ $PAGE->requires->data_for_js('scormplayerdata', Array('launch' => false,
 $PAGE->requires->js('/mod/scorm/request.js', true);
 $PAGE->requires->js('/lib/cookies.js', true);
 echo $OUTPUT->header();
+<<<<<<< HEAD
 if (!empty($scorm->displayactivityname)) {
+=======
+if ($displaymode !== 'popup') {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     echo $OUTPUT->heading(format_string($scorm->name));
 }
 

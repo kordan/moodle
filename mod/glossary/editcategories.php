@@ -131,6 +131,7 @@ if ( $hook >0 ) {
             $DB->delete_records("glossary_entries_categories", array("categoryid"=>$hook));
             $DB->delete_records("glossary_categories", array("id"=>$hook));
 
+<<<<<<< HEAD
             $event = \mod_glossary\event\category_deleted::create(array(
                 'context' => $context,
                 'objectid' => $hook
@@ -141,6 +142,9 @@ if ( $hook >0 ) {
 
             // Reset caches.
             \mod_glossary\local\concept_cache::reset_glossary($glossary);
+=======
+            add_to_log($course->id, "glossary", "delete category", "editcategories.php?id=$cm->id", $hook,$cm->id);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
             redirect("editcategories.php?id=$cm->id", get_string("categorydeleted", "glossary"), 2);
         } else {

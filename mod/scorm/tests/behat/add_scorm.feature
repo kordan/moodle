@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @mod @mod_scorm @_file_upload @_switch_frame
+=======
+@mod @mod_scorm @_only_local @_file_upload @_switch_frame
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Add scorm activity
   In order to let students access a scorm package
   As a teacher
@@ -21,7 +25,11 @@ Feature: Add scorm activity
     And I follow "Course 1"
     And I turn editing mode on
     And I add a "SCORM package" to section "1"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Name | Awesome SCORM package |
       | Description | Description |
     And I upload "mod/scorm/tests/packages/singlesco_scorm12.zip" file to "Package file" filemanager

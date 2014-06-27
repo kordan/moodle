@@ -54,7 +54,11 @@ class mod_assign_quick_grading_form extends moodleform {
 
         // Skip notifications option.
         $mform->addElement('selectyesno', 'sendstudentnotifications', get_string('sendstudentnotifications', 'assign'));
+<<<<<<< HEAD
         $mform->setDefault('sendstudentnotifications', $instance['sendstudentnotifications']);
+=======
+        $mform->setDefault('sendstudentnotifications', 1);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
         // Buttons.
         $savemessage = get_string('saveallquickgradingchanges', 'assign');

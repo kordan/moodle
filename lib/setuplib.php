@@ -994,6 +994,14 @@ function workaround_max_input_vars() {
         $values = array();
         parse_str($chunk, $values);
 
+<<<<<<< HEAD
+=======
+        if (ini_get_bool('magic_quotes_gpc')) {
+            // Use the same logic as lib/setup.php to work around deprecated magic quotes.
+            $values = array_map('stripslashes_deep', $values);
+        }
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         merge_query_params($_POST, $values);
         merge_query_params($_REQUEST, $values);
     }

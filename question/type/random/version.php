@@ -26,7 +26,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_random';
+<<<<<<< HEAD
 $plugin->version   = 2014051200;
+=======
+$plugin->version   = 2013110501;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 $plugin->requires  = 2014050800;
 

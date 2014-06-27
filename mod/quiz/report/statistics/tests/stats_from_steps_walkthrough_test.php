@@ -324,6 +324,7 @@ class quiz_report_statistics_from_steps_testcase extends mod_quiz_attempt_walkth
             }
         }
 
+<<<<<<< HEAD
         foreach ($expectedvariantcounts as $slot => $expectedvariantcount) {
             foreach ($expectedvariantcount as $variantno => $s) {
                 $this->assertEquals($s, $questionstats->for_slot($slot, $variantno)->s);
@@ -335,6 +336,39 @@ class quiz_report_statistics_from_steps_testcase extends mod_quiz_attempt_walkth
      * @param $quizstats
      */
     protected function check_quiz_stats_for_quiz_00($quizstats) {
+=======
+        $this->report = new quiz_statistics_report();
+        $whichattempts = QUIZ_GRADEAVERAGE;
+        $groupstudents = array();
+        $questions = $this->report->load_and_initialise_questions_for_calculations($this->quiz);
+        list($quizstats, $questionstats, $subquestionstats) =
+                        $this->report->get_quiz_and_questions_stats($this->quiz, $whichattempts, $groupstudents, $questions);
+
+        $qubaids = quiz_statistics_qubaids_condition($this->quiz->id, $groupstudents, $whichattempts);
+
+        // We will create some quiz and question stat calculator instances and some response analyser instances, just in order
+        // to check the time of the
+        $quizcalc = new quiz_statistics_calculator();
+        // Should not be a delay of more than one second between the calculation of stats above and here.
+        $this->assertTimeCurrent($quizcalc->get_last_calculated_time($qubaids));
+
+        $qcalc = new \core_question\statistics\questions\calculator($questions);
+        $this->assertTimeCurrent($qcalc->get_last_calculated_time($qubaids));
+
+        foreach ($questions as $question) {
+            if (!question_bank::get_qtype($question->qtype, false)->can_analyse_responses()) {
+                continue;
+            }
+            $responesstats = new \core_question\statistics\responses\analyser($question);
+            $this->assertTimeCurrent($responesstats->get_last_analysed_time($qubaids));
+        }
+
+        // These quiz stats and the question stats found in qstats00.csv were calculated independently in spreadsheets which are
+        // available in open document or excel format here :
+        // https://github.com/jamiepratt/moodle-quiz-tools/tree/master/statsspreadsheet
+
+        // These quiz stats and the position stats here are calculated in stats.xls and stats.ods available, see above github URL.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         $quizstatsexpected = array(
             'median'             => 4.5,
             'firstattemptsavg'   => 4.617333332,
@@ -354,6 +388,7 @@ class quiz_report_statistics_from_steps_testcase extends mod_quiz_attempt_walkth
         }
     }
 
+<<<<<<< HEAD
     /**
      * Check the question stats and the response counts used in the statistics report. If the appropriate files exist in fixtures/.
      *
@@ -392,6 +427,69 @@ class quiz_report_statistics_from_steps_testcase extends mod_quiz_attempt_walkth
             return array($questions, $quizstats, $questionstats, $qubaids);
         }
         return array($questions, $quizstats, $questionstats, $qubaids);
+=======
+        for ($rowno = 0; $rowno < $csvdata['qstats']->getRowCount(); $rowno++) {
+            $slotqstats = $csvdata['qstats']->getRow($rowno);
+            foreach ($slotqstats as $statname => $slotqstat) {
+                if ($statname !== 'slot') {
+                    $this->assert_stat_equals($questionstats, $subquestionstats, $slotqstats['slot'],
+                                              null, null, $statname, (float)$slotqstat);
+                }
+            }
+        }
+
+        $itemstats = array('s' => 12,
+                          'effectiveweight' => null,
+                          'discriminationindex' => 35.803933,
+                          'discriminativeefficiency' => 39.39393939,
+                          'sd' => 0.514928651,
+                          'facility' => 0.583333333,
+                          'maxmark' => 1,
+                          'positions' => '1',
+                          'slot' => null,
+                          'subquestion' => true);
+        foreach ($itemstats as $statname => $expected) {
+            $this->assert_stat_equals($questionstats, $subquestionstats, 1, null, 'numerical', $statname, $expected);
+        }
+    }
+
+    /**
+     * Check that the stat is as expected within a reasonable tolerance.
+     *
+     * @param \core_question\statistics\questions\calculated[] $questionstats
+     * @param \core_question\statistics\questions\calculated_for_subquestion[] $subquestionstats
+     * @param int                                              $slot
+     * @param int|null                                         $variant if null then not a variant stat.
+     * @param string|null                                      $subqname if null then not an item stat.
+     * @param string                                           $statname
+     * @param float                                            $expected
+     */
+    protected function assert_stat_equals($questionstats, $subquestionstats, $slot, $variant, $subqname, $statname, $expected) {
+
+        if ($variant === null && $subqname === null) {
+            $actual = $questionstats[$slot]->{$statname};
+        } else if ($subqname !== null) {
+            $actual = $subquestionstats[$this->randqids[$slot][$subqname]]->{$statname};
+        } else {
+            $actual = $questionstats[$slot]->variantstats[$variant]->{$statname};
+        }
+        if (is_bool($expected) || is_string($expected)) {
+            $this->assertEquals($expected, $actual, "$statname for slot $slot");
+        } else {
+            switch ($statname) {
+                case 'covariance' :
+                case 'discriminationindex' :
+                case 'discriminativeefficiency' :
+                case 'effectiveweight' :
+                    $precision = 1e-5;
+                    break;
+                default :
+                    $precision = 1e-6;
+            }
+            $delta = abs($expected) * $precision;
+            $this->assertEquals(floatval($expected), $actual, "$statname for slot $slot", $delta);
+        }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
 }

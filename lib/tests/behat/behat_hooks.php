@@ -235,6 +235,11 @@ class behat_hooks extends behat_base {
         $this->resize_window('medium');
     }
 
+<<<<<<< HEAD
+=======
+    }
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     /**
      * Wait for JS to complete before beginning interacting with the DOM.
      *
@@ -295,9 +300,52 @@ class behat_hooks extends behat_base {
             }
         } catch (Exception $e) {
             self::$currentstepexception = $e;
+<<<<<<< HEAD
+=======
         }
     }
 
+    /**
+     * Execute any steps required after the step has finished.
+     *
+     * This includes creating an HTML dump of the content if there was a failure.
+     *
+     * @AfterStep
+     */
+    public function after_step($event) {
+        global $CFG;
+
+        // Save the page content if the step failed.
+        if (!empty($CFG->behat_faildump_path) &&
+                $event->getResult() === StepEvent::FAILED) {
+            $this->take_contentdump($event);
+        }
+    }
+
+    /**
+     * Getter for self::$faildumpdirname
+     *
+     * @return string
+     */
+    protected function get_run_faildump_dir() {
+        return self::$faildumpdirname;
+    }
+
+    /**
+     * Take screenshot when a step fails.
+     *
+     * @throws Exception
+     * @param StepEvent $event
+     */
+    protected function take_screenshot(StepEvent $event) {
+        // Goutte can't save screenshots.
+        if (!$this->running_javascript()) {
+            return false;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+        }
+    }
+
+<<<<<<< HEAD
     /**
      * Execute any steps required after the step has finished.
      *
@@ -362,6 +410,34 @@ class behat_hooks extends behat_base {
      * @param StepEvent $event
      * @param String $filetype The file suffix to use. Limited to 4 chars.
      */
+=======
+        list ($dir, $filename) = $this->get_faildump_filename($event, 'png');
+        $this->saveScreenshot($filename, $dir);
+    }
+
+    /**
+     * Take a dump of the page content when a step fails.
+     *
+     * @throws Exception
+     * @param StepEvent $event
+     */
+    protected function take_contentdump(StepEvent $event) {
+        list ($dir, $filename) = $this->get_faildump_filename($event, 'html');
+
+        $fh = fopen($dir . DIRECTORY_SEPARATOR . $filename, 'w');
+        fwrite($fh, $this->getSession()->getPage()->getContent());
+        fclose($fh);
+    }
+
+    /**
+     * Determine the full pathname to store a failure-related dump.
+     *
+     * This is used for content such as the DOM, and screenshots.
+     *
+     * @param StepEvent $event
+     * @param String $filetype The file suffix to use. Limited to 4 chars.
+     */
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     protected function get_faildump_filename(StepEvent $event, $filetype) {
         global $CFG;
 

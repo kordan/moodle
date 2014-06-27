@@ -167,9 +167,15 @@ function xmldb_qtype_essay_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
 
+<<<<<<< HEAD
         // Essay savepoint reached.
         upgrade_plugin_savepoint(true, 2014011301, 'qtype', 'essay');
     }
+=======
+    // Moodle v2.6.0 release upgrade line.
+    // Put any upgrade step following this.
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     return true;
 }
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_badges @_file_upload
+=======
+@core @core_badges @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Award badges
   In order to award badges to users for their achievements
   As an admin
@@ -8,7 +12,11 @@ Feature: Award badges
   Scenario: Award profile badge
     Given I log in as "admin"
     And I navigate to "Add a new badge" node in "Site administration > Badges"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Name | Profile Badge |
       | Description | Test badge description |
       | issuername | Test Badge Site |
@@ -43,7 +51,11 @@ Feature: Award badges
       | student | student | 1 | student1@asd.com |
     And I log in as "admin"
     And I navigate to "Add a new badge" node in "Site administration > Badges"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Name | Site Badge |
       | Description | Site badge description |
       | issuername | Tester of site badge |

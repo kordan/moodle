@@ -32,11 +32,14 @@ defined('MOODLE_INTERNAL') || die();
  * @property-read array $other {
  *      Extra information about event.
  *
+<<<<<<< HEAD
  *      - string shortname: shortname of role.
  *      - string description: role description.
  *      - string archetype: role type.
  * }
  *
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
  * @package    core
  * @since      Moodle 2.6
  * @copyright  2013 Rajesh Taneja <rajesh@moodle.com>

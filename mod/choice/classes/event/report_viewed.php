@@ -30,8 +30,13 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package    mod_choice
  * @since      Moodle 2.6
+<<<<<<< HEAD
  * @copyright  2013 Adrian Greeve
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+=======
+ * @copyright 2013 Adrian Greeve
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
  */
 class report_viewed extends \core\event\base {
 

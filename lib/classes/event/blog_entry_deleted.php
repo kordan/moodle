@@ -37,7 +37,11 @@ defined('MOODLE_INTERNAL') || die();
 
 class blog_entry_deleted extends base {
 
+<<<<<<< HEAD
     /** @var \blog_entry A reference to the active blog_entry object. */
+=======
+    /** @var  \blog_entry A reference to the active blog_entry object. */
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     protected $blogentry;
 
     /**
@@ -64,6 +68,20 @@ class blog_entry_deleted extends base {
      *
      * @param \blog_entry $blogentry A reference to the active blog_entry object.
      */
+<<<<<<< HEAD
+=======
+    public function set_custom_data(\blog_entry $data) {
+        // Note, this function will be removed in 2.7.
+        $this->set_blog_entry($data);
+    }
+
+    /**
+     * Sets blog_entry object to be used by observers.
+     *
+     * @since 2.6.2
+     * @param \blog_entry $data A reference to the active blog_entry object.
+     */
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function set_blog_entry(\blog_entry $blogentry) {
         $this->blogentry = $blogentry;
     }
@@ -71,7 +89,11 @@ class blog_entry_deleted extends base {
     /**
      * Returns deleted blog entry for event observers.
      *
+<<<<<<< HEAD
      * @throws \coding_exception
+=======
+     * @since 2.6.2
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * @return \blog_entry
      */
     public function get_blog_entry() {

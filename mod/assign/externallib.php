@@ -1434,10 +1434,16 @@ class mod_assign_external extends external_api {
         $warnings = array();
         $data = new stdClass();
         $data->submissionstatement = $params['acceptsubmissionstatement'];
+<<<<<<< HEAD
         $notices = array();
 
         if (!$assignment->submit_for_grading($data, $notices)) {
             $detail = 'User id: ' . $USER->id . ', Assignment id: ' . $params['assignmentid'] . ' Notices:' . implode(', ', $notices);
+=======
+
+        if (!$assignment->submit_for_grading($data)) {
+            $detail = 'User id: ' . $USER->id . ', Assignment id: ' . $params['assignmentid'];
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $warnings[] = self::generate_warning($params['assignmentid'],
                                                  'couldnotsubmitforgrading',
                                                  $detail);
@@ -1781,6 +1787,7 @@ class mod_assign_external extends external_api {
         $gradedata->workflowstate = $params['workflowstate'];
         $gradedata->applytoall = $params['applytoall'];
         $gradedata->grade = $params['grade'];
+<<<<<<< HEAD
 
         if (!empty($params['advancedgradingdata'])) {
             $advancedgrading = array();
@@ -1796,6 +1803,8 @@ class mod_assign_external extends external_api {
             }
             $gradedata->advancedgrading = $advancedgrading;
         }
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
         $assignment->save_grade($params['userid'], $gradedata);
 

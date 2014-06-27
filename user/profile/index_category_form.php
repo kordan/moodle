@@ -75,12 +75,22 @@ class category_form extends moodleform {
 
         $duplicate = $DB->get_field('user_info_category', 'id', array('name' => $data->name));
 
+<<<<<<< HEAD
         // Check the name is unique.
         if (!empty($data->id)) { // We are editing an existing record.
             $olddata = $DB->get_record('user_info_category', array('id' => $data->id));
             // Name has changed, new name in use, new name in use by another record.
             $dupfound = (($olddata->name !== $data->name) && $duplicate && ($data->id != $duplicate));
         } else { // New profile category.
+=======
+        /// Check the name is unique
+        if (!empty($data->id)) { // we are editing an existing record
+            $olddata = $DB->get_record('user_info_category', array('id'=>$data->id));
+            // name has changed, new name in use, new name in use by another record
+            $dupfound = (($olddata->name !== $data->name) && $duplicate && ($data->id != $duplicate));
+        }
+        else { // new profile category
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $dupfound = $duplicate;
         }
 

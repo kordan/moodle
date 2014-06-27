@@ -83,6 +83,7 @@ switch ($action) {
         $PAGE->blocks->load_blocks();
         $instances = $PAGE->blocks->get_blocks_for_region($buinewregion);
 
+<<<<<<< HEAD
         $buinewweight = null;
         if ($buibeforeid == 0) {
             if (count($instances) === 0) {
@@ -92,6 +93,17 @@ switch ($action) {
                 // Moving to very bottom.
                 $last = end($instances);
                 $buinewweight = $last->instance->weight + 1;
+=======
+        $bui_newweight = null;
+        if ($bui_beforeid == 0) {
+            if (count($instances) === 0) {
+                // Moving the block into an empty region. Give it the default weight.
+                $bui_newweight = 0;
+            } else {
+                // Moving to very bottom.
+                $last = end($instances);
+                $bui_newweight = $last->instance->weight + 1;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             }
         } else {
             // Moving somewhere.

@@ -62,6 +62,11 @@ class behat_forms extends behat_base {
 
     /**
      * Fills a form with field/value data. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+<<<<<<< HEAD
+=======
+     *
+     * Backport of Moodle 2.7 method to help backporting
+     * features to 2.6.
      *
      * @Given /^I set the following fields to these values:$/
      * @throws ElementNotFoundException Thrown by behat_base::find
@@ -77,6 +82,35 @@ class behat_forms extends behat_base {
         // The action depends on the field type.
         foreach ($datahash as $locator => $value) {
             $this->set_field_value($locator, $value);
+        }
+    }
+
+    /**
+     * Fills a moodle form with field/value data. This step will be deprecated in Moodle 2.7 in favour of 'I set the following fields to these values:'.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+     *
+     * @Given /^I set the following fields to these values:$/
+     * @throws ElementNotFoundException Thrown by behat_base::find
+     * @param TableNode $data
+     */
+    public function i_set_the_following_fields_to_these_values(TableNode $data) {
+
+        // Expand all fields in case we have.
+        $this->expand_all_fields();
+
+        $datahash = $data->getRowsHash();
+
+        // The action depends on the field type.
+        foreach ($datahash as $locator => $value) {
+<<<<<<< HEAD
+            $this->set_field_value($locator, $value);
+=======
+
+            $field = behat_field_manager::get_form_field_from_label($locator, $this);
+
+            // Delegates to the field class.
+            $field->set_value($value);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
     }
 
@@ -99,6 +133,12 @@ class behat_forms extends behat_base {
      */
     protected function expand_all_fields() {
 
+<<<<<<< HEAD
+=======
+        // We ensure that all the editors are loaded and we can interact with them.
+        $this->ensure_editors_are_loaded();
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // We already know that we waited for the DOM and the JS to be loaded, even the editor
         // so, we will use the reduced timeout as it is a common task and we should save time.
         try {
@@ -144,6 +184,11 @@ class behat_forms extends behat_base {
 
     /**
      * Sets the specified value to the field.
+<<<<<<< HEAD
+=======
+     *
+     * Backport of Moodle 2.7 method to help backporting
+     * features to 2.6.
      *
      * @Given /^I set the field "(?P<field_string>(?:[^"]|\\")*)" to "(?P<field_value_string>(?:[^"]|\\")*)"$/
      * @throws ElementNotFoundException Thrown by behat_base::find
@@ -156,7 +201,158 @@ class behat_forms extends behat_base {
     }
 
     /**
+     * Fills in form text field with specified id|name|label|value. It works with text-based fields. This step will be deprecated in Moodle 2.7 in favour of 'I set the field "FIELD_STRING" to "VALUE_STRING"'.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+     *
+     * @Given /^I set the field "(?P<field_string>(?:[^"]|\\")*)" to "(?P<field_value_string>(?:[^"]|\\")*)"$/
+     * @throws ElementNotFoundException Thrown by behat_base::find
+     * @param string $field
+     * @param string $value
+     * @return void
+     */
+<<<<<<< HEAD
+    public function i_set_the_field_to($field, $value) {
+=======
+    public function fill_field($field, $value) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+        $this->set_field_value($field, $value);
+    }
+
+    /**
      * Checks, the field matches the value. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+     *
+     * @Then /^the field "(?P<field_string>(?:[^"]|\\")*)" matches value "(?P<field_value_string>(?:[^"]|\\")*)"$/
+     * @throws ElementNotFoundException Thrown by behat_base::find
+     * @param string $field
+     * @param string $value
+     * @return void
+     */
+<<<<<<< HEAD
+    public function the_field_matches_value($field, $value) {
+
+        // Get the field.
+        $formfield = behat_field_manager::get_form_field_from_label($field, $this);
+
+        // Checks if the provided value matches the current field value.
+        if (!$formfield->matches($value)) {
+            $fieldvalue = $formfield->get_value();
+            throw new ExpectationException(
+                'The \'' . $field . '\' value is \'' . $fieldvalue . '\', \'' . $value . '\' expected' ,
+                $this->getSession()
+            );
+        }
+=======
+    public function select_option($option, $select) {
+        $this->set_field_value($select, $option);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+    }
+
+    /**
+     * Checks, the field does not match the value. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+     *
+     * @Then /^the field "(?P<field_string>(?:[^"]|\\")*)" does not match value "(?P<field_value_string>(?:[^"]|\\")*)"$/
+     * @throws ExpectationException
+     * @throws ElementNotFoundException Thrown by behat_base::find
+     * @param string $field
+     * @param string $value
+     * @return void
+     */
+<<<<<<< HEAD
+    public function the_field_does_not_match_value($field, $value) {
+
+        // Get the field.
+        $formfield = behat_field_manager::get_form_field_from_label($field, $this);
+
+        // Checks if the provided value matches the current field value.
+        if ($formfield->matches($value)) {
+            $fieldvalue = $formfield->get_value();
+            throw new ExpectationException(
+                'The \'' . $field . '\' value matches \'' . $value . '\' and it should not match it' ,
+                $this->getSession()
+            );
+        }
+=======
+    public function select_radio($radio) {
+        $this->set_field_value($radio, 1);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+    }
+
+    /**
+     * Checks, the provided field/value matches. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+     *
+     * @Then /^the following fields match these values:$/
+     * @throws ExpectationException
+     * @param TableNode $data Pairs of | field | value |
+     */
+<<<<<<< HEAD
+    public function the_following_fields_match_these_values(TableNode $data) {
+
+        // Expand all fields in case we have.
+        $this->expand_all_fields();
+
+        $datahash = $data->getRowsHash();
+
+        // The action depends on the field type.
+        foreach ($datahash as $locator => $value) {
+            $this->the_field_matches_value($locator, $value);
+        }
+    }
+
+    /**
+     * Checks that the provided field/value pairs don't match. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+=======
+    public function check_option($option) {
+        $this->set_field_value($option, 1);
+    }
+
+    /**
+     * Unchecks checkbox with specified id|name|label|value.
+     *
+     * @When /^I uncheck "(?P<option_string>(?:[^"]|\\")*)"$/
+     * @throws ElementNotFoundException Thrown by behat_base::find
+     * @param string $option
+     */
+    public function uncheck_option($option) {
+        $this->set_field_value($option, '');
+    }
+
+    /**
+     * Checks that the field matches the specified value. When using multi-select fields use commas to separate selected options. This step will be deprecated in Moodle 2.7 in favour of 'the field "FIELD_STRING" matches value "VALUE_STRING"'.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+     *
+     * @Then /^the following fields do not match these values:$/
+     * @throws ExpectationException
+     * @param TableNode $data Pairs of | field | value |
+     */
+    public function the_following_fields_do_not_match_these_values(TableNode $data) {
+
+<<<<<<< HEAD
+        // Expand all fields in case we have.
+        $this->expand_all_fields();
+
+        $datahash = $data->getRowsHash();
+
+        // The action depends on the field type.
+        foreach ($datahash as $locator => $value) {
+            $this->the_field_does_not_match_value($locator, $value);
+=======
+        $field = behat_field_manager::get_form_field_from_label($locator, $this);
+
+        // Checks if the provided value matches the current field value.
+        if (!$field->matches($value)) {
+            $fieldvalue = $field->get_value();
+            throw new ExpectationException(
+                'The \'' . $locator . '\' value is \'' . $fieldvalue . '\', \'' . $value . '\' expected' ,
+                $this->getSession()
+            );
+        }
+    }
+
+    /**
+     * Checks, the field matches the value. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+     *
+     * Backport of Moodle 2.7 method to help backporting
+     * features to 2.6.
      *
      * @Then /^the field "(?P<field_string>(?:[^"]|\\")*)" matches value "(?P<field_value_string>(?:[^"]|\\")*)"$/
      * @throws ElementNotFoundException Thrown by behat_base::find
@@ -176,13 +372,16 @@ class behat_forms extends behat_base {
                 'The \'' . $field . '\' value is \'' . $fieldvalue . '\', \'' . $value . '\' expected' ,
                 $this->getSession()
             );
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
     }
 
     /**
-     * Checks, the field does not match the value. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+<<<<<<< HEAD
+=======
+     * Checks that the form element field does not match the specified value.
      *
-     * @Then /^the field "(?P<field_string>(?:[^"]|\\")*)" does not match value "(?P<field_value_string>(?:[^"]|\\")*)"$/
+     * @Then /^the field "(?P<field_string>(?:[^"]|\\")*)" does not match value "(?P<value_string>(?:[^"]|\\")*)"$/
      * @throws ExpectationException
      * @throws ElementNotFoundException Thrown by behat_base::find
      * @param string $field
@@ -205,7 +404,7 @@ class behat_forms extends behat_base {
     }
 
     /**
-     * Checks, the provided field/value matches. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+     * Checks if fields values matches the provided values. Provide a table with field/value data.
      *
      * @Then /^the following fields match these values:$/
      * @throws ExpectationException
@@ -220,12 +419,12 @@ class behat_forms extends behat_base {
 
         // The action depends on the field type.
         foreach ($datahash as $locator => $value) {
-            $this->the_field_matches_value($locator, $value);
+            $this->the_field_should_match_value($locator, $value);
         }
     }
 
     /**
-     * Checks that the provided field/value pairs don't match. More info in http://docs.moodle.org/dev/Acceptance_testing#Providing_values_to_steps.
+     * Checks that fields values do not match the provided values. Provide a table with field/value data.
      *
      * @Then /^the following fields do not match these values:$/
      * @throws ExpectationException
@@ -245,6 +444,27 @@ class behat_forms extends behat_base {
     }
 
     /**
+     * Checks, that checkbox with specified in|name|label|value is checked.
+     *
+     * @Then /^the "(?P<checkbox_string>(?:[^"]|\\")*)" checkbox should be checked$/
+     * @param string $checkbox
+     */
+    public function assert_checkbox_checked($checkbox) {
+        $this->the_field_should_match_value($checkbox, 1);
+    }
+
+    /**
+     * Checks, that checkbox with specified in|name|label|value is unchecked.
+     *
+     * @Then /^the "(?P<checkbox_string>(?:[^"]|\\")*)" checkbox should not be checked$/
+     * @param string $checkbox
+     */
+    public function assert_checkbox_not_checked($checkbox) {
+        $this->the_field_should_match_value($checkbox, '');
+    }
+
+    /**
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * Checks, that given select box contains the specified option.
      *
      * @Then /^the "(?P<select_string>(?:[^"]|\\")*)" select box should contain "(?P<option_string>(?:[^"]|\\")*)"$/
@@ -312,6 +532,7 @@ class behat_forms extends behat_base {
         } else {
             // Only one option has been passed.
             $optionsarr[] = trim($option);
+<<<<<<< HEAD
         }
 
         // Now get all the values and texts in the select.
@@ -321,6 +542,17 @@ class behat_forms extends behat_base {
             $values[trim($opt->getValue())] = trim($opt->getText());
         }
 
+=======
+        }
+
+        // Now get all the values and texts in the select.
+        $options = $selectnode->findAll('xpath', '//option');
+        $values = array();
+        foreach ($options as $opt) {
+            $values[trim($opt->getValue())] = trim($opt->getText());
+        }
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         foreach ($optionsarr as $opt) {
             // Verify every option is not a valid text or value.
             if (in_array($opt, $values) || array_key_exists($opt, $values)) {

@@ -61,7 +61,11 @@ Feature: Uniqueness of Group ID number
       | Grouping ID number | GG2 |
     And I press "Save changes"
     And I click on "Edit" "link" in the "Grouping 1" "table_row"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Grouping ID number | GG2 |
     And I press "Save changes"
     And I should see "This ID number is already taken"

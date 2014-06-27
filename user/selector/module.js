@@ -258,8 +258,13 @@ M.core_user.init_user_selector = function (Y, name, hash, extrafields, lastsearc
             }
 
             if (count > 0) {
+<<<<<<< HEAD
                 optgroup.set('label', groupname + ' (' + count + ')');
                 if (processsingle && count === 1 && this.get_option('autoselectunique') && option.get('disabled') == false) {
+=======
+                optgroup.set('label', groupname+' ('+count+')');
+                if (processsingle && count===1 && this.get_option('autoselectunique') && option.get('disabled') == false) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
                     option.set('selected', true);
                 }
             } else {

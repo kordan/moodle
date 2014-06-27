@@ -409,10 +409,13 @@ Y.extend(TREE, Y.Base, TREE.prototype, {
         },
         /**
          * The navigation tree block instance.
+<<<<<<< HEAD
          *
          * @attribute instance
          * @default false
          * @type Number
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
          */
         instance : {
             value : false,

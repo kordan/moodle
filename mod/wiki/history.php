@@ -64,6 +64,7 @@ if (!wiki_user_can_view($subwiki, $wiki)) {
     print_error('cannotviewpage', 'wiki');
 }
 
+<<<<<<< HEAD
 // Trigger history viewed event.
 $context = context_module::instance($cm->id);
 $event = \mod_wiki\event\page_history_viewed::create(
@@ -75,6 +76,9 @@ $event->add_record_snapshot('wiki_pages', $page);
 $event->add_record_snapshot('wiki', $wiki);
 $event->add_record_snapshot('wiki_subwikis', $subwiki);
 $event->trigger();
+=======
+add_to_log($course->id, 'wiki', 'history', "history.php?pageid=".$pageid, $pageid, $cm->id);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 /// Print the page header
 $wikipage = new page_wiki_history($wiki, $subwiki, $cm);

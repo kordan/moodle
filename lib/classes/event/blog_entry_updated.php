@@ -50,10 +50,27 @@ class blog_entry_updated extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Sets blog_entry object to be used by observers.
+=======
+     * Set custom data of the event - updated blog entry.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      *
      * @param \blog_entry $blogentry A reference to the active blog_entry object.
      */
+<<<<<<< HEAD
+=======
+    public function set_custom_data(\blog_entry $data) {
+        // Note, this function will be removed in 2.7.
+        $this->set_blog_entry($data);
+    }
+
+    /**
+     * Sets blog_entry object to be used by observers.
+     *
+     * @param \blog_entry $data A reference to the active blog_entry object.
+     */
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function set_blog_entry(\blog_entry $blogentry) {
         $this->blogentry = $blogentry;
     }
@@ -61,7 +78,10 @@ class blog_entry_updated extends base {
     /**
      * Returns updated blog entry for event observers.
      *
+<<<<<<< HEAD
      * @throws \coding_exception
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * @return \blog_entry
      */
     public function get_blog_entry() {

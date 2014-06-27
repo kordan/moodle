@@ -124,6 +124,17 @@ class behat_command {
     public static function behat_setup_problem() {
         global $CFG;
 
+<<<<<<< HEAD
+=======
+        // We don't check the PHP version if $CFG->behat_switchcompletely has been enabled.
+        // Here we are in CLI.
+        if (empty($CFG->behat_switchcompletely) && empty($CFG->behat_wwwroot) && $checkphp && version_compare(PHP_VERSION, '5.4.0', '<')) {
+            behat_error(BEHAT_EXITCODE_REQUIREMENT, 'PHP 5.4 is required. See config-dist.php for possible alternatives');
+        }
+
+        $clibehaterrorstr = "Behat dependencies not installed. Ensure you ran the composer installer. " . self::DOCS_URL . "#Installation\n";
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Moodle setting.
         if (!self::are_behat_dependencies_installed()) {
 

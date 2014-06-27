@@ -664,8 +664,13 @@ class core_badges_renderer extends plugin_renderer_base {
 
         if (has_capability('moodle/badges:viewawarded', $context)) {
             $awarded = $DB->count_records_sql('SELECT COUNT(b.userid)
+<<<<<<< HEAD
                                                FROM {badge_issued} b INNER JOIN {user} u ON b.userid = u.id
                                                WHERE b.badgeid = :badgeid AND u.deleted = 0', array('badgeid' => $badgeid));
+=======
+                                                FROM {badge_issued} b INNER JOIN {user} u ON b.userid = u.id
+                                                WHERE b.badgeid = :badgeid AND u.deleted = 0', array('badgeid' => $badgeid));
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $row[] = new tabobject('awards',
                         new moodle_url('/badges/recipients.php', array('id' => $badgeid)),
                         get_string('bawards', 'badges', $awarded)

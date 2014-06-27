@@ -111,12 +111,17 @@ class course_module_updated extends base {
      * @return array of parameters to be passed to legacy add_to_log() function.
      */
     protected function get_legacy_logdata() {
+<<<<<<< HEAD
         $log1 = array($this->courseid, "course", "update mod", "../mod/" . $this->other['modulename'] . "/view.php?id=" .
                 $this->objectid, $this->other['modulename'] . " " . $this->other['instanceid']);
         $log2 = array($this->courseid, $this->other['modulename'], "update",
                "view.php?id={$this->objectid}",
                "{$this->other['instanceid']}", $this->objectid);
         return array($log1, $log2);
+=======
+        return array ($this->courseid, "course", "update mod", "../mod/" . $this->other['modulename'] . "/view.php?id=" .
+                $this->objectid, $this->other['modulename'] . " " . $this->other['instanceid']);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**
@@ -144,6 +149,10 @@ class course_module_updated extends base {
      *                     or {@link get_coursemodule_from_instance}.
      * @param \context_module $modcontext module context instance
      * @return \core\event\base returns instance of new event
+<<<<<<< HEAD
+=======
+     * @since Moodle 2.6.3
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      */
     public static final function create_from_cm($cm, $modcontext = null) {
         // If not set, get the module context.

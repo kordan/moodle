@@ -8,10 +8,17 @@ Feature: Forms manipulation
   Scenario: Basic forms manipulation
     Given I log in as "admin"
     And I navigate to "Edit profile" node in "My profile settings"
+<<<<<<< HEAD
     When I set the field "First name" to "Field value"
     And I set the field "Text editor" to "Plain text area"
     And I set the field "Unmask" to "1"
     Then the field "First name" matches value "Field value"
+=======
+    When I fill in "First name" with "Field value"
+    And I select "Plain text area" from "Text editor"
+    And I check "Unmask"
+    Then the "First name" field should match "Field value" value
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And the "Text editor" select box should contain "Plain text area"
     And the field "Unmask" matches value "1"
     And I set the field "Unmask" to ""

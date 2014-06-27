@@ -238,12 +238,20 @@ Feature: Test category management actions
 
   @javascript
   Scenario: Test bulk action is shown only when some category/course is selected
+<<<<<<< HEAD
     Given the following "categories" exist:
+=======
+    Given the following "categories" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | name | category | idnumber |
       | Cat 1 | 0 | CAT1 |
       | Cat 2 | 0 | CAT2 |
       | Cat 3 | 0 | CAT3 |
+<<<<<<< HEAD
     And the following "courses" exist:
+=======
+    And the following "courses" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | category | fullname | shortname | idnumber |
       | CAT3 | Course 1 | Course 1 | C1 |
       | CAT3 | Course 2 | Course 2 | C2 |
@@ -257,7 +265,11 @@ Feature: Test category management actions
     And the "movecategoriesto" "select" should be disabled
     And the "resortcategoriesby" "select" should be disabled
     And the "resortcoursesby" "select" should be disabled
+<<<<<<< HEAD
     When I set the field "selectsortby" to "allcategories"
+=======
+    When I select "allcategories" from "selectsortby"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     Then the "resortcategoriesby" "select" should be enabled
     And the "resortcoursesby" "select" should be enabled
     And the "movecategoriesto" "select" should be disabled
@@ -265,7 +277,11 @@ Feature: Test category management actions
     And the "movecategoriesto" "select" should be enabled
     And the "resortcategoriesby" "select" should be enabled
     And the "resortcoursesby" "select" should be enabled
+<<<<<<< HEAD
     And I set the field "selectsortby" to "selectedcategories"
+=======
+    And I select "selectedcategories" from "selectsortby"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And the "movecategoriesto" "select" should be enabled
     And the "resortcategoriesby" "select" should be enabled
     And the "resortcoursesby" "select" should be enabled
@@ -334,7 +350,11 @@ Feature: Test category management actions
     And the "resortcoursesby" "select" should be disabled
 
   Scenario: Test that is not possible to create a course category with a duplicate idnumber
+<<<<<<< HEAD
     Given the following "categories" exist:
+=======
+    Given the following "categories" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | name | category | idnumber |
       | Cat 1 | 0 | CAT1 |
     And I log in as "admin"

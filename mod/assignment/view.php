@@ -26,6 +26,16 @@ if (!$mapping) {
     }
     print_error('assignmentneedsupgrade', 'assignment', $url);
 }
+<<<<<<< HEAD
+=======
+require_once($classfile);
+$assignmentclass = "assignment_$assignment->assignmenttype";
+$assignmentinstance = new $assignmentclass($cm->id, $assignment, $cm, $course);
+
+/// Mark as viewed
+$completion=new completion_info($course);
+$completion->set_module_viewed($cm);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 $url = new moodle_url('/mod/assign/view.php', array('id' => $mapping->newcmid));
 redirect($url);

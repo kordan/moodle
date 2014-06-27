@@ -350,6 +350,7 @@ function upgrade_course_modules_sequences() {
 }
 
 /**
+<<<<<<< HEAD
  * Updates a single item (course module or course section) to transfer the
  * availability settings from the old to the new format.
  *
@@ -454,5 +455,23 @@ function upgrade_availability_item($groupmembersonly, $groupingid,
                 '"c":[' . implode(',', $conditions) . ']}';
     } else {
         return null;
+=======
+ * Updates the mime-types for files that exist in the database, based on their
+ * file extension.
+ *
+ * @param array $filetypes Array with file extension as the key, and mimetype as the value
+ */
+function upgrade_mimetypes($filetypes) {
+    global $DB;
+    $select = $DB->sql_like('filename', '?', false);
+    foreach ($filetypes as $extension=>$mimetype) {
+        $DB->set_field_select(
+            'files',
+            'mimetype',
+            $mimetype,
+            $select,
+            array($extension)
+        );
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 }

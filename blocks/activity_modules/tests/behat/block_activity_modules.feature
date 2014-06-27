@@ -8,11 +8,21 @@ Feature: Block activity modules
     Given I log in as "admin"
     And I navigate to "Manage activities" node in "Site administration > Plugins > Activity modules"
     And I click on "//a[@title=\"Show\"]" "xpath_element" in the "Feedback" "table_row"
+<<<<<<< HEAD
 
   Scenario: Add activities block on the frontpage
     Given the following "activities" exist:
       | activity   | name                        | intro                              | course               | idnumber    |
       | assign     | Frontpage assignment name   | Frontpage assignment description   | Acceptance test site | assign0     |
+=======
+    And I click on "//a[@title=\"Show\"]" "xpath_element" in the "Assignment (2.2)" "table_row"
+
+  Scenario: Add activities block on the frontpage
+    Given the following "activities" exists:
+      | activity   | name                        | intro                              | course               | idnumber    |
+      | assign     | Frontpage assignment name   | Frontpage assignment description   | Acceptance test site | assign0     |
+      | assignment | Frontpage assignment22 name | Frontpage assignment22 description | Acceptance test site | assignment0 |
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | book       | Frontpage book name         | Frontpage book description         | Acceptance test site | book0       |
       | chat       | Frontpage chat name         | Frontpage chat description         | Acceptance test site | chat0       |
       | choice     | Frontpage choice name       | Frontpage choice description       | Acceptance test site | choice0     |
@@ -40,6 +50,12 @@ Feature: Block activity modules
     And I click on "Assignments" "link" in the "Activities" "block"
     Then I should see "Frontpage assignment name"
     And I am on homepage
+<<<<<<< HEAD
+=======
+    And I click on "Assignments (2.2)" "link" in the "Activities" "block"
+    And I should see "Frontpage assignment22 name"
+    And I am on homepage
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I click on "Chats" "link" in the "Activities" "block"
     And I should see "Frontpage chat name"
     And I am on homepage
@@ -85,12 +101,22 @@ Feature: Block activity modules
     And I should see "Frontpage url name"
 
   Scenario: Add activities block in a course
+<<<<<<< HEAD
     Given the following "courses" exist:
       | fullname | shortname | format |
       | Course 1 | C1        | topics |
     And the following "activities" exist:
       | activity   | name                   | intro                         | course | idnumber    |
       | assign     | Test assignment name   | Test assignment description   | C1     | assign1     |
+=======
+    Given the following "courses" exists:
+      | fullname | shortname | format |
+      | Course 1 | C1        | topics |
+    And the following "activities" exists:
+      | activity   | name                   | intro                         | course | idnumber    |
+      | assign     | Test assignment name   | Test assignment description   | C1     | assign1     |
+      | assignment | Test assignment22 name | Test assignment22 description | C1     | assignment1 |
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | book       | Test book name         | Test book description         | C1     | book1       |
       | chat       | Test chat name         | Test chat description         | C1     | chat1       |
       | choice     | Test choice name       | Test choice description       | C1     | choice1     |
@@ -119,6 +145,12 @@ Feature: Block activity modules
     And I click on "Assignments" "link" in the "Activities" "block"
     Then I should see "Test assignment name"
     And I follow "Course 1"
+<<<<<<< HEAD
+=======
+    And I click on "Assignments (2.2)" "link" in the "Activities" "block"
+    And I should see "Test assignment22 name"
+    And I follow "Course 1"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I click on "Chats" "link" in the "Activities" "block"
     And I should see "Test chat name"
     And I follow "Course 1"

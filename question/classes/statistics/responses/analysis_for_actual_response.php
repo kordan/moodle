@@ -128,6 +128,7 @@ class analysis_for_actual_response {
         $row->response = $this->response;
         $row->credit = $this->fraction;
         $row->timemodified = time();
+<<<<<<< HEAD
         $analysisid = $DB->insert_record('question_response_analysis', $row);
         if ($whichtries === \question_attempt::ALL_TRIES) {
             foreach ($this->trycount as $try => $count) {
@@ -144,6 +145,13 @@ class analysis_for_actual_response {
             $countrow->analysisid = $analysisid;
             $DB->insert_record('question_response_count', $countrow, false);
         }
+=======
+        $DB->insert_record('question_response_analysis', $row, false);
+    }
+
+    public function response_matches($response) {
+        return (string)$response === (string)$this->response;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**

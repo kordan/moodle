@@ -230,6 +230,7 @@ if ($mycourses = enrol_get_my_courses()) {
     $controlstable->data[0]->cells[] = $OUTPUT->render($select);
 }
 
+<<<<<<< HEAD
 $controlstable->data[0]->cells[] = groups_print_course_menu($course, $baseurl->out(), true);
 
 if (!isset($hiddenfields['lastaccess'])) {
@@ -246,6 +247,29 @@ if (!isset($hiddenfields['lastaccess'])) {
                                                FROM {user}
                                               WHERE lastaccess != 0');
         $lastaccess0exists = $DB->record_exists('user', array('lastaccess' => 0));
+=======
+/// Print settings and things in a table across the top
+    $controlstable = new html_table();
+    $controlstable->attributes['class'] = 'controls';
+    $controlstable->cellspacing = 0;
+    $controlstable->data[] = new html_table_row();
+
+/// Print my course menus
+    if ($mycourses = enrol_get_my_courses()) {
+        $courselist = array();
+        $popupurl = new moodle_url('/user/index.php?roleid='.$roleid.'&sifirst=&silast=');
+        foreach ($mycourses as $mycourse) {
+            $coursecontext = context_course::instance($mycourse->id);
+            $courselist[$mycourse->id] = format_string($mycourse->shortname, true, array('context' => $coursecontext));
+        }
+        if (has_capability('moodle/site:viewparticipants', $systemcontext)) {
+            unset($courselist[SITEID]);
+            $courselist = array(SITEID => format_string($SITE->shortname, true, array('context' => $systemcontext))) + $courselist;
+        }
+        $select = new single_select($popupurl, 'id', $courselist, $course->id, null, 'courseform');
+        $select->set_label(get_string('mycourses'));
+        $controlstable->data[0]->cells[] = $OUTPUT->render($select);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     $now = usergetmidnight(time());

@@ -944,8 +944,14 @@ class question_bank_view {
     }
 
     protected function wanted_columns() {
+<<<<<<< HEAD
         $columns = array('checkbox', 'qtype', 'questionname', 'editaction', 'copyaction',
                         'previewaction', 'deleteaction', 'creatorname', 'modifiername');
+=======
+        $columns = array('checkbox', 'qtype', 'questionname', 'editaction',
+                'previewaction', 'moveaction', 'deleteaction', 'creatorname',
+                'modifiername');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         if (question_get_display_preference('qbshowtext', 0, PARAM_BOOL, new moodle_url(''))) {
             $columns[] = 'questiontext';
         }

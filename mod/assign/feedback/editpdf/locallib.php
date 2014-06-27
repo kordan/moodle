@@ -137,7 +137,8 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
         // Retrieve total number of pages.
         $pagetotal = document_services::page_number_for_attempt($this->assignment->get_instance()->id,
                 $userid,
-                $attempt);
+                $attempt,
+                $readonly);
 
         $widget = new assignfeedback_editpdf_widget($this->assignment->get_instance()->id,
                                                     $userid,
@@ -178,6 +179,9 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
             $html = $renderer->render($widget);
             $mform->addElement('static', 'editpdf', get_string('editpdf', 'assignfeedback_editpdf'), $html);
             $mform->addHelpButton('editpdf', 'editpdf', 'assignfeedback_editpdf');
+            $mform->addElement('hidden', 'editpdf_source_userid', $userid);
+            $mform->setType('editpdf_source_userid', PARAM_INT);
+            $mform->setConstant('editpdf_source_userid', $userid);
         }
     }
 
@@ -189,6 +193,14 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
      * @return bool
      */
     public function save(stdClass $grade, stdClass $data) {
+        // Source user id is only added to the form if there was a pdf.
+        if (!empty($data->editpdf_source_userid)) {
+            $sourceuserid = $data->editpdf_source_userid;
+            // Copy drafts annotations and comments if current user is different to sourceuserid.
+            if ($sourceuserid != $grade->userid) {
+                page_editor::copy_drafts_from_to($this->assignment, $grade, $sourceuserid);
+            }
+        }
         if (page_editor::has_annotations_or_comments($grade->id, true)) {
             document_services::generate_feedback_document($this->assignment, $grade->userid, $grade->attemptnumber);
         }
@@ -269,8 +281,17 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
      */
     public function is_enabled() {
         if ($this->enabledcache === null) {
+<<<<<<< HEAD
             $testpath = assignfeedback_editpdf\pdf::test_gs_path(false);
             $this->enabledcache = ($testpath->status == assignfeedback_editpdf\pdf::GSPATH_OK);
+=======
+            if (!extension_loaded('zlib')) {
+                $this->enabledcache = false;
+            } else {
+                $testpath = assignfeedback_editpdf\pdf::test_gs_path(false);
+                $this->enabledcache = ($testpath->status == assignfeedback_editpdf\pdf::GSPATH_OK);
+            }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
         return $this->enabledcache;
     }

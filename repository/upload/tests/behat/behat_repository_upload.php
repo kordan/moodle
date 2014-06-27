@@ -44,12 +44,35 @@ class behat_repository_upload extends behat_files {
 
     /**
      * Uploads a file to the specified filemanager leaving other fields in upload form default. The paths should be relative to moodle codebase.
+<<<<<<< HEAD
+=======
+     *
+     * Will be deprecated in 2.7
+     * @see behat_repository_upload::i_upload_file_to_filemanager()
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      *
      * @When /^I upload "(?P<filepath_string>(?:[^"]|\\")*)" file to "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
      * @throws ExpectationException Thrown by behat_base::find
      * @param string $filepath
      * @param string $filemanagerelement
      */
+<<<<<<< HEAD
+=======
+    public function i_upload_file_to_filepicker($filepath, $filepickerelement) {
+        $alternative = 'I upload "' . $this->escape($filepath) . '" file to "' .
+                $this->escape($filepickerelement) . '" filemanager';
+        return array(new Behat\Behat\Context\Step\Given($alternative));
+    }
+
+    /**
+     * Uploads a file to the specified filemanager leaving other fields in upload form default. The paths should be relative to moodle codebase.
+     *
+     * @When /^I upload "(?P<filepath_string>(?:[^"]|\\")*)" file to "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $filepath
+     * @param string $filemanagerelement
+     */
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function i_upload_file_to_filemanager($filepath, $filemanagerelement) {
         $this->upload_file_to_filemanager($filepath, $filemanagerelement, new TableNode(), false);
     }

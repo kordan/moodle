@@ -146,12 +146,15 @@ switch ($messagetype) {
         //Fire an event if we get a web service request which we don't support directly.
         //This will allow others to extend the LTI services, which I expect to be a common
         //use case, at least until the spec matures.
+<<<<<<< HEAD
         $data = new stdClass();
         $data->body = $rawbody;
         $data->xml = $xml;
         $data->messagetype = $messagetype;
         $data->consumerkey = $consumerkey;
         $data->sharedsecret = $sharedsecret;
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         $eventdata = array();
         $eventdata['other'] = array();
         $eventdata['other']['messageid'] = lti_parse_message_id($xml);
@@ -170,7 +173,10 @@ switch ($messagetype) {
 
         try {
             $event = \mod_lti\event\unknown_service_api_called::create($eventdata);
+<<<<<<< HEAD
             $event->set_message_data($data);
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $event->trigger();
         } catch (Exception $e) {
             $lti_web_service_handled = false;

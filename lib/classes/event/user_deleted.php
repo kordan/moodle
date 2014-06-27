@@ -69,7 +69,11 @@ class user_deleted extends base {
      * @return string
      */
     public function get_description() {
+<<<<<<< HEAD
         return "The user with id '$this->userid' deleted the user with id '$this->objectid'.";
+=======
+        return 'User profile deleted for the user with the id ' . $this->objectid;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**
@@ -116,6 +120,7 @@ class user_deleted extends base {
     protected function validate_data() {
         parent::validate_data();
 
+<<<<<<< HEAD
         if (!isset($this->relateduserid)) {
             debugging('The \'relateduserid\' value must be specified in the event.', DEBUG_DEVELOPER);
             $this->relateduserid = $this->objectid;
@@ -139,6 +144,26 @@ class user_deleted extends base {
 
         if (!isset($this->other['mnethostid'])) {
             throw new \coding_exception('The \'mnethostid\' value must be set in other.');
+=======
+        if (!isset($this->other['username'])) {
+            throw new \coding_exception('username must be set in $other.');
+        }
+
+        if (!isset($this->other['email'])) {
+            throw new \coding_exception('email must be set in $other.');
+        }
+
+        if (!isset($this->other['idnumber'])) {
+            throw new \coding_exception('idnumber must be set in $other.');
+        }
+
+        if (!isset($this->other['picture'])) {
+            throw new \coding_exception('picture must be set in $other.');
+        }
+
+        if (!isset($this->other['mnethostid'])) {
+            throw new \coding_exception('mnethostid must be set in $other.');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
     }
 }

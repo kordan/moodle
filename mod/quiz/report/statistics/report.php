@@ -535,11 +535,15 @@ class quiz_statistics_report extends quiz_default_report {
      * @return array with 2 elements:    - $quizstats The statistics for overall attempt scores.
      *                                   - $questionstats \core_question\statistics\questions\all_calculated_for_qubaid_condition
      */
+<<<<<<< HEAD
     public function get_all_stats_and_analysis($quiz, $whichattempts, $whichtries, $groupstudents, $questions, $progress = null) {
 
         if ($progress === null) {
             $progress = new \core\progress\null();
         }
+=======
+    public function get_quiz_and_questions_stats($quiz, $whichattempts, $groupstudents, $questions) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
         $qubaids = quiz_statistics_qubaids_condition($quiz->id, $groupstudents, $whichattempts);
 

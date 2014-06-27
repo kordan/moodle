@@ -29,14 +29,24 @@ Feature: Toggle activities groups mode from the course page
     Then "No groups (Click to change)" "link" should exist
     And "//a/child::img[contains(@src, 'groupn')]" "xpath_element" should exist
     And I click on "No groups (Click to change)" "link" in the "Test forum name" activity
+<<<<<<< HEAD
     And "Separate groups (Click to change)" "link" should exist
     And "//a/child::img[contains(@src, 'groups')]" "xpath_element" should exist
+=======
+    And "Separate groups (Click to change)" "link" should exists
+    And "//a/child::img[contains(@src, 'groups')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I reload the page
     And "Separate groups (Click to change)" "link" should exist
     And "//a/child::img[contains(@src, 'groups')]" "xpath_element" should exist
     And I click on "Separate groups (Click to change)" "link" in the "Test forum name" activity
+<<<<<<< HEAD
     And "Visible groups (Click to change)" "link" should exist
     And "//a/child::img[contains(@src, 'groupv')]" "xpath_element" should exist
+=======
+    And "Visible groups (Click to change)" "link" should exists
+    And "//a/child::img[contains(@src, 'groupv')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I reload the page
     And "Visible groups (Click to change)" "link" should exist
     And "//a/child::img[contains(@src, 'groupv')]" "xpath_element" should exist

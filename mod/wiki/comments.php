@@ -63,6 +63,7 @@ if (!wiki_user_can_view($subwiki, $wiki)) {
     print_error('cannotviewpage', 'wiki');
 }
 
+<<<<<<< HEAD
 // Trigger comment viewed event.
 $event = \mod_wiki\event\comments_viewed::create(
         array(
@@ -73,6 +74,9 @@ $event->add_record_snapshot('wiki_pages', $page);
 $event->add_record_snapshot('wiki', $wiki);
 $event->add_record_snapshot('wiki_subwikis', $subwiki);
 $event->trigger();
+=======
+add_to_log($course->id, 'wiki', 'comments', "comments.php?pageid=".$pageid, $pageid, $cm->id);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 /// Print the page header
 $wikipage = new page_wiki_comments($wiki, $subwiki, $cm);

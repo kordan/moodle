@@ -6,11 +6,19 @@ Feature: Add forum activities and discussions
 
   @javascript
   Scenario: Add a forum and a discussion attaching files
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher1@asd.com |
       | student1 | Student | 1 | student1@asd.com |
     And the following "courses" exist:
+=======
+    Given the following "users" exists:
+      | username | firstname | lastname | email |
+      | teacher1 | Teacher | 1 | teacher1@asd.com |
+      | student1 | Student | 1 | student1@asd.com |
+    And the following "courses" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | fullname | shortname | category |
       | Course 1 | C1 | 0 |
     And the following "course enrolments" exist:

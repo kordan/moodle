@@ -111,6 +111,7 @@ class calculated {
      */
     public $randomguessscore = null;
 
+
     // End of fields in db.
 
     protected $fieldsindb = array('questionid', 'slot', 'subquestion', 's', 'effectiveweight', 'negcovar', 'discriminationindex',

@@ -40,7 +40,11 @@ Feature: Edit capabilities
       | mod/forum:deleteanypost | Prohibit |
       | mod/forum:editanypost | Prevent |
       | mod/forum:addquestion | Allow |
+<<<<<<< HEAD
     When I set the field "Advanced role override" to "Student (3)"
+=======
+    When I select "Student (3)" from "Advanced role override"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     Then "mod/forum:deleteanypost" capability has "Prohibit" permission
     And "mod/forum:editanypost" capability has "Prevent" permission
     And "mod/forum:addquestion" capability has "Allow" permission
@@ -59,7 +63,11 @@ Feature: Edit capabilities
       | mod/forum:deleteanypost | Prohibit |
       | mod/forum:editanypost | Prevent |
       | mod/forum:addquestion | Allow |
+<<<<<<< HEAD
     When I set the field "Advanced role override" to "Student (3)"
+=======
+    When I select "Student (3)" from "Advanced role override"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     Then "mod/forum:deleteanypost" capability has "Prohibit" permission
     And "mod/forum:editanypost" capability has "Prevent" permission
     And "mod/forum:addquestion" capability has "Allow" permission

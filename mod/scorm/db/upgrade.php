@@ -18,7 +18,11 @@
  * Upgrade script for the scorm module.
  *
  * @package    mod_scorm
+<<<<<<< HEAD
  * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+=======
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -203,6 +207,7 @@ function xmldb_scorm_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2013110501, 'scorm');
     }
 
+<<<<<<< HEAD
     if ($oldversion < 2014031700) {
         // Define field displayactivityname to be added to scorm.
         $table = new xmldb_table('scorm');
@@ -227,6 +232,9 @@ function xmldb_scorm_upgrade($oldversion) {
     }
 
     if ($oldversion < 2014040200) {
+=======
+    if ($oldversion < 2013110504) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Fix invalid $scorm->launch records that launch an org sco instead of a real sco.
         $sql = "SELECT s.*, c.identifier
                  FROM {scorm} s
@@ -273,9 +281,14 @@ function xmldb_scorm_upgrade($oldversion) {
         }
         $scorms->close();
 
+<<<<<<< HEAD
         upgrade_mod_savepoint(true, 2014040200, 'scorm');
     }
 
+=======
+        upgrade_mod_savepoint(true, 2013110504, 'scorm');
+    }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     return true;
 }
 

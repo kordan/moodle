@@ -63,6 +63,61 @@ class editsection_form extends moodleform {
             $mform->addElement('header', 'availabilityconditions',
                     get_string('restrictaccess', 'availability'));
             $mform->setExpanded('availabilityconditions', false);
+<<<<<<< HEAD
+=======
+            // String used by conditions more than once
+            $strcondnone = get_string('none', 'condition');
+            // Grouping conditions - only if grouping is enabled at site level
+            if (!empty($CFG->enablegroupmembersonly)) {
+                $options = array();
+                if ($groupings = $DB->get_records('groupings', array('courseid' => $course->id))) {
+                    foreach ($groupings as $grouping) {
+                        $options[$grouping->id] = format_string(
+                                $grouping->name, true, array('context' => $context));
+                    }
+                }
+                core_collator::asort($options);
+                $options = array(0 => get_string('none')) + $options;
+                $mform->addElement('select', 'groupingid', get_string('groupingsection', 'group'), $options);
+                $mform->addHelpButton('groupingid', 'groupingsection', 'group');
+            }
+
+            // Available from/to defaults to midnight because then the display
+            // will be nicer where it tells users when they can access it (it
+            // shows only the date and not time).
+            $date = usergetdate(time());
+            $midnight = make_timestamp($date['year'], $date['mon'], $date['mday']);
+
+            // Date and time conditions.
+            $mform->addElement('date_time_selector', 'availablefrom',
+                    get_string('availablefrom', 'condition'),
+                    array('optional' => true, 'defaulttime' => $midnight));
+            $mform->addElement('date_time_selector', 'availableuntil',
+                    get_string('availableuntil', 'condition'),
+                    array('optional' => true, 'defaulttime' => $midnight));
+
+            // Conditions based on grades
+            $gradeoptions = array();
+            $items = grade_item::fetch_all(array('courseid' => $course->id));
+            $items = $items ? $items : array();
+            foreach ($items as $id => $item) {
+                $gradeoptions[$id] = $item->get_name();
+            }
+            asort($gradeoptions);
+            $gradeoptions = array(0 => $strcondnone) + $gradeoptions;
+
+            $grouparray = array();
+            $grouparray[] = $mform->createElement('select', 'conditiongradeitemid', '', $gradeoptions);
+            $grouparray[] = $mform->createElement('static', '', '',
+                    ' ' . get_string('grade_atleast', 'condition').' ');
+            $grouparray[] = $mform->createElement('text', 'conditiongrademin', '', array('size' => 3));
+            $grouparray[] = $mform->createElement('static', '', '',
+                    '% ' . get_string('grade_upto', 'condition') . ' ');
+            $grouparray[] = $mform->createElement('text', 'conditiongrademax', '', array('size' => 3));
+            $grouparray[] = $mform->createElement('static', '', '', '%');
+            $group = $mform->createElement('group', 'conditiongradegroup',
+                    get_string('gradecondition', 'condition'), $grouparray);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
             // Availability field. This is just a textarea; the user interface
             // interaction is all implemented in JavaScript. The field is named

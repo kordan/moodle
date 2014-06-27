@@ -363,6 +363,7 @@ class theme_config {
     private $usesvg = null;
 
     /**
+<<<<<<< HEAD
      * The LESS file to compile. When set, the theme will attempt to compile the file itself.
      * @var bool
      */
@@ -381,6 +382,8 @@ class theme_config {
     public $lessvariablescallback = null;
 
     /**
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * Sets the render method that should be used for rendering custom block regions by scripts such as my/index.php
      * Defaults to {@link core_renderer::blocks_for_region()}
      * @var string
@@ -455,8 +458,12 @@ class theme_config {
         $configurable = array('parents', 'sheets', 'parents_exclude_sheets', 'plugins_exclude_sheets', 'javascripts', 'javascripts_footer',
                               'parents_exclude_javascripts', 'layouts', 'enable_dock', 'enablecourseajax', 'supportscssoptimisation',
                               'rendererfactory', 'csspostprocess', 'editor_sheets', 'rarrow', 'larrow', 'hidefromselector', 'doctype',
+<<<<<<< HEAD
                               'yuicssmodules', 'blockrtlmanipulations', 'lessfile', 'extralesscallback', 'lessvariablescallback',
                               'blockrendermethod');
+=======
+                              'yuicssmodules', 'blockrtlmanipulations', 'blockrendermethod');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
         foreach ($config as $key=>$value) {
             if (in_array($key, $configurable)) {
@@ -957,7 +964,11 @@ class theme_config {
                         continue;
                     }
 
+<<<<<<< HEAD
                     // Get the CSS from the plugin.
+=======
+                    // Add main stylesheet.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
                     $sheetfile = "$fulldir/styles.css";
                     if (is_readable($sheetfile)) {
                         $cssfiles['plugins'][$type.'_'.$plugin] = $sheetfile;

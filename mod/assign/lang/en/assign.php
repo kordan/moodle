@@ -328,8 +328,11 @@ $string['savegradingresult'] = 'Grade';
 $string['saveallquickgradingchanges'] = 'Save all quick grading changes';
 $string['savenext'] = 'Save and show next';
 $string['scale'] = 'Scale';
+<<<<<<< HEAD
 $string['sendstudentnotificationsdefault'] = 'Default setting for "Notify students"';
 $string['sendstudentnotificationsdefault_help'] = 'Set the default value for the "Notify students" checkbox on the grading form.';
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 $string['sendstudentnotifications'] = 'Notify students';
 $string['sendstudentnotifications_help'] = 'If enabled, students receive a message about the updated grade or feedback.';
 $string['sendnotifications'] = 'Notify graders about submissions';

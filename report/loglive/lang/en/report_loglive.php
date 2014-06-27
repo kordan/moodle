@@ -35,5 +35,10 @@ $string['loglive:view'] = 'View live logs';
 $string['nologreaderenabled'] = 'No log reader enabled';
 $string['pause'] = 'Pause live updates';
 $string['pluginname'] = 'Live logs';
+<<<<<<< HEAD
 $string['resume'] = 'Resume live updates';
 $string['selectlogreader'] = 'Select log reader';
+=======
+$string['livelogs'] = 'Live logs from the past hour';
+$string['page'] = 'Page {$a}';
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3

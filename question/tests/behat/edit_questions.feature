@@ -24,8 +24,13 @@ Feature: A teacher can edit questions in the question bank
     And I log in as "teacher1"
     And I follow "Course 1"
     And I follow "Question bank"
+<<<<<<< HEAD
     When I click on "Edit" "link" in the "Test question to be edited" "table_row"
     And I set the following fields to these values:
+=======
+    When I click on "Edit" "link" in the "Test question name" "table_row"
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Question name | Edited question name |
       | Question text | Write a lot about what you want |
     And I press "id_submitbutton"
@@ -34,7 +39,11 @@ Feature: A teacher can edit questions in the question bank
     And I should see "Admin User" in the ".categoryquestionscontainer tbody .creatorname" "css_element"
     And I should see "Teacher 1" in the ".categoryquestionscontainer tbody .modifiername" "css_element"
     And I click on "Edit" "link" in the "Edited question name" "table_row"
+<<<<<<< HEAD
     And the field "Question name" matches value "Edited question name"
+=======
+    And the "Question name" field should match "Edited question name" value
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I press "Cancel"
     And I click on "Preview" "link" in the "Edited question name" "table_row"
     And I switch to "questionpreview" window

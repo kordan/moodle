@@ -1321,7 +1321,12 @@ class question_attempt {
     }
 
     /**
+<<<<<<< HEAD
      * Break down a student response by sub part and classification. See also {@link question::classify_response}.
+=======
+     * Break down a student response by sub part and classification.
+     * See also {@link question_type::get_possible_responses()}
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * Used for response analysis.
      *
      * @param string $whichtries         which tries to analyse for response analysis. Will be one of

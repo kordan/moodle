@@ -38,9 +38,15 @@ require_once($CFG->dirroot . '/tag/lib.php');
 require_once($CFG->dirroot . '/user/profile/lib.php');
 require_once($CFG->libdir.'/filelib.php');
 
+<<<<<<< HEAD
 $userid = optional_param('id', 0, PARAM_INT);
 $edit   = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off.
 $reset  = optional_param('reset', null, PARAM_BOOL);
+=======
+$userid         = optional_param('id', 0, PARAM_INT);
+$edit           = optional_param('edit', null, PARAM_BOOL);    // Turn editing on and off.
+$showallcourses = optional_param('showallcourses', 0, PARAM_INT);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 $PAGE->set_url('/user/profile.php', array('id' => $userid));
 
@@ -211,6 +217,15 @@ if ($currentpage->userid == 0) {
     $CFG->blockmanagerclass = 'my_syspage_block_manager';
 }
 
+// Trigger a user profile viewed event.
+$event = \core\event\user_profile_viewed::create(array(
+    'objectid' => $user->id,
+    'relateduserid' => $user->id,
+    'context' => $usercontext
+));
+$event->add_record_snapshot('user', $user);
+$event->trigger();
+
 // TODO WORK OUT WHERE THE NAV BAR IS!
 echo $OUTPUT->header();
 echo '<div class="userprofile">';
@@ -372,12 +387,27 @@ if (!isset($hiddenfields['mycourses'])) {
                     }
                     $class = 'class="dimmed"';
                 }
+<<<<<<< HEAD
                 $courselisting .= "<a href=\"{$CFG->wwwroot}/user/view.php?id={$user->id}&amp;course={$mycourse->id}\" $class >" .
                     $ccontext->get_context_name(false) . "</a>, ";
             }
             $shown++;
             if ($shown == 20) {
                 $courselisting .= "...";
+=======
+                $params = array('id' => $user->id, 'course' => $mycourse->id);
+                if ($showallcourses) {
+                    $params['showallcourses'] = 1;
+                }
+                $url = new moodle_url('/user/view.php', $params);
+                $courselisting .= html_writer::link($url, $ccontext->get_context_name(false), array('class' => $class));
+                $courselisting .= ', ';
+            }
+            $shown++;
+            if(!$showallcourses && $shown==20) {
+                $url = new moodle_url('/user/profile.php', array('id' => $user->id, 'showallcourses' => 1));
+                $courselisting .= html_writer::link($url, '...', array('title' => get_string('viewmore')));
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
                 break;
             }
         }
@@ -437,6 +467,11 @@ if (!empty($CFG->enablebadges)) {
 
 echo html_writer::end_tag('dl');
 echo "</div></div>"; // Closing desriptionbox and userprofilebox.
+<<<<<<< HEAD
+=======
+
+echo $OUTPUT->custom_block_region('content');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 echo $OUTPUT->custom_block_region('content');
 

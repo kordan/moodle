@@ -24,7 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 $plugin->version   = 2014051200; // The current module version (Date: YYYYMMDDXX).
 $plugin->requires  = 2014050800; // Requires this Moodle version.
 $plugin->component = 'mod_quiz'; // Full name of the plugin (used for diagnostics).
 $plugin->cron      = 60;
+=======
+$module->version   = 2013110501; // The current module version (Date: YYYYMMDDXX).
+$module->requires  = 2013110500; // Requires this Moodle version.
+$module->component = 'mod_quiz'; // Full name of the plugin (used for diagnostics).
+$module->cron      = 60;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3

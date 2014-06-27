@@ -1950,7 +1950,7 @@ class core_course_courselib_testcase extends advanced_testcase {
      * Tests for event related to course module creation.
      */
     public function test_course_module_created_event() {
-        global $USER, $DB;
+        global $USER, $DB, $CFG;
         $this->resetAfterTest();
 
         // Create an assign module.
@@ -1958,9 +1958,8 @@ class core_course_courselib_testcase extends advanced_testcase {
         $modinfo = $this->create_specific_module_test('assign');
         $events = $sink->get_events();
         $event = array_pop($events);
-        $sink->close();
 
-        $cm = $DB->get_record('course_modules', array('id' => $modinfo->coursemodule), '*', MUST_EXIST);
+        $cm = get_coursemodule_from_id('assign', $modinfo->coursemodule, 0, false, MUST_EXIST);
         $mod = $DB->get_record('assign', array('id' => $modinfo->instance), '*', MUST_EXIST);
 
         // Validate event data.
@@ -1981,13 +1980,41 @@ class core_course_courselib_testcase extends advanced_testcase {
         $eventdata->userid     = $USER->id;
         $this->assertEventLegacyData($eventdata, $event);
 
+<<<<<<< HEAD
         $arr = array(
             array($cm->course, "course", "add mod", "../mod/assign/view.php?id=$cm->id", "assign $cm->instance"),
             array($cm->course, "assign", "add", "view.php?id=$cm->id", $cm->instance, $cm->id)
         );
+=======
+        $arr = array($cm->course, "course", "add mod", "../mod/assign/view.php?id=$cm->id", "assign $cm->instance");
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         $this->assertEventLegacyLogData($arr, $event);
         $this->assertEventContextNotUsed($event);
 
+        // Let us see if duplicating an activity results in a nice course module created event.
+        $sink->clear();
+        $course = get_course($mod->course);
+
+        // Discard error logs.
+        $oldlog = ini_get('error_log');
+        ini_set('error_log', "$CFG->dataroot/testlog.log");
+        $newcmhtml = mod_duplicate_activity($course, $cm);
+        ini_set('error_log', $oldlog);
+
+        $events = $sink->get_events();
+        $event = array_pop($events);
+        $sink->close();
+
+        // Validate event data.
+        $this->assertInstanceOf('\core\event\course_module_created', $event);
+        $this->assertEquals($newcmhtml->cmid, $event->objectid);
+        $this->assertEquals($USER->id, $event->userid);
+        $this->assertEquals($course->id, $event->courseid);
+        $url = new moodle_url('/mod/assign/view.php', array('id' => $newcmhtml->cmid));
+        $this->assertEquals($url, $event->get_url());
+
+        // Clear the time limit, otherwise PHPUnit complains.
+        set_time_limit(0);
     }
 
     /**
@@ -2090,10 +2117,14 @@ class core_course_courselib_testcase extends advanced_testcase {
         $eventdata->userid     = $USER->id;
         $this->assertEventLegacyData($eventdata, $event);
 
+<<<<<<< HEAD
         $arr = array(
             array($cm->course, "course", "update mod", "../mod/forum/view.php?id=$cm->id", "forum $cm->instance"),
             array($cm->course, "forum", "update", "view.php?id=$cm->id", $cm->instance, $cm->id)
         );
+=======
+        $arr = array($cm->course, "course", "update mod", "../mod/forum/view.php?id=$cm->id", "forum $cm->instance");
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         $this->assertEventLegacyLogData($arr, $event);
         $this->assertEventContextNotUsed($event);
     }
@@ -2139,6 +2170,46 @@ class core_course_courselib_testcase extends advanced_testcase {
             array($cm->course, "course", "update mod", "../mod/assign/view.php?id=$cm->id", "assign $cm->instance"),
             array($cm->course, "assign", "update", "view.php?id=$cm->id", $cm->instance, $cm->id)
         );
+        $this->assertEventLegacyLogData($arr, $event);
+    }
+
+    /**
+     * Tests for create_from_cm method.
+     */
+    public function test_course_module_create_from_cm() {
+        $this->resetAfterTest();
+        $this->setAdminUser();
+
+        // Create course and modules.
+        $course = $this->getDataGenerator()->create_course(array('numsections' => 5));
+
+        // Generate an assignment.
+        $assign = $this->getDataGenerator()->create_module('assign', array('course' => $course->id));
+
+        // Get the module context.
+        $modcontext = context_module::instance($assign->cmid);
+
+        // Get course module.
+        $cm = get_coursemodule_from_id(null, $assign->cmid, $course->id, false, MUST_EXIST);
+
+        // Create an event from course module.
+        $event = \core\event\course_module_updated::create_from_cm($cm, $modcontext);
+
+        // Trigger the events.
+        $sink = $this->redirectEvents();
+        $event->trigger();
+        $events = $sink->get_events();
+        $event2 = array_pop($events);
+
+        // Test event data.
+        $this->assertInstanceOf('\core\event\course_module_updated', $event);
+        $this->assertEquals($cm->id, $event2->objectid);
+        $this->assertEquals($modcontext, $event2->get_context());
+        $this->assertEquals($cm->modname, $event2->other['modulename']);
+        $this->assertEquals($cm->instance, $event2->other['instanceid']);
+        $this->assertEquals($cm->name, $event2->other['name']);
+        $this->assertSame('mod_updated', $event2->get_legacy_eventname());
+        $arr = array($cm->course, "course", "update mod", "../mod/assign/view.php?id=$cm->id", "assign $cm->instance");
         $this->assertEventLegacyLogData($arr, $event);
     }
 

@@ -33,7 +33,11 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2013 Frédéric Massart
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class grouping_created extends base {
+=======
+class grouping_created extends \core\event\base {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
     /**
      * Returns description of what happened.
@@ -90,4 +94,18 @@ class grouping_created extends base {
         $this->data['edulevel'] = self::LEVEL_OTHER;
         $this->data['objecttable'] = 'groupings';
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Set legacy data.
+     *
+     * @param mixed $legacydata.
+     * @return void
+     */
+    public function set_legacy_eventdata($legacydata) {
+        // This function is not used and will be removed in 2.7.
+    }
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }

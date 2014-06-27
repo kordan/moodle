@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Group member added event class.
  *
+<<<<<<< HEAD
  * @property-read array $other {
  *      Extra information about event.
  *
@@ -35,6 +36,8 @@ defined('MOODLE_INTERNAL') || die();
  *      - int itemid: id of item.
  * }
  *
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
  * @package    core
  * @since      Moodle 2.6
  * @copyright  2013 Frédéric Massart

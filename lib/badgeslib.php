@@ -822,8 +822,13 @@ function badges_get_badges($type, $courseid = 0, $sort = '', $dir = '', $page = 
             $badges[$r->id]->uniquehash = $r->uniquehash;
         } else {
             $badges[$r->id]->awards = $DB->count_records_sql('SELECT COUNT(b.userid)
+<<<<<<< HEAD
                                         FROM {badge_issued} b INNER JOIN {user} u ON b.userid = u.id
                                         WHERE b.badgeid = :badgeid AND u.deleted = 0', array('badgeid' => $badge->id));
+=======
+                                         FROM {badge_issued} b INNER JOIN {user} u ON b.userid = u.id
+                                         WHERE b.badgeid = :badgeid AND u.deleted = 0', array('badgeid' => $badge->id));
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $badges[$r->id]->statstring = $badge->get_status_name();
         }
     }

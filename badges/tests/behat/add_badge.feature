@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_badges @_file_upload
+=======
+@core @core_badges @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Add badges to the system
   In order to give badges to users for their achievements
   As an admin

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @repository @repository_upload @_file_upload
+=======
+@repository @repository_upload @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Upload files
   In order to add contents
   As a user
@@ -6,6 +10,7 @@ Feature: Upload files
 
   @javascript
   Scenario: Upload a file in a multiple file filemanager
+<<<<<<< HEAD
     Given the following "courses" exist:
       | fullname | shortname | category |
       | Course 1 | C1 | 0 |
@@ -15,6 +20,17 @@ Feature: Upload files
     Then I should see "1" elements in "Files" filemanager
     And I should see "empty.txt" in the "div.fp-content" "css_element"
     And I upload "lib/tests/fixtures/empty.txt" file to "Files" filemanager as:
+=======
+    Given the following "courses" exists:
+      | fullname | shortname | category |
+      | Course 1 | C1 | 0 |
+    And I log in as "admin"
+    And I navigate to "My private files" node in "My profile"
+    And I upload "lib/tests/fixtures/empty.txt" file to "Files" filemanager
+    Then I should see "1" elements in "Files" filemanager
+    And I should see "empty.txt" in the "div.fp-content" "css_element"
+    When I upload "lib/tests/fixtures/empty.txt" file to "Files" filemanager as:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Save as | empty_copy.txt |
     Then I should see "2" elements in "Files" filemanager
     And I should see "empty.txt"

@@ -35,7 +35,11 @@ $string['availablelangs'] = 'Paquetages de langue disponibles';
 $string['chooselanguagehead'] = 'Choisissez une langue';
 $string['chooselanguagesub'] = 'Veuillez choisir la langue d\'installation. Cette langue sera utilisée comme langue par défaut du site, que vous pourrez modifier ultérieurement.';
 $string['clialreadyconfigured'] = 'Le fichier config.php existe déjà. Veuillez utiliser admin/cli/install_database.php pour installer Moodle sur ce site.';
+<<<<<<< HEAD
 $string['clialreadyinstalled'] = 'Le fichier config.php existe déjà. Veuillez utiliser admin/cli/upgrade.php si vous désirez mettre à jour ce site.';
+=======
+$string['clialreadyinstalled'] = 'Le fichier config.php existe déjà. Veuillez utiliser admin/cli/install_database.php si vous désirez mettre à jour ce site Moodle.';
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 $string['cliinstallheader'] = 'Programme d\'installation de Moodle {$a} en ligne de commande';
 $string['databasehost'] = 'Serveur de base de données';
 $string['databasename'] = 'Nom de la base de données';

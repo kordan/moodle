@@ -921,6 +921,7 @@ $services = array(
             'core_course_get_contents',
             'core_get_component_strings',
             'core_user_add_user_device',
+<<<<<<< HEAD
             'core_calendar_get_calendar_events',
             'core_enrol_get_users_courses',
             'core_enrol_get_enrolled_users',
@@ -951,6 +952,9 @@ $services = array(
             'mod_forum_get_forums_by_courses',
             'mod_forum_get_forum_discussions',
             'mod_forum_get_forum_discussion_posts'),
+=======
+            'core_calendar_get_calendar_events'),
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         'enabled' => 0,
         'restrictedusers' => 0,
         'shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE,

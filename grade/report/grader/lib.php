@@ -1059,8 +1059,13 @@ class grade_report_grader extends grade_report {
             'requires'  => array('base', 'dom', 'event', 'event-mouseenter', 'event-key', 'io-queue', 'json-parse', 'overlay')
         );
         $PAGE->requires->js_init_call('M.gradereport_grader.init_report', $jsarguments, false, $module);
+<<<<<<< HEAD
         $PAGE->requires->strings_for_js(array('addfeedback', 'feedback', 'grade'), 'grades');
         $PAGE->requires->strings_for_js(array('ajaxchoosescale', 'ajaxclicktoclose', 'ajaxerror', 'ajaxfailedupdate', 'ajaxfieldchanged'), 'gradereport_grader');
+=======
+        $PAGE->requires->strings_for_js(array('addfeedback','feedback', 'grade'), 'grades');
+        $PAGE->requires->strings_for_js(array('ajaxchoosescale','ajaxclicktoclose','ajaxerror','ajaxfailedupdate', 'ajaxfieldchanged'), 'gradereport_grader');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         if (!$this->get_pref('enableajax') && $USER->gradeediting[$this->courseid]) {
             $PAGE->requires->yui_module('moodle-core-formchangechecker',
                     'M.core_formchangechecker.init',

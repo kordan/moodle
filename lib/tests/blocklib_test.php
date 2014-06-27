@@ -102,9 +102,12 @@ class core_blocklib_testcase extends advanced_testcase {
         $this->blockmanager->add_region('too-late', false);
     }
 
+<<<<<<< HEAD
     /**
      * Testing adding a custom region.
      */
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function test_add_custom_region() {
         global $SESSION;
         // Exercise SUT.
@@ -117,9 +120,12 @@ class core_blocklib_testcase extends advanced_testcase {
 
     }
 
+<<<<<<< HEAD
     /**
      * Test adding two custom regions using add_regions method.
      */
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function test_add_custom_regions() {
         global $SESSION;
         // Set up fixture.
@@ -133,14 +139,18 @@ class core_blocklib_testcase extends advanced_testcase {
         $this->assertTrue(in_array('another-custom-region', $SESSION->custom_block_regions['phpunit-block-test']));
     }
 
+<<<<<<< HEAD
     /**
      * Test adding two custom block regions.
      */
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function test_add_custom_region_twice() {
         // Exercise SUT.
         $this->blockmanager->add_region('a-custom-region-name');
         $this->blockmanager->add_region('another-custom-region');
         // Validate.
+<<<<<<< HEAD
         $this->assertEquals(
             array('a-custom-region-name', 'another-custom-region'),
             $this->blockmanager->get_regions(),
@@ -150,6 +160,12 @@ class core_blocklib_testcase extends advanced_testcase {
 
     /**
      * Test to ensure that we cannot add a region after the blocks have been loaded.
+=======
+        $this->assertEquals(array('a-custom-region-name', 'another-custom-region'), $this->blockmanager->get_regions(), '', 0, 10, true);
+    }
+
+    /**
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * @expectedException coding_exception
      */
     public function test_cannot_add_custom_region_after_loaded() {

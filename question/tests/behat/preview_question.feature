@@ -24,7 +24,11 @@ Feature: A teacher can preview questions in the question bank
       | fraction[0] | 100% |
       | answer[1] | * |
       | fraction[1] | None |
+<<<<<<< HEAD
     When I click on "Preview" "link" in the "Test question to be previewed" "table_row"
+=======
+    When I click on "Preview" "link" in the "Test question name" "table_row"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I switch to "questionpreview" window
     And I set the following fields to these values:
       | Whether correct | Shown |

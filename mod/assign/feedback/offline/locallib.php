@@ -36,8 +36,13 @@ require_once($CFG->dirroot.'/grade/grading/lib.php');
  */
 class assign_feedback_offline extends assign_feedback_plugin {
 
+<<<<<<< HEAD
     /** @var boolean|null $enabledcache Cached lookup of the is_enabled function */
     private $enabledcache = null;
+=======
+    /** @var boolean|null $activecache Cached lookup of advanced grading */
+    private $activecache = null;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
     /**
      * Get the name of the file feedback plugin
@@ -368,6 +373,7 @@ class assign_feedback_offline extends assign_feedback_plugin {
      * @return bool
      */
     public function is_enabled() {
+<<<<<<< HEAD
         if ($this->enabledcache === null) {
             $gradingmanager = get_grading_manager($this->assignment->get_context(), 'mod_assign', 'submissions');
             $controller = $gradingmanager->get_active_controller();
@@ -380,6 +386,19 @@ class assign_feedback_offline extends assign_feedback_plugin {
             }
         }
         return $this->enabledcache;
+=======
+        if ($this->activecache === null) {
+            $gradingmanager = get_grading_manager($this->assignment->get_context(), 'mod_assign', 'submissions');
+            $controller = $gradingmanager->get_active_controller();
+            $this->activecache = !empty($controller);
+        }
+
+        if ($this->activecache) {
+            return false;
+        } else {
+            return parent::is_enabled();
+        }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**

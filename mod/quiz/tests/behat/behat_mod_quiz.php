@@ -26,7 +26,10 @@
 // NOTE: no MOODLE_INTERNAL test here, this file may be required by behat before including /config.php.
 
 require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
+<<<<<<< HEAD
 require_once(__DIR__ . '/../../../../question/tests/behat/behat_question_base.php');
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 use Behat\Behat\Context\Step\Given as Given,
     Behat\Gherkin\Node\TableNode as TableNode;
@@ -39,7 +42,11 @@ use Behat\Behat\Context\Step\Given as Given,
  * @copyright  2014 Marina Glancy
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class behat_mod_quiz extends behat_question_base {
+=======
+class behat_mod_quiz extends behat_base {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     /**
      * Adds a question to the existing quiz with filling the form.
      *
@@ -48,6 +55,7 @@ class behat_mod_quiz extends behat_question_base {
      * @When /^I add a "(?P<question_type_string>(?:[^"]|\\")*)" question to the "(?P<quiz_name_string>(?:[^"]|\\")*)" quiz with:$/
      * @param string $questiontype
      * @param string $quizname
+<<<<<<< HEAD
      * @param TableNode $questiondata with data for filling the add question form
      */
     public function i_add_question_to_the_quiz_with($questiontype, $quizname, TableNode $questiondata) {
@@ -59,5 +67,25 @@ class behat_mod_quiz extends behat_question_base {
             new Given("I follow \"$editquiz\""),
             new Given("I press \"$addaquestion\""),
                 ), $this->finish_adding_question($questiontype, $questiondata));
+=======
+     * @param TableNode $table with data for filling the add question form
+     */
+    public function i_add_question_to_the_quiz_with($questiontype, $quizname, TableNode $table) {
+        $questiontype = $this->escape($questiontype);
+        $quizname = $this->escape($quizname);
+        $editquiz = $this->escape(get_string('editquiz', 'quiz'));
+        $addaquestion = $this->escape(get_string('addaquestion', 'quiz'));
+        $next = $this->escape(get_string('next'));
+        $savechanges = $this->escape(get_string('savechanges'));
+        return array(
+            new Given("I follow \"$quizname\""),
+            new Given("I follow \"$editquiz\""),
+            new Given("I press \"$addaquestion\""),
+            new Given("I select \"$questiontype\" radio button"),
+            new Given("I press \"$next\""),
+            new Given("I fill the moodle form with:", $table),
+            new Given("I press \"$savechanges\"")
+        );
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 }

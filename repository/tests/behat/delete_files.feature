@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_filepicker @_file_upload
+=======
+@core @core_filepicker @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Delete files and folders from the file manager
   In order to clean the file manager contents
   As a user

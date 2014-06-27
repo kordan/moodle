@@ -4,7 +4,6 @@ Feature: The context of a block can always be returned to it's original state.
   As an admin
   I need to be able to return the block to original state
 
-  @javascript
   Scenario: Add and configure a block to display on every page and revert back
     Given the following "courses" exist:
       | fullname | shortname | category |
@@ -15,9 +14,14 @@ Feature: The context of a block can always be returned to it's original state.
     And I add the "Tags" block
     Then I should see "Tags" in the "Tags" "block"
     And I click on "Participants" "link" in the "//li[p/span[contains(normalize-space(string(.)), 'Current course')]]" "xpath_element"
+<<<<<<< HEAD
     And I open the "Tags" blocks action menu
     And I follow "Configure Tags block"
     And I set the following fields to these values:
+=======
+    And I configure the "Tags" block
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Display on page types | Any page |
     And I press "Save changes"
     And I follow "Course 1"
@@ -25,9 +29,14 @@ Feature: The context of a block can always be returned to it's original state.
       | Assignment name | Assignment1 |
       | Description | Description |
     And I follow "Assignment1"
+<<<<<<< HEAD
     And I open the "Tags" blocks action menu
     And I follow "Configure Tags block"
     And I set the following fields to these values:
+=======
+    And I configure the "Tags" block
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Display on page types | Any assignment module page |
     And I press "Save changes"
     And I should see "Tags" in the "Tags" "block"
@@ -41,9 +50,14 @@ Feature: The context of a block can always be returned to it's original state.
       | Description | Description |
     And I follow "Assignment2"
     And I should see "Tags" in the "Tags" "block"
+<<<<<<< HEAD
     And I open the "Tags" blocks action menu
     And I follow "Configure Tags block"
     And I set the following fields to these values:
+=======
+    And I configure the "Tags" block
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Display on page types | Any page |
     And I press "Save changes"
     And I follow "Course 1"

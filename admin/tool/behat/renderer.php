@@ -45,7 +45,41 @@ class tool_behat_renderer extends plugin_renderer_base {
      */
     public function render_stepsdefinitions($stepsdefinitions, $form) {
 
+<<<<<<< HEAD
         $html = $this->generic_info();
+=======
+        $title = get_string('pluginname', 'tool_behat');
+
+        // Header.
+        $html = $this->output->header();
+        $html .= $this->output->heading($title);
+
+        // Info.
+        $installurl = behat_command::DOCS_URL . '#Installation';
+        $installlink = html_writer::tag('a', $installurl, array('href' => $installurl, 'target' => '_blank'));
+        $writetestsurl = behat_command::DOCS_URL . '#Writting_features';
+        $writetestslink = html_writer::tag('a', $writetestsurl, array('href' => $writetestsurl, 'target' => '_blank'));
+        $writestepsurl = behat_command::DOCS_URL . '#Adding_steps_definitions';
+        $writestepslink = html_writer::tag('a', $writestepsurl, array('href' => $writestepsurl, 'target' => '_blank'));
+        $infos = array(
+            get_string('installinfo', 'tool_behat', $installlink),
+            get_string('newtestsinfo', 'tool_behat', $writetestslink),
+            get_string('newstepsinfo', 'tool_behat', $writestepslink)
+        );
+
+        // List of steps.
+        $html .= $this->output->box_start();
+        $html .= html_writer::tag('h1', get_string('infoheading', 'tool_behat'));
+        $html .= html_writer::tag('div', get_string('aim', 'tool_behat'));
+        $html .= html_writer::start_tag('div');
+        $html .= html_writer::start_tag('ul');
+        $html .= html_writer::start_tag('li');
+        $html .= implode(html_writer::end_tag('li') . html_writer::start_tag('li'), $infos);
+        $html .= html_writer::end_tag('li');
+        $html .= html_writer::end_tag('ul');
+        $html .= html_writer::end_tag('div');
+        $html .= $this->output->box_end();
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
         // Form.
         ob_start();

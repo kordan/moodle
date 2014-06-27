@@ -18,6 +18,7 @@
  * The user profile viewed event.
  *
  * @package    core
+ * @since      Moodle 2.6
  * @copyright  2013 Mark Nelson <markn@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -68,8 +69,14 @@ class user_profile_viewed extends base {
      * @return string
      */
     public function get_description() {
+<<<<<<< HEAD
         return "The user with id '$this->userid' viewed the profile for the user with id '$this->relateduserid' in the course " .
             "with id '{$this->other['courseid']}'.";
+=======
+        $desc = "The user with id '$this->userid' viewed the profile for the user with id '$this->relateduserid'";
+        $desc .= ($this->contextlevel == CONTEXT_COURSE) ? " in the course with id '$this->courseid'." : ".";
+        return $desc;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**
@@ -78,7 +85,10 @@ class user_profile_viewed extends base {
      * @return \moodle_url
      */
     public function get_url() {
-        return new \moodle_url('/user/view.php', array('id' => $this->relateduserid, 'course' => $this->other['courseid']));
+        if ($this->contextlevel == CONTEXT_COURSE) {
+            return new \moodle_url('/user/view.php', array('id' => $this->relateduserid, 'course' => $this->courseid));
+        }
+        return new \moodle_url('/user/profile.php', array('id' => $this->relateduserid));
     }
 
     /**
@@ -87,7 +97,10 @@ class user_profile_viewed extends base {
      * @return array
      */
     protected function get_legacy_logdata() {
-        return array($this->other['courseid'], 'user', 'view', 'view.php?id=' . $this->relateduserid . '&course=' .
-            $this->other['courseid'], $this->relateduserid);
+        if ($this->contextlevel == CONTEXT_COURSE) {
+            return array($this->courseid, 'user', 'view', 'view.php?id=' . $this->relateduserid . '&course=' .
+                $this->courseid, $this->relateduserid);
+        }
+        return null;
     }
 }

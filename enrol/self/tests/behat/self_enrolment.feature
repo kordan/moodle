@@ -64,13 +64,18 @@ Feature: Users can auto-enrol themself in courses where self enrolment is allowe
     And I press "Create group"
     And I set the following fields to these values:
       | Group name | Group 1 |
-      | Enrolment key | testgroupenrolkey |
+      | Enrolment key | Test-groupenrolkey1 |
     And I press "Save changes"
     And I log out
     And I log in as "student1"
     And I follow "Course 1"
+<<<<<<< HEAD
     And I set the following fields to these values:
       | Enrolment key | testgroupenrolkey |
+=======
+    And I fill the moodle form with:
+      | Enrolment key | Test-groupenrolkey1 |
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I press "Enrol me"
     Then I should see "Topic 1"
     And I should not see "Enrolment options"

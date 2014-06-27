@@ -51,6 +51,11 @@ Feature: Add or remove items from the TinyMCE editor toolbar
     And I turn editing mode on
     When I add a "Database" to section "1"
     And I wait until "#id_introeditor_tbl" "css_element" exists
+<<<<<<< HEAD
     Then "#id_introeditor_tbl .mce_bold" "css_element" should exist
     And "#id_introeditor_tbl .mce_anchor" "css_element" should not exist
+=======
+    Then "#id_introeditor_tbl .mce_bold" "css_element" should exists
+    And "#id_introeditor_tbl .mce_anchor" "css_element" should not exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I press "Cancel"

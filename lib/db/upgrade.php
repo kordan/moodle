@@ -2875,7 +2875,11 @@ function xmldb_main_upgrade($oldversion) {
         upgrade_main_savepoint(true, 2013111800.01);
     }
 
+<<<<<<< HEAD
     if ($oldversion < 2013122400.01) {
+=======
+    if ($oldversion < 2013111800.08) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Purge stored passwords from config_log table, ideally this should be in each plugin
         // but that would complicate backporting...
         $items = array(
@@ -2913,6 +2917,7 @@ function xmldb_main_upgrade($oldversion) {
             }
         }
         // Main savepoint reached.
+<<<<<<< HEAD
         upgrade_main_savepoint(true, 2013122400.01);
     }
 
@@ -2933,14 +2938,27 @@ function xmldb_main_upgrade($oldversion) {
     }
 
     if ($oldversion < 2014011701.00) {
+=======
+        upgrade_main_savepoint(true, 2013111800.08);
+    }
+
+    if ($oldversion < 2013111801.02) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Fix gradebook sortorder duplicates.
         upgrade_grade_item_fix_sortorder();
 
         // Main savepoint reached.
+<<<<<<< HEAD
         upgrade_main_savepoint(true, 2014011701.00);
     }
 
     if ($oldversion < 2014012300.01) {
+=======
+        upgrade_main_savepoint(true, 2013111801.02);
+    }
+
+    if ($oldversion < 2013111801.04) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Remove deleted users home pages.
         $sql = "DELETE FROM {my_pages}
                 WHERE EXISTS (SELECT {user}.id
@@ -2950,6 +2968,7 @@ function xmldb_main_upgrade($oldversion) {
                 AND {my_pages}.private = 1";
         $DB->execute($sql);
 
+<<<<<<< HEAD
         // Reached main savepoint.
         upgrade_main_savepoint(true, 2014012300.01);
     }
@@ -3626,6 +3645,62 @@ function xmldb_main_upgrade($oldversion) {
             );
         }
         upgrade_main_savepoint(true, 2014050100.00);
+=======
+        // Main savepoint reached.
+        upgrade_main_savepoint(true, 2013111801.04);
+    }
+
+    if ($oldversion < 2013111802.10) {
+        // Fixing possible wrong MIME type for DigiDoc files.
+        $extensions = array('%.bdoc', '%.cdoc', '%.ddoc');
+        $select = $DB->sql_like('filename', '?', false);
+        foreach ($extensions as $extension) {
+            $DB->set_field_select(
+                'files',
+                'mimetype',
+                'application/x-digidoc',
+                $select,
+                array($extension)
+            );
+        }
+        upgrade_main_savepoint(true, 2013111802.10);
+    }
+
+    // MDL-32543 Make sure that the log table has correct length for action and url fields.
+    if ($oldversion < 2013111803.01) {
+
+        $table = new xmldb_table('log');
+
+        $columns = $DB->get_columns('log');
+        if ($columns['action']->max_length < 40) {
+            $index1 = new xmldb_index('course-module-action', XMLDB_INDEX_NOTUNIQUE, array('course', 'module', 'action'));
+            if ($dbman->index_exists($table, $index1)) {
+                $dbman->drop_index($table, $index1);
+            }
+            $index2 = new xmldb_index('action', XMLDB_INDEX_NOTUNIQUE, array('action'));
+            if ($dbman->index_exists($table, $index2)) {
+                $dbman->drop_index($table, $index2);
+            }
+            $field = new xmldb_field('action', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, null, 'cmid');
+            $dbman->change_field_precision($table, $field);
+            $dbman->add_index($table, $index1);
+            $dbman->add_index($table, $index2);
+        }
+
+        if ($columns['url']->max_length < 100) {
+            $field = new xmldb_field('url', XMLDB_TYPE_CHAR, '100', null, XMLDB_NOTNULL, null, null, 'action');
+            $dbman->change_field_precision($table, $field);
+        }
+
+        upgrade_main_savepoint(true, 2013111803.01);
+    }
+
+    if ($oldversion < 2013111803.05) {
+        // Fixing possible wrong MIME type for Publisher files.
+        $filetypes = array('%.pub'=>'application/x-mspublisher');
+        upgrade_mimetypes($filetypes);
+        upgrade_main_savepoint(true, 2013111803.05);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     return true;

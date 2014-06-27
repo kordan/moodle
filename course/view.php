@@ -230,6 +230,7 @@
         $PAGE->set_button($buttons);
     }
 
+<<<<<<< HEAD
     // If viewing a section, make the title more specific
     if ($section and $section > 0 and course_format_uses_sections($course->format)) {
         $sectionname = get_string('sectionname', "format_$course->format");
@@ -237,6 +238,15 @@
         $PAGE->set_title(get_string('coursesectiontitle', 'moodle', array('course' => $course->fullname, 'sectiontitle' => $sectiontitle, 'sectionname' => $sectionname)));
     } else {
         $PAGE->set_title(get_string('coursetitle', 'moodle', array('course' => $course->fullname)));
+=======
+    $PAGE->set_title(get_string('course') . ': ' . $course->fullname);
+    // If viewing a section, make the title more specific
+    if ($section and $section > 0 and course_format_uses_sections($course->format)) {
+        // Get section details and check it exists.
+        $newtitle = $PAGE->title.', '.get_string('sectionname', "format_$course->format").': '.
+            get_section_name($course, $section);
+        $PAGE->set_title($newtitle);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     $PAGE->set_heading($course->fullname);

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_cohort @_file_upload
+=======
+@core @core_cohort @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Upload users to a cohort
   In order to quickly fill site-wide groups with users
   As an admin

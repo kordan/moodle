@@ -9,7 +9,11 @@ Feature: Login from a block
       | username | password | firstname | lastname | email |
       | testuser | testpass | Test      | User     | student1@asd.com |
     And I log in as "admin"
+<<<<<<< HEAD
     And I navigate to "Turn editing on" node in "Front page settings"
+=======
+    And I follow "Turn editing on"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I add the "Login" block
 
   Scenario: Login block visible to non-logged in users

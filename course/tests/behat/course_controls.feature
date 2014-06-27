@@ -15,7 +15,7 @@ Feature: Course activity controls works as expected
   # * Course controls with paged mode in the course home page
   # * Course controls with paged mode in a section's page
 
-  @javascript @_cross_browser
+  @javascript @_cross_browser @_alert
   Scenario Outline: General activities course controls using topics and weeks formats, and paged mode and not paged mode works as expected
     Given the following "users" exist:
       | username | firstname | lastname | email |
@@ -58,15 +58,26 @@ Feature: Course activity controls works as expected
     And I click on "Edit settings" "link" in the "Test forum name 1" activity
     And I should see "Updating Forum"
     And I should see "Display description on course page"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Forum name | Just to check that I can edit the name |
       | Description | Just to check that I can edit the description |
       | Display description on course page | 1 |
     And I click on "Cancel" "button"
+<<<<<<< HEAD
     And "#section-2" "css_element" <should_see_other_sections> exist
     And I open "Test forum name 1" actions menu
     And I click on "Hide" "link" in the "Test forum name 1" activity
     And "#section-2" "css_element" <should_see_other_sections> exist
+=======
+    And "#section-2" "css_element" <should_see_other_sections> exists
+    And I open "Test forum name 1" actions menu
+    And I click on "Hide" "link" in the "Test forum name 1" activity
+    And "#section-2" "css_element" <should_see_other_sections> exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I open "Test forum name 1" actions menu
     And I delete "Test forum name 1" activity
     And I should not see "Test forum name 1" in the "#region-main" "css_element"
@@ -143,7 +154,11 @@ Feature: Course activity controls works as expected
     And I click on "Hide" "link" in the "Test forum name 1" activity
     And "#section-2" "css_element" <should_see_other_sections> exist
     And I delete "Test forum name 1" activity
+<<<<<<< HEAD
     And "#section-2" "css_element" <should_see_other_sections> exist
+=======
+    And "#section-2" "css_element" <should_see_other_sections> exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I should not see "Test forum name 1" in the "#region-main" "css_element"
     And I duplicate "Test forum name 2" activity editing the new copy with:
       | Forum name | Edited test forum name 2 |

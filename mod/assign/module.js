@@ -96,6 +96,23 @@ M.mod_assign.init_grading_table = function(Y) {
                         e.preventDefault();
                     }
                 }
+<<<<<<< HEAD
+=======
+            });
+        }
+
+        Y.use('node-menunav', function(Y) {
+            var menus = Y.all('.gradingtable .actionmenu');
+
+            menus.each(function(menu) {
+                Y.on("contentready", function() {
+                    this.plug(Y.Plugin.NodeMenuNav, {autoSubmenuDisplay: true});
+                    var submenus = this.all('.yui3-loading');
+                    submenus.each(function (n) {
+                        n.removeClass('yui3-loading');
+                    });
+                }, "#" + menu.getAttribute('id'));
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             });
         }
 

@@ -16,7 +16,10 @@
     display:none;
 }
 
+<<<<<<< HEAD
 .content-only #region-main.span9, // Two column layout with no block or all blocks docked.
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 .empty-region-side-post #region-bs-main-and-pre.span9, // LTR with no post area.
 .empty-region-side-pre #region-bs-main-and-post.span9, // RTL with no pre area.
 .empty-region-side-post #region-bs-main-and-post.span9 #region-main.span8, // RTL with no post area.
@@ -1222,6 +1225,7 @@ body.tag .managelink {
 .label .mod-indent {
   float:left;
   padding-top:20px
+<<<<<<< HEAD
 }
 .mod-indent-1 {
     width: 30px;
@@ -1243,32 +1247,25 @@ body.tag .managelink {
 }
 .mod-indent-7 {
     width: 210px;
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }
-.mod-indent-8 {
-    width: 240px;
+
+/* Creates a series of .mod-indent-# rule declarations based on indent size and number of indent levels. */
+@mod-indent-size: 30px;
+@mod-indent-levels: 16;
+.mod-indent-generate(@n, @i: 1) when (@i =< @n) {
+    .mod-indent-@{i} {
+        width: (@i * @mod-indent-size);
+    }
+    .mod-indent-generate(@n, (@i + 1));
 }
-.mod-indent-9 {
-    width: 270px;
+.mod-indent-generate(@n, @i: 1) when (@i = @n) {
+    .mod-indent-huge {
+        width: (@i * @mod-indent-size);
+    }
 }
-.mod-indent-10 {
-    width: 300px;
-}
-.mod-indent-11 {
-    width: 330px;
-}
-.mod-indent-12 {
-    width: 360px;
-}
-.mod-indent-13 {
-    width: 390px;
-}
-.mod-indent-14 {
-    width: 420px;
-}
-.mod-indent-15,
-.mod-indent-huge {
-    width: 420px;
-}
+.mod-indent-generate(@mod-indent-levels);
 
 /* Audio player size in 'block' mode (can only change width, height is hardcoded in JS) */
 .resourcecontent .mediaplugin_mp3 object {
@@ -2230,12 +2227,17 @@ body.lockscroll {
   height: 100%;
   overflow: hidden;
 }
+<<<<<<< HEAD
 
 .dir-rtl {
     // Bootstrap sets right margin to 0. Fail.
     // They set left margin to 25px so we will copy that.
     ul, ol {
         margin-left: 0;
+=======
+.dir-rtl {
+    ul, ol {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         margin-right: 25px;
     }
 }

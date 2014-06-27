@@ -112,6 +112,7 @@ function xmldb_forum_upgrade($oldversion) {
     // Moodle v2.6.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     if ($oldversion < 2014040400) {
 
         // Define index userid-postid (not unique) to be dropped form forum_read.
@@ -134,6 +135,24 @@ function xmldb_forum_upgrade($oldversion) {
 
         // Forum savepoint reached.
         upgrade_mod_savepoint(true, 2014040400, 'forum');
+=======
+    if ($oldversion < 2013110501) {
+
+        // Incorrect values that need to be replaced.
+        $replacements = array(
+            11 => 20,
+            12 => 50,
+            13 => 100
+        );
+
+        // Run the replacements.
+        foreach ($replacements as $old => $new) {
+            $DB->set_field('forum', 'maxattachments', $new, array('maxattachments' => $old));
+        }
+
+        // Forum savepoint reached.
+        upgrade_mod_savepoint(true, 2013110501, 'forum');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     return true;

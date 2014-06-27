@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_filepicker @repository @repository_user @_file_upload
+=======
+@core @core_filepicker @repository @repository_user @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Create shortcuts
   In order to automatically synchronize copies of the file with the source
   As a teacher
@@ -6,6 +10,7 @@ Feature: Create shortcuts
 
   @javascript @_bug_phantomjs
   Scenario: Upload a file as a copy and as a shortcut in filemanager
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Terry | Teacher | teacher1@asd.com |
@@ -13,6 +18,15 @@ Feature: Create shortcuts
       | fullname | shortname | category |
       | Course 1 | C1 | 0 |
     And the following "course enrolments" exist:
+=======
+    Given the following "users" exists:
+      | username | firstname | lastname | email |
+      | teacher1 | Terry | Teacher | teacher1@asd.com |
+    And the following "courses" exists:
+      | fullname | shortname | category |
+      | Course 1 | C1 | 0 |
+    And the following "course enrolments" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | user | course | role |
       | teacher1 | C1 | editingteacher |
     When I log in as "teacher1"
@@ -25,13 +39,21 @@ Feature: Create shortcuts
     And I follow "Course 1"
     And I turn editing mode on
     And I add a "Folder" to section "1"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Name        | Test folder             |
       | Description | Test folder description |
     And I add "empty.txt" file from "Private files" to "Files" filemanager
     And I should see "1" elements in "Files" filemanager
     And I should see "empty.txt" in the ".fp-content .fp-file" "css_element"
+<<<<<<< HEAD
     And ".fp-content .fp-file.fp-isreference" "css_element" should not exist
+=======
+    And ".fp-content .fp-file.fp-isreference" "css_element" should not exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I add "empty.txt" file from "Private files" to "Files" filemanager as:
       | Save as | empty_ref.txt |
       | Create an alias/shortcut to the file | 1 |
@@ -47,13 +69,21 @@ Feature: Create shortcuts
     And I add and overwrite "empty.txt" file from "Private files" to "Files" filemanager as:
       | Save as | empty_ref.txt |
     And I should see "2" elements in "Files" filemanager
+<<<<<<< HEAD
     And ".fp-content .fp-file.fp-isreference" "css_element" should not exist
+=======
+    And ".fp-content .fp-file.fp-isreference" "css_element" should not exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I press "Save changes"
     And I should see "empty.txt"
     And I should see "empty_ref.txt"
     And I press "Edit"
     And I should see "2" elements in "Files" filemanager
+<<<<<<< HEAD
     And ".fp-content .fp-file.fp-isreference" "css_element" should not exist
+=======
+    And ".fp-content .fp-file.fp-isreference" "css_element" should not exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     # ------ Overwriting non-reference with a reference ---------
     And I add and overwrite "empty.txt" file from "Private files" to "Files" filemanager as:
       | Save as | empty_ref.txt |

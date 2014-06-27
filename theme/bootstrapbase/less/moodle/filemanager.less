@@ -96,16 +96,29 @@
     float: right;
 }
 .file-picker .fp-repo-items {
+    float: none;
+    width: auto;
+    margin-left:181px;
+}
+.moodle-dialogue-fullscreen .file-picker .fp-repo-items {
+    margin-left: 0px;
+    margin-right:0px;
     float: left;
-    width: 693px;
 }
 .dir-rtl .file-picker .fp-repo-items {
+    margin-left: 0px;
+    margin-right:181px;
+}
+.dir-rtl .moodle-dialogue-fullscreen .file-picker .fp-repo-items {
+    margin-left: 0px;
+    margin-right:0px;
     float: right;
 }
 .file-picker .fp-navbar {
     background: #F2F2F2;
     border-bottom: 1px solid #BBBBBB;
     min-height: 40px;
+    overflow: hidden;
 }
 .file-picker .fp-navbar .fp-viewbar {
     margin: 4px;
@@ -113,7 +126,7 @@
 
 .file-picker .fp-content {
     background: #FFFFFF;
-    clear: both;
+    clear: none;
     overflow: auto;
     height: 452px;
 }
@@ -1209,6 +1222,7 @@ a.ygtvspacer:hover {
             margin-left:4px;
         }
     }
+<<<<<<< HEAD
 }
 // Upload form for file picker.
 .fp-formset {
@@ -1295,4 +1309,6 @@ a.ygtvspacer:hover {
         margin-left: 0;
         text-align: right;
     }
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }

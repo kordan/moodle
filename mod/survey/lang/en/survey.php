@@ -197,10 +197,14 @@ $string['downloadinfo'] = 'You can download the complete raw data for this surve
 $string['downloadresults'] = 'Download results';
 $string['downloadtext'] = 'Download data as a plain text file';
 $string['editingasurvey'] = 'Editing a survey';
+<<<<<<< HEAD
 $string['eventreportdownloaded'] = 'Survey report downloaded';
 $string['eventreportviewed'] = 'Survey report viewed';
 $string['eventresponsesubmitted'] = 'Survey response submitted';
 $string['guestsnotallowed'] = 'Guests are not allowed to submit surveys';
+=======
+$string['guestsnotallowed'] = 'Only enrolled users are able to submit surveys';
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 $string['howlong'] = 'How long did this survey take you to complete?';
 $string['howlongoptions'] = 'under 1 min,1-2 min,2-3 min,3-4 min,4-5-min,5-10 min,more than 10';
 $string['ifoundthat'] = 'I found that';

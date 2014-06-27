@@ -48,6 +48,7 @@ function xmldb_filter_tex_upgrade($oldversion) {
     // Moodle v2.6.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     if ($oldversion < 2013120300) {
         $settings = array(
                 'density', 'latexbackground', 'convertformat', 'pathlatex',
@@ -65,5 +66,7 @@ function xmldb_filter_tex_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2013120300, 'filter', 'tex');
     }
 
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     return true;
 }

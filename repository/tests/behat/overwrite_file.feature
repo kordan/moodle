@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_filepicker @_file_upload
+=======
+@core @core_filepicker @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Overwrite file feature
   In order to update an existing file
   As a user
@@ -6,6 +10,7 @@ Feature: Overwrite file feature
 
   @javascript @_bug_phantomjs
   Scenario: Upload a file in filemanager and overwrite it
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Terry | Teacher | teacher1@asd.com |
@@ -13,6 +18,15 @@ Feature: Overwrite file feature
       | fullname | shortname | category |
       | Course 1 | C1 | 0 |
     And the following "course enrolments" exist:
+=======
+    Given the following "users" exists:
+      | username | firstname | lastname | email |
+      | teacher1 | Terry | Teacher | teacher1@asd.com |
+    And the following "courses" exists:
+      | fullname | shortname | category |
+      | Course 1 | C1 | 0 |
+    And the following "course enrolments" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | user | course | role |
       | teacher1 | C1 | editingteacher |
     When I log in as "teacher1"
@@ -33,7 +47,11 @@ Feature: Overwrite file feature
     And I follow "Course 1"
     And I turn editing mode on
     And I add a "Folder" to section "1"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Name | Test folder |
       | Description | Test folder description |
     And I add "empty.txt" file from "Private files" to "Files" filemanager

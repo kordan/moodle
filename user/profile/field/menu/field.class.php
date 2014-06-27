@@ -48,10 +48,21 @@ class profile_field_menu extends profile_field_base {
         // First call parent constructor.
         $this->profile_field_base($fieldid, $userid);
 
+<<<<<<< HEAD
         // Param 1 for menu type is the options.
         $options = explode("\n", $this->field->param1);
         $this->options = array();
         if ($this->field->required) {
+=======
+        /// Param 1 for menu type is the options
+        if (isset($this->field->param1)) {
+            $options = explode("\n", $this->field->param1);
+        } else {
+            $options = array();
+        }
+        $this->options = array();
+        if (!empty($this->field->required)) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $this->options[''] = get_string('choose').'...';
         }
         foreach ($options as $key => $option) {

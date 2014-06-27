@@ -44,6 +44,7 @@ if (empty($id)) {
 }
 require_capability('report/loglive:view', $context);
 
+<<<<<<< HEAD
 $params = array();
 if ($id != 0) {
     $params['id'] = $id;
@@ -70,6 +71,56 @@ if ($page == 0 && !empty($logreader)) {
             'interval' => $refresh, 'perpage' => $renderable->perpage);
     $PAGE->requires->strings_for_js(array('pause', 'resume'), 'report_loglive');
     $PAGE->requires->yui_module('moodle-report_loglive-fetchlogs', 'Y.M.report_loglive.FetchLogs.init', array($jsparams));
+=======
+$strlivelogs = get_string('livelogs', 'report_loglive');
+if (!empty($page)) {
+    $strlogs = get_string('logs'). ": ". get_string('page', 'report_loglive', $page + 1);
+} else {
+    $strlogs = get_string('logs');
+}
+
+if ($inpopup) {
+    \core\session\manager::write_close();
+
+    $date = time() - 3600;
+
+    $url = new moodle_url('/report/loglive/index.php', array('id'=>$course->id, 'user'=>0, 'date'=>$date, 'inpopup'=>1));
+
+    $strupdatesevery = get_string('updatesevery', 'moodle', REPORT_LOGLIVE_REFRESH);
+
+    $coursename = format_string($course->fullname, true, array('context'=>$context));
+
+    $PAGE->set_url($url);
+    $PAGE->set_pagelayout('popup');
+    $PAGE->set_title("$coursename: $strlivelogs ($strupdatesevery)");
+    $PAGE->set_periodic_refresh_delay(REPORT_LOGLIVE_REFRESH);
+    $PAGE->set_heading($strlivelogs);
+    echo $OUTPUT->header();
+
+    // Trigger a content view event.
+    $event = \report_loglive\event\content_viewed::create(array('courseid' => $course->id,
+                                                                'other'    => array('content' => 'loglive')));
+    $event->set_page_detail();
+    $event->set_legacy_logdata(array($course->id, 'course', 'report live', "report/loglive/index.php?id=$course->id", $course->id));
+    $event->trigger();
+
+    print_log($course, 0, $date, "l.time DESC", $page, 500, $url);
+
+    echo $OUTPUT->footer();
+    exit;
+}
+
+
+if ($course->id == SITEID) {
+    admin_externalpage_setup('reportloglive', '', null, '', array('pagelayout'=>'report'));
+    echo $OUTPUT->header();
+
+} else {
+    $PAGE->set_url('/report/log/live.php', array('id'=>$course->id));
+    $PAGE->set_title($course->shortname .': '. $strlivelogs);
+    $PAGE->set_heading($course->fullname);
+    echo $OUTPUT->header();
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }
 
 $strlivelogs = get_string('livelogs', 'report_loglive');

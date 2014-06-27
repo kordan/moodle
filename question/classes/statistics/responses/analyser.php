@@ -186,8 +186,13 @@ class analyser {
 
         $timemodified = time() - self::TIME_TO_CACHE;
         return $DB->get_field_select('question_response_analysis', 'timemodified',
+<<<<<<< HEAD
                                      'hashcode = ? AND whichtries = ? AND questionid = ? AND timemodified > ?',
                                      array($qubaids->get_hash_code(), $whichtries, $this->questiondata->id, $timemodified),
                                      IGNORE_MULTIPLE);
+=======
+                                     'hashcode = ? AND questionid = ? AND timemodified > ?',
+                                     array($qubaids->get_hash_code(), $this->questiondata->id, $timemodified), IGNORE_MULTIPLE);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 }

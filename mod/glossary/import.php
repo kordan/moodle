@@ -98,6 +98,11 @@ if ($xml = glossary_read_imported_file($result)) {
             $glossary->showspecial = ($xmlglossary['SHOWSPECIAL'][0]['#']);
             $glossary->showalphabet = ($xmlglossary['SHOWALPHABET'][0]['#']);
             $glossary->showall = ($xmlglossary['SHOWALL'][0]['#']);
+<<<<<<< HEAD
+=======
+            $glossary->timecreated = time();
+            $glossary->timemodified = time();
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $glossary->cmidnumber = null;
 
             // Setting the default values if no values were passed
@@ -132,6 +137,7 @@ if ($xml = glossary_read_imported_file($result)) {
                 $glossary->defaultapproval = $CFG->glossary_defaultapproval;
             }
 
+<<<<<<< HEAD
             // These fields were not included in export, assume zero.
             $glossary->assessed = 0;
             $glossary->availability = null;
@@ -139,6 +145,10 @@ if ($xml = glossary_read_imported_file($result)) {
             // New glossary is to be inserted in section 0, it is always visible.
             $glossary->section = 0;
             $glossary->visible = 1;
+=======
+            // This field was not included in export, assume zero.
+            $glossary->assessed = 0;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
             // Include new glossary and return the new ID
             if ( !($glossary = add_moduleinfo($glossary, $course)) ) {
@@ -147,6 +157,45 @@ if ($xml = glossary_read_imported_file($result)) {
                 echo $OUTPUT->footer();
                 exit;
             } else {
+<<<<<<< HEAD
+=======
+                //The instance has been created, so lets do course_modules
+                //and course_sections
+                $mod = new stdClass();
+                $mod->groupmode = $course->groupmode;  /// Default groupmode the same as course
+
+                $mod->instance = $glossary->id;
+                // course_modules and course_sections each contain a reference
+                // to each other, so we have to update one of them twice.
+
+                if (! $currmodule = $DB->get_record("modules", array("name"=>'glossary'))) {
+                    print_error('modulenotexist', 'debug', '', 'Glossary');
+                }
+                $mod->module = $currmodule->id;
+                $mod->course = $course->id;
+                $mod->modulename = 'glossary';
+                $mod->section = 0;
+
+                if (! $mod->coursemodule = add_course_module($mod) ) {
+                    print_error('cannotaddcoursemodule');
+                }
+
+                $sectionid = course_add_cm_to_section($course, $mod->coursemodule, 0);
+                //We get the section's visible field status
+                $visible = $DB->get_field("course_sections", "visible", array("id"=>$sectionid));
+
+                $DB->set_field("course_modules", "visible", $visible, array("id"=>$mod->coursemodule));
+
+                add_to_log($course->id, "course", "add mod",
+                           "../mod/$mod->modulename/view.php?id=$mod->coursemodule",
+                           "$mod->modulename $mod->instance");
+                add_to_log($course->id, $mod->modulename, "add",
+                           "view.php?id=$mod->coursemodule",
+                           "$mod->instance", $mod->coursemodule);
+
+                rebuild_course_cache($course->id);
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
                 echo $OUTPUT->box(get_string("newglossarycreated","glossary"),'generalbox boxaligncenter boxwidthnormal');
             }
         } else {

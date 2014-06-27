@@ -104,6 +104,7 @@ class data_lib_testcase extends advanced_testcase {
         // Make sure the function returns true on a successful deletion.
         $this->assertTrue($result);
     }
+<<<<<<< HEAD
 
     /**
      * Test comment_created event.
@@ -231,4 +232,6 @@ class data_lib_testcase extends advanced_testcase {
         $this->assertEquals($url, $event->get_url());
         $this->assertEventContextNotUsed($event);
     }
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }

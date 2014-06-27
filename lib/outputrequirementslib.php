@@ -745,7 +745,7 @@ class page_requirements_manager {
                                     'requires' => array('node', 'event', 'json', 'core_filepicker'),
                                     'strings'  => array(array('uploadformlimit', 'moodle'), array('droptoupload', 'moodle'), array('maxfilesreached', 'moodle'),
                                                         array('dndenabled_inbox', 'moodle'), array('fileexists', 'moodle'), array('maxbytesforfile', 'moodle'),
-                                                        array('maxareabytesreached', 'moodle')
+                                                        array('maxareabytesreached', 'moodle'), array('serverconnection', 'error'),
                                                     ));
                     break;
             }
@@ -1225,6 +1225,7 @@ class page_requirements_manager {
             $format = '-debug';
         }
 
+<<<<<<< HEAD
         $rollupversion = $CFG->yui3version;
         if (!empty($CFG->yuipatchlevel)) {
             $rollupversion .= '_' . $CFG->yuipatchlevel;
@@ -1233,6 +1234,16 @@ class page_requirements_manager {
         $baserollups = array(
             'rollup/' . $rollupversion . "/yui-moodlesimple{$yuiformat}.js",
             'rollup/' . $jsrev . "/mcore{$format}.js",
+=======
+        $baserollups = array(
+            'rollup/' . $CFG->yui3version . '/yui-moodlesimple' . $yuiformat . '.js',
+        );
+        // The reason for separate rollups is that the Y = YUI().use('*') call is run async and
+        // it gets it's knickers in a twist. Putting it in a separate <script>
+        // to the moodle rollup means that it's completed before the moodle one starts.
+        $moodlerollups = array(
+            'rollup/' . $jsrev . '/mcore' . $format . '.js',
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         );
 
         if ($this->yui3loader->combine) {
@@ -1433,6 +1444,15 @@ class page_requirements_manager {
         }
 
         // Add all needed strings.
+        // First add core strings required for some dialogues.
+        $this->strings_for_js(array(
+            'confirm',
+            'yes',
+            'no',
+            'areyousure',
+            'closebuttontitle',
+            'unknownerror',
+        ), 'moodle');
         if (!empty($this->stringsforjs)) {
             $strings = array();
             foreach ($this->stringsforjs as $component=>$v) {

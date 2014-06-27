@@ -148,6 +148,12 @@ class core_backup_controller_testcase extends advanced_testcase {
             }
         }
         $this->assertTrue($alltrue);
+<<<<<<< HEAD
+=======
+
+        // Avoid test warning.
+        set_time_limit(0);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 }
 
@@ -159,7 +165,11 @@ class core_backup_controller_testcase extends advanced_testcase {
  * @copyright 2014 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class core_backup_progress_restore_is_executing extends \core\progress\base {
+=======
+class core_backup_progress_restore_is_executing extends core_backup_progress {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     /** @var array Array of results from calling function */
     public $executing = array();
 

@@ -681,7 +681,11 @@ class core_event_testcase extends advanced_testcase {
         $this->assertDebuggingCalled();
 
         // Check that whole float numbers do not trigger debugging messages.
+<<<<<<< HEAD
         $event7 = \core_tests\event\unittest_executed::create(array('context'=>\context_system::instance(),
+=======
+        $event7 = \core_tests\event\unittest_executed::create(array('courseid'=>1, 'context'=>\context_system::instance(),
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             'other' => array('wholenumber' => 90.0000, 'numberwithdecimals' => 54.7656, 'sample' => 1)));
         $event7->trigger();
         $this->assertDebuggingNotCalled();
@@ -750,6 +754,7 @@ class core_event_testcase extends advanced_testcase {
         $this->assertSame($event->get_data(), $data);
     }
 
+<<<<<<< HEAD
     /**
      * @expectedException PHPUnit_Framework_Error_Notice
      */
@@ -828,5 +833,54 @@ and nothing else.";
             'objecttable' => 'mod_unittest'
         );
         $this->assertEquals($staticinfo, $expected);
+=======
+    public function test_user_profile_viewed() {
+        $this->resetAfterTest();
+        $this->setAdminUser();
+
+        $user = $this->getDataGenerator()->create_user();
+        $course = $this->getDataGenerator()->create_course();
+        $coursecontext = context_course::instance($course->id);
+
+        // User profile viewed in course context.
+        $eventparams = array(
+            'objectid' => $user->id,
+            'relateduserid' => $user->id,
+            'courseid' => $course->id,
+            'context' => $coursecontext,
+            'other' => array(
+                'courseid' => $course->id,
+                'courseshortname' => $course->shortname,
+                'coursefullname' => $course->fullname
+            )
+        );
+        $event = \core\event\user_profile_viewed::create($eventparams);
+
+        // Trigger and capture the event.
+        $sink = $this->redirectEvents();
+        $event->trigger();
+        $events = $sink->get_events();
+        $event = reset($events);
+
+        $this->assertInstanceOf('\core\event\user_profile_viewed', $event);
+        $log = array($course->id, 'user', 'view', 'view.php?id=' . $user->id . '&course=' . $course->id, $user->id);
+        $this->assertEventLegacyLogData($log, $event);
+
+        // User profile viewed in user context.
+        $usercontext = context_user::instance($user->id);
+        $eventparams['context'] = $usercontext;
+        unset($eventparams['courseid'], $eventparams['other']);
+        $event = \core\event\user_profile_viewed::create($eventparams);
+
+        // Trigger and capture the event.
+        $sink = $this->redirectEvents();
+        $event->trigger();
+        $events = $sink->get_events();
+        $event = reset($events);
+
+        $this->assertInstanceOf('\core\event\user_profile_viewed', $event);
+        $expected = null;
+        $this->assertEventLegacyLogData($expected, $event);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 }

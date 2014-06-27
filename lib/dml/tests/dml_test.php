@@ -5106,6 +5106,7 @@ class core_dml_testcase extends database_driver_testcase {
         $this->assertEquals(2, end($records)->count);
     }
 
+<<<<<<< HEAD
     /**
      * Test debugging messages about invalid limit number values.
      */
@@ -5174,6 +5175,8 @@ class core_dml_testcase extends database_driver_testcase {
         $this->assertDebuggingCalled("Negative limitnum parameter detected: -2, did you pass the correct arguments?");
     }
 
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function test_queries_counter() {
 
         $DB = $this->tdb;

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @tool @tool_uploadcourse @_file_upload
+=======
+@tool @tool_uploadcourse @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: An admin can create courses using a CSV file
   In order to create courses using a CSV file
   As an admin
@@ -28,7 +32,11 @@ Feature: An admin can create courses using a CSV file
   @javascript
   Scenario: Creation of existing courses
     Given I upload "admin/tool/uploadcourse/tests/fixtures/courses.csv" file to "File" filemanager
+<<<<<<< HEAD
     And I set the field "Upload mode" to "Create all, increment shortname if needed"
+=======
+    And I select "Create all, increment shortname if needed" from "Upload mode"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I click on "Preview" "button"
     When I click on "Upload courses" "button"
     Then I should see "Course created"

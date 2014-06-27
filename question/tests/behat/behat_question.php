@@ -55,7 +55,15 @@ class behat_question extends behat_question_base {
         return array_merge(array(
             new Given('I follow "' . get_string('questionbank', 'question') . '"'),
             new Given('I press "' . get_string('createnewquestion', 'question') . '"'),
+<<<<<<< HEAD
                 ), $this->finish_adding_question($questiontypename, $questiondata));
+=======
+            new Given('I click on "' . $this->escape($questiontypexpath) . '" "xpath_element"'),
+            new Given('I click on "#chooseqtype_submit" "css_element"'),
+            new Given('I fill the moodle form with:', $questiondata),
+            new Given('I press "' . get_string('savechanges') . '"')
+        );
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**

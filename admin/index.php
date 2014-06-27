@@ -378,9 +378,12 @@ if (!$cache and moodle_needs_upgrading()) {
     if (!$PAGE->headerprinted) {
         // means core upgrade or installation was not already done
 
+<<<<<<< HEAD
         /** @var core_admin_renderer $output */
         $output = $PAGE->get_renderer('core', 'admin');
 
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         if (!$confirmplugins) {
             $strplugincheck = get_string('plugincheck');
 
@@ -398,6 +401,12 @@ if (!$cache and moodle_needs_upgrading()) {
                 redirect($PAGE->url);
             }
 
+<<<<<<< HEAD
+=======
+            /** @var core_admin_renderer $output */
+            $output = $PAGE->get_renderer('core', 'admin');
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $deployer = \core\update\deployer::instance();
             if ($deployer->enabled()) {
                 $deployer->initialize($PAGE->url, $PAGE->url);
@@ -415,6 +424,7 @@ if (!$cache and moodle_needs_upgrading()) {
                     $version, $showallplugins,
                     new moodle_url($PAGE->url),
                     new moodle_url('/admin/index.php', array('confirmplugincheck'=>1, 'cache'=>0)));
+<<<<<<< HEAD
             die();
         }
 
@@ -425,6 +435,20 @@ if (!$cache and moodle_needs_upgrading()) {
             echo $output->unsatisfied_dependencies_page($version, $failed, $reloadurl);
             die();
         }
+=======
+            die();
+        }
+
+        // Make sure plugin dependencies are always checked.
+        $failed = array();
+        if (!core_plugin_manager::instance()->all_plugins_ok($version, $failed)) {
+            /** @var core_admin_renderer $output */
+            $output = $PAGE->get_renderer('core', 'admin');
+            $reloadurl = new moodle_url('/admin/index.php', array('cache' => 0));
+            echo $output->unsatisfied_dependencies_page($version, $failed, $reloadurl);
+            die();
+        }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         unset($failed);
     }
 

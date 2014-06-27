@@ -32,6 +32,7 @@ Feature: Restrict activity availability through grade conditions
     # Adding the page like this because id_availableform_enabled needs to be clicked to trigger the action.
     And I add a "Page" to section "2"
     And I expand all fieldsets
+<<<<<<< HEAD
     And I click on "Add restriction..." "button"
     And I click on "Grade" "button" in the "Add restriction..." "dialogue"
     And I click on "min" "checkbox"
@@ -41,6 +42,16 @@ Feature: Restrict activity availability through grade conditions
       | Page content | Test page contents |
       | id | 2 |
       | minval | 20 |
+=======
+    And I click on "id_availablefrom_enabled" "checkbox"
+    And I fill the moodle form with:
+      | Name | Test page name |
+      | Description | Restricted page, till grades in Grade assignment is at least 20% |
+      | Page content | Test page contents |
+      | id_conditiongradegroup_0_conditiongradeitemid | 2 |
+      | id_conditiongradegroup_0_conditiongrademin | 20 |
+      | id_showavailability | 1 |
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I press "Save and return to course"
     And I log out
     When I log in as "student1"

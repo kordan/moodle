@@ -5,7 +5,11 @@ Feature: A teacher can choose whether glossary entries require approval
   I need to enable entries requiring approval
 
   Scenario: Approve and undo approve glossary entries
+<<<<<<< HEAD
     Given the following "users" exist:
+=======
+    Given the following "users" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher1@asd.com |
       | student1 | Student | 1 | student1@asd.com |

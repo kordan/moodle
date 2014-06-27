@@ -59,6 +59,8 @@ M.mod_quiz.autosave = {
      * @private
      */
     WATCH_HIDDEN_DELAY:      1000,
+    FAILURES_BEFORE_NOTIFY:     1,
+    FIRST_SUCCESSFUL_SAVE:     -1,
 
     /**
      * The number of failures to ignore before notifying the user.
@@ -155,6 +157,7 @@ M.mod_quiz.autosave = {
      */
     save_transaction: null,
 
+<<<<<<< HEAD
     /**
      * Failed saves count.
      *
@@ -182,6 +185,15 @@ M.mod_quiz.autosave = {
      * @type Object
      * @default {}
      */
+=======
+    /** @property Failed saves count. */
+    savefailures: 0,
+
+    /** Properly bound key change handler. */
+    editor_change_handler: null,
+
+    /** Record of the value of all the hidden fields, last time they were checked. */
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     hidden_field_values: {},
 
     /**
@@ -343,7 +355,14 @@ M.mod_quiz.autosave = {
         });
     },
 
-    save_done: function() {
+    save_done: function(transactionid, response) {
+        if (response.responseText !== 'OK') {
+            // Because IIS is useless, Moodle can't send proper HTTP response
+            // codes, so we have to detect failures manually.
+            this.save_failed(transactionid, response);
+            return;
+        }
+
         Y.log('Save completed.');
         this.save_transaction = null;
 

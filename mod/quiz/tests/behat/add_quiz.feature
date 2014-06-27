@@ -5,6 +5,7 @@ Feature: Add a quiz
   I need to create a quiz
 
   Background:
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email               |
       | teacher1 | Terry1    | Teacher1 | teacher1@moodle.com |
@@ -13,6 +14,16 @@ Feature: Add a quiz
       | fullname | shortname | category |
       | Course 1 | C1 | 0 |
     And the following "course enrolments" exist:
+=======
+    Given the following "users" exists:
+      | username | firstname | lastname | email               |
+      | teacher1 | Terry1    | Teacher1 | teacher1@moodle.com |
+      | student1 | Sam1      | Student1 | student1@moodle.com |
+    And the following "courses" exists:
+      | fullname | shortname | category |
+      | Course 1 | C1 | 0 |
+    And the following "course enrolments" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
@@ -36,14 +47,22 @@ Feature: Add a quiz
     And I press "Attempt quiz now"
     Then I should see "Question 1"
     And I should see "Answer the first question"
+<<<<<<< HEAD
     And I set the field "True" to "1"
+=======
+    And I select "True" radio button
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I press "Next"
     And I should see "Answer saved"
     And I press "Submit all and finish"
 
   @javascript
   Scenario: Add and configure small quiz and perform an attempt as a student with Javascript enabled
+<<<<<<< HEAD
     Then I click on "Yes" "button" in the "Confirmation" "dialogue"
+=======
+    Then I click on "Submit all and finish" "button" in the "Confirmation" "dialogue"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I should see "So you think it is true"
     And I should see "Thank you, this is the general feedback"
     And I should see "The correct answer is 'False'."

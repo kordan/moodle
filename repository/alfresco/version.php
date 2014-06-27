@@ -26,6 +26,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 $plugin->version   = 2014051200;        // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2014050800;        // Requires this Moodle version
+=======
+$plugin->version   = 2014022600;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires  = 2013110500;        // Requires this Moodle version
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 $plugin->component = 'repository_alfresco'; // Full name of the plugin (used for diagnostics)

@@ -15,6 +15,13 @@ Feature: Block appearances
       | user | course | role |
       | teacher1 | C1 | editingteacher |
     And I log in as "admin"
+<<<<<<< HEAD
+=======
+    And I navigate to "Theme selector" node in "Site administration > Appearance > Themes"
+    And I click on "Change theme" "button" in the "Default" "table_row"
+    And I click on "Use theme" "button" in the "Afterburner" "table_row"
+    And I press "Continue"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I am on homepage
     And I follow "Course 1"
     And I follow "Turn editing on"
@@ -35,32 +42,45 @@ Feature: Block appearances
     And I follow "Course 1"
     And I follow "Turn editing on"
     And I add the "Comments" block
+<<<<<<< HEAD
     And I open the "Comments" blocks action menu
     And I follow "Configure Comments block"
     And I set the following fields to these values:
+=======
+    And I configure the "Comments" block
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Display on page types | Any page |
     And I press "Save changes"
 
-  @javascript
   Scenario: Block settings can be modified so that a block apprears on any page
     When I follow "Test survey name"
     Then I should see "Comments" in the "Comments" "block"
     And I follow "Course 1"
+<<<<<<< HEAD
     And I open the "Comments" blocks action menu
     And I follow "Configure Comments block"
     And I set the following fields to these values:
+=======
+    And I configure the "Comments" block
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Display on page types | Any course page |
     And I press "Save changes"
     And I follow "Turn editing off"
     And I follow "Test survey name"
     And I should not see "Comments"
 
-  @javascript
   Scenario: Block settings can be modified so that a block can be hidden or moved
     When I follow "Test book name"
+<<<<<<< HEAD
     And I open the "Comments" blocks action menu
     And I follow "Configure Comments block"
     And I set the following fields to these values:
+=======
+    And I configure the "Comments" block
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Visible | No |
     And I press "Save changes"
     And I follow "Turn editing off"
@@ -68,9 +88,14 @@ Feature: Block appearances
     Then I should not see "Comments"
     And I expand "Course administration" node
     And I follow "Turn editing on"
+<<<<<<< HEAD
     And I open the "Comments" blocks action menu
     And I follow "Configure Comments block"
     And I set the following fields to these values:
+=======
+    And I configure the "Comments" block
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Visible | Yes |
       | Region  | Right |
     And I press "Save changes"

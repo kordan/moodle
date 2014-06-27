@@ -121,6 +121,7 @@ $strscorm  = get_string("modulename", "scorm");
 $shortname = format_string($course->shortname, true, array('context' => $context));
 $pagetitle = strip_tags($shortname.': '.format_string($scorm->name));
 
+<<<<<<< HEAD
 // Trigger module viewed event.
 $event = \mod_scorm\event\course_module_viewed::create(array(
     'objectid' => $scorm->id,
@@ -130,6 +131,9 @@ $event->add_record_snapshot('course', $course);
 $event->add_record_snapshot('scorm', $scorm);
 $event->add_record_snapshot('course_modules', $cm);
 $event->trigger();
+=======
+add_to_log($course->id, 'scorm', 'pre-view', 'view.php?id='.$cm->id, "$scorm->id", $cm->id);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 if (empty($preventskip) && empty($launch) && (has_capability('mod/scorm:skipview', $contextmodule))) {
     scorm_simple_play($scorm, $USER, $contextmodule, $cm->id);

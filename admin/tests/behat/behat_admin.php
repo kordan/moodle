@@ -125,4 +125,20 @@ class behat_admin extends behat_base {
             $this->getSession()->wait($timeout, $javascript);
         }
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Will be deprecated in 2.7. Goes to notification page.
+     *
+     * @Given /^I go to notifications page$/
+     * @return Given[]
+     */
+    public function i_go_to_notifications_page() {
+        return array(
+            new Given('I expand "' . get_string('administrationsite') . '" node'),
+            new Given('I follow "' . get_string('notifications') . '"')
+        );
+    }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }

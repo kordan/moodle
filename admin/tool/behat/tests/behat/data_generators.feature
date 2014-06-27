@@ -89,10 +89,17 @@ Feature: Set up contextual data for tests
     And I follow "Course 1"
     And I expand "Users" node
     And I follow "Permissions"
+<<<<<<< HEAD
     And I set the field "Advanced role override" to "Student (1)"
     Then "mod/forum:editanypost" capability has "Allow" permission
     And I press "Cancel"
     And I set the field "Advanced role override" to "Teacher (1)"
+=======
+    And I select "Student (1)" from "Advanced role override"
+    Then "mod/forum:editanypost" capability has "Allow" permission
+    And I press "Cancel"
+    And I select "Teacher (1)" from "Advanced role override"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And "mod/forum:replynews" capability has "Prevent" permission
     And I press "Cancel"
 
@@ -161,7 +168,11 @@ Feature: Set up contextual data for tests
     Given the following "courses" exist:
       | fullname | shortname |
       | Course 1 | C1 |
+<<<<<<< HEAD
     And the following "activities" exist:
+=======
+    And the following "activities" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | activity   | name                   | intro                         | course | idnumber    |
       | assign     | Test assignment name   | Test assignment description   | C1     | assign1     |
       | assignment | Test assignment22 name | Test assignment22 description | C1     | assignment1 |
@@ -248,7 +259,13 @@ Feature: Set up contextual data for tests
     And I follow "Groups"
     Then the "groups" select box should contain "Group 1 (1)"
     And the "groups" select box should contain "Group 2 (1)"
+<<<<<<< HEAD
     And I set the field "groups" to "Group 1 (1)"
     And the "members" select box should contain "Student 1"
     And I set the field "groups" to "Group 2 (1)"
+=======
+    And I select "Group 1 (1)" from "groups"
+    And the "members" select box should contain "Student 1"
+    And I select "Group 2 (1)" from "groups"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And the "members" select box should contain "Student 2"

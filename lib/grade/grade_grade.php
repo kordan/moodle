@@ -774,11 +774,18 @@ class grade_grade extends grade_object {
     protected function notify_changed($deleted) {
         global $CFG;
 
+<<<<<<< HEAD
         // Condition code may cache the grades for conditional availability of
         // modules or sections. (This code should use a hook for communication
         // with plugin, but hooks are not implemented at time of writing.)
         if (!empty($CFG->enableavailability) && class_exists('\availability_grade\callbacks')) {
             \availability_grade\callbacks::grade_changed($this->userid);
+=======
+        // Inform conditionlib since it may cache the grades for conditional availability of modules or sections.
+        if (!empty($CFG->enableavailability)) {
+            require_once($CFG->libdir.'/conditionlib.php');
+            condition_info_base::inform_grade_changed($this, $deleted);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
 
         require_once($CFG->libdir.'/completionlib.php');

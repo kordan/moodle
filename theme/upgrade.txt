@@ -1,6 +1,7 @@
 This files describes API changes in /theme/* themes,
 information provided here is intended especially for theme designer.
 
+<<<<<<< HEAD
 === 2.7 ===
 
 * CSS related functions in theme class and csslib.php were refactored, addons that are
@@ -21,6 +22,13 @@ Removed themes:
   During the upgrade process the themes will be uninstalled and all their settings will be deleted.
   If you wish to keep your theme and its settings, download it from moodle.org and put it back in
   the theme/ directory BEFORE UPGRADING.
+=======
+=== 2.6.3 ===
+
+Notes:
+* z-index on #dock has been adjusted from 11000 to 5000 to prevent overlapping issues with fullscreen TinyMCE in all affected themes.
+* z-index on #page-header has also been adjusted from 99999 to 5000 on Overlay.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 === 2.6 ===
 

@@ -65,22 +65,35 @@ switch ($action) {
         if (confirm_sesskey()) {
             profile_delete_category($id);
         }
+<<<<<<< HEAD
         redirect($redirect, get_string('deleted'));
+=======
+        redirect($redirect,get_string('deleted'));
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         break;
     case 'deletefield':
         $id      = required_param('id', PARAM_INT);
         $confirm = optional_param('confirm', 0, PARAM_BOOL);
 
         // If no userdata for profile than don't show confirmation.
+<<<<<<< HEAD
         $datacount = $DB->count_records('user_info_data', array('fieldid' => $id));
+=======
+        $datacount = $DB->count_records('user_info_data', array('fieldid'=>$id));
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         if (((data_submitted() and $confirm) or ($datacount === 0)) and confirm_sesskey()) {
             profile_delete_field($id);
             redirect($redirect, get_string('deleted'));
         }
 
         // Ask for confirmation, as there is user data available for field.
+<<<<<<< HEAD
         $fieldname = $DB->get_field('user_info_field', 'name', array('id' => $id));
         $optionsyes = array ('id' => $id, 'confirm' => 1, 'action' => 'deletefield', 'sesskey' => sesskey());
+=======
+        $fieldname = $DB->get_field('user_info_field', 'name', array('id'=>$id));
+        $optionsyes = array ('id'=>$id, 'confirm'=>1, 'action'=>'deletefield', 'sesskey'=>sesskey());
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         $strheading = get_string('profiledeletefield', 'admin', $fieldname);
         $PAGE->navbar->add($strheading);
         echo $OUTPUT->header();
@@ -191,9 +204,15 @@ function profile_category_icons($category) {
     // Edit.
     $editstr = '<a title="'.$stredit.'" href="index.php?id='.$category->id.'&amp;action=editcategory"><img src="'.$OUTPUT->pix_url('t/edit') . '" alt="'.$stredit.'" class="iconsmall" /></a> ';
 
+<<<<<<< HEAD
     // Delete.
     // Can only delete the last category if there are no fields in it.
     if (($categorycount > 1) or ($fieldcount == 0)) {
+=======
+    /// Delete
+    /// Can only delete the last category if there are no fields in it
+    if ( ($categorycount > 1) or ($fieldcount == 0) ) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         $editstr .= '<a title="'.$strdelete.'" href="index.php?id='.$category->id.'&amp;action=deletecategory&amp;sesskey='.sesskey();
         $editstr .= '"><img src="'.$OUTPUT->pix_url('t/delete') . '" alt="'.$strdelete.'" class="iconsmall" /></a> ';
     } else {
@@ -236,7 +255,11 @@ function profile_field_icons($field) {
     // Edit.
     $editstr = '<a title="'.$stredit.'" href="index.php?id='.$field->id.'&amp;action=editfield"><img src="'.$OUTPUT->pix_url('t/edit') . '" alt="'.$stredit.'" class="iconsmall" /></a> ';
 
+<<<<<<< HEAD
     // Delete.
+=======
+    /// Delete
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     $editstr .= '<a title="'.$strdelete.'" href="index.php?id='.$field->id.'&amp;action=deletefield&amp;sesskey='.sesskey();
     $editstr .= '"><img src="'.$OUTPUT->pix_url('t/delete') . '" alt="'.$strdelete.'" class="iconsmall" /></a> ';
 

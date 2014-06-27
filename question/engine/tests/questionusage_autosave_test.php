@@ -685,4 +685,13 @@ class question_usage_autosave_test extends qbehaviour_walkthrough_test_base {
 
         $this->delete_quba();
     }
+<<<<<<< HEAD
+=======
+
+    protected function tearDown() {
+        // This test relies on the destructor for the second DB connection being called before running the next test.
+        // Without this change - there will be unit test failures on "some" DBs (MySQL).
+        gc_collect_cycles();
+    }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }

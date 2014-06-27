@@ -310,6 +310,19 @@ class condition_info_section extends condition_info_base {
     public static function update_section_from_form($section, $fromform, $wipefirst=true) {
         throw new coding_exception('Function no longer available');
     }
+
+    public function get_full_information($modinfo=null) {
+        $information = parent::get_full_information($modinfo);
+
+        // Grouping conditions.
+        if ($this->item->groupingid > 0) {
+            $information .= get_string(
+                    'requires_grouping',
+                    'condition', groups_get_grouping_name($this->item->groupingid));
+        }
+
+        return $information;
+    }
 }
 
 
@@ -353,7 +366,56 @@ abstract class condition_info_base {
      * @throws Always throws a coding_exception
      */
     public static function get_condition_user_fields($formatoptions = null) {
+<<<<<<< HEAD
         throw new coding_exception('Function no longer available');
+=======
+        global $DB, $CFG;
+
+        $userfields = array(
+            'firstname' => get_user_field_name('firstname'),
+            'lastname' => get_user_field_name('lastname'),
+            'email' => get_user_field_name('email'),
+            'city' => get_user_field_name('city'),
+            'country' => get_user_field_name('country'),
+            'url' => get_user_field_name('url'),
+            'icq' => get_user_field_name('icq'),
+            'skype' => get_user_field_name('skype'),
+            'aim' => get_user_field_name('aim'),
+            'yahoo' => get_user_field_name('yahoo'),
+            'msn' => get_user_field_name('msn'),
+            'idnumber' => get_user_field_name('idnumber'),
+            'institution' => get_user_field_name('institution'),
+            'department' => get_user_field_name('department'),
+            'phone1' => get_user_field_name('phone1'),
+            'phone2' => get_user_field_name('phone2'),
+            'address' => get_user_field_name('address')
+        );
+
+        // Go through the custom profile fields now
+        if ($user_info_fields = $DB->get_records('user_info_field')) {
+            require_once($CFG->dirroot . '/user/profile/lib.php');
+            foreach ($user_info_fields as $field) {
+                // This logic is the same as used in profile_user_record function
+                // to exclude some field types from being loaded into the $USER
+                // record.
+                require_once($CFG->dirroot . '/user/profile/field/' .
+                        $field->datatype . '/field.class.php');
+                $newfield = 'profile_field_' . $field->datatype;
+                $formfield = new $newfield();
+                if (!$formfield->is_user_object_data()) {
+                    continue;
+                }
+
+                if ($formatoptions) {
+                    $userfields[$field->id] = format_string($field->name, true, $formatoptions);
+                } else {
+                    $userfields[$field->id] = $field->name;
+                }
+            }
+        }
+
+        return $userfields;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**
@@ -446,10 +508,171 @@ abstract class condition_info_base {
      * @deprecated Since Moodle 2.7
      */
     public function get_full_information($modinfo=null) {
+<<<<<<< HEAD
         debugging('condition_info*::get_full_information() is deprecated, replace ' .
                 'with new \core_availability\info_module($cm)->get_full_information()',
                 DEBUG_DEVELOPER);
         return $this->get_availability_info()->get_full_information($modinfo);
+=======
+        $this->require_data();
+
+        $information = '';
+
+        // Completion conditions
+        if (count($this->item->conditionscompletion) > 0) {
+            if (!$modinfo) {
+                $modinfo = get_fast_modinfo($this->item->course);
+            }
+            foreach ($this->item->conditionscompletion as $cmid => $expectedcompletion) {
+                if (empty($modinfo->cms[$cmid])) {
+                    continue;
+                }
+                $information .= html_writer::start_tag('li');
+                $information .= get_string(
+                        'requires_completion_' . $expectedcompletion,
+                        'condition', $modinfo->cms[$cmid]->name) . ' ';
+                $information .= html_writer::end_tag('li');
+            }
+        }
+
+        // Grade conditions
+        if (count($this->item->conditionsgrade) > 0) {
+            foreach ($this->item->conditionsgrade as $gradeitemid => $minmax) {
+                // String depends on type of requirement. We are coy about
+                // the actual numbers, in case grades aren't released to
+                // students.
+                if (is_null($minmax->min) && is_null($minmax->max)) {
+                    $string = 'any';
+                } else if (is_null($minmax->max)) {
+                    $string = 'min';
+                } else if (is_null($minmax->min)) {
+                    $string = 'max';
+                } else {
+                    $string = 'range';
+                }
+                $information .= html_writer::start_tag('li');
+                $information .= get_string('requires_grade_'.$string, 'condition', $minmax->name).' ';
+                $information .= html_writer::end_tag('li');
+            }
+        }
+
+        // User field conditions
+        if (count($this->item->conditionsfield) > 0) {
+            $context = $this->get_context();
+            // Need the array of operators
+            foreach ($this->item->conditionsfield as $field => $details) {
+                $a = new stdclass;
+                // Display the fieldname into current lang.
+                if (is_numeric($field)) {
+                    // Is a custom profile field (will use multilang).
+                    $translatedfieldname = $details->fieldname;
+                } else {
+                    $translatedfieldname = get_user_field_name($details->fieldname);
+                }
+                $a->field = format_string($translatedfieldname, true, array('context' => $context));
+                $a->value = s($details->value);
+                $information .= html_writer::start_tag('li');
+                $information .= get_string('requires_user_field_'.$details->operator, 'condition', $a) . ' ';
+                $information .= html_writer::end_tag('li');
+            }
+        }
+
+        // The date logic is complicated. The intention of this logic is:
+        // 1) display date without time where possible (whenever the date is
+        //    midnight)
+        // 2) when the 'until' date is e.g. 00:00 on the 14th, we display it as
+        //    'until the 13th' (experience at the OU showed that students are
+        //    likely to interpret 'until <date>' as 'until the end of <date>').
+        // 3) This behaviour becomes confusing for 'same-day' dates where there
+        //    are some exceptions.
+        // Users in different time zones will typically not get the 'abbreviated'
+        // behaviour but it should work OK for them aside from that.
+
+        // The following cases are possible:
+        // a) From 13:05 on 14 Oct until 12:10 on 17 Oct (exact, exact)
+        // b) From 14 Oct until 12:11 on 17 Oct (midnight, exact)
+        // c) From 13:05 on 14 Oct until 17 Oct (exact, midnight 18 Oct)
+        // d) From 14 Oct until 17 Oct (midnight 14 Oct, midnight 18 Oct)
+        // e) On 14 Oct (midnight 14 Oct, midnight 15 Oct)
+        // f) From 13:05 on 14 Oct until 0:00 on 15 Oct (exact, midnight, same day)
+        // g) From 0:00 on 14 Oct until 12:05 on 14 Oct (midnight, exact, same day)
+        // h) From 13:05 on 14 Oct (exact)
+        // i) From 14 Oct (midnight)
+        // j) Until 13:05 on 14 Oct (exact)
+        // k) Until 14 Oct (midnight 15 Oct)
+
+        // Check if start and end dates are 'midnights', if so we show in short form
+        $shortfrom = self::is_midnight($this->item->availablefrom);
+        $shortuntil = self::is_midnight($this->item->availableuntil);
+
+        // For some checks and for display, we need the previous day for the 'until'
+        // value, if we are going to display it in short form
+        if ($this->item->availableuntil) {
+            $daybeforeuntil = strtotime('-1 day', usergetmidnight($this->item->availableuntil));
+        }
+
+        // Special case for if one but not both are exact and they are within a day
+        if ($this->item->availablefrom && $this->item->availableuntil &&
+                $shortfrom != $shortuntil && $daybeforeuntil < $this->item->availablefrom) {
+            // Don't use abbreviated version (see examples f, g above)
+            $shortfrom = false;
+            $shortuntil = false;
+        }
+
+        // When showing short end date, the display time is the 'day before' one
+        $displayuntil = $shortuntil ? $daybeforeuntil : $this->item->availableuntil;
+
+        if ($this->item->availablefrom && $this->item->availableuntil) {
+            if ($shortfrom && $shortuntil && $daybeforeuntil == $this->item->availablefrom) {
+                $information .= html_writer::start_tag('li');
+                $information .= get_string('requires_date_both_single_day', 'condition',
+                        self::show_time($this->item->availablefrom, true));
+                $information .= html_writer::end_tag('li');
+            } else {
+                $information .= html_writer::start_tag('li');
+                $information .= get_string('requires_date_both', 'condition', (object)array(
+                         'from' => self::show_time($this->item->availablefrom, $shortfrom),
+                         'until' => self::show_time($displayuntil, $shortuntil)));
+                $information .= html_writer::end_tag('li');
+            }
+        } else if ($this->item->availablefrom) {
+            $information .= html_writer::start_tag('li');
+            $information .= get_string('requires_date', 'condition',
+                self::show_time($this->item->availablefrom, $shortfrom));
+            $information .= html_writer::end_tag('li');
+        } else if ($this->item->availableuntil) {
+            $information .= html_writer::start_tag('li');
+            $information .= get_string('requires_date_before', 'condition',
+                self::show_time($displayuntil, $shortuntil));
+            $information .= html_writer::end_tag('li');
+        }
+
+        // The information is in <li> tags, but to avoid taking up more space
+        // if there is only a single item, we strip out the list tags so that it
+        // is plain text in that case.
+        if (!empty($information)) {
+            $li = strpos($information, '<li>', 4);
+            if ($li === false) {
+                $information = preg_replace('~^\s*<li>(.*)</li>\s*$~s', '$1', $information);
+            } else {
+                $information = html_writer::tag('ul', $information);
+            }
+            $information = trim($information);
+        }
+        return $information;
+    }
+
+    /**
+     * Checks whether a given time refers exactly to midnight (in current user
+     * timezone).
+     *
+     * @param int $time Time
+     * @return bool True if time refers to midnight, false if it's some other
+     *   time or if it is set to zero
+     */
+    private static function is_midnight($time) {
+        return $time && usergetmidnight($time) == $time;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**
@@ -477,11 +700,186 @@ abstract class condition_info_base {
      * @deprecated Since Moodle 2.7
      */
     public function is_available(&$information, $grabthelot=false, $userid=0, $modinfo=null) {
+<<<<<<< HEAD
         debugging('condition_info*::is_available() is deprecated, replace ' .
                 'with new \core_availability\info_module($cm)->is_available()',
                 DEBUG_DEVELOPER);
         return $this->get_availability_info()->is_available(
                 $information, $grabthelot, $userid, $modinfo);
+=======
+        $this->require_data();
+
+        $available = true;
+        $information = '';
+
+        // Check each completion condition
+        if (count($this->item->conditionscompletion) > 0) {
+            if (!$modinfo) {
+                $modinfo = get_fast_modinfo($this->item->course);
+            }
+            $completion = new completion_info($modinfo->get_course());
+            foreach ($this->item->conditionscompletion as $cmid => $expectedcompletion) {
+                // If this depends on a deleted module, handle that situation
+                // gracefully.
+                if (empty($modinfo->cms[$cmid])) {
+                    global $PAGE;
+                    if (isset($PAGE) && strpos($PAGE->pagetype, 'course-view-')===0) {
+                        debugging("Warning: activity {$this->item->id} '{$this->item->name}' has condition " .
+                                "on deleted activity $cmid (to get rid of this message, edit the named activity)");
+                    }
+                    continue;
+                }
+
+                // The completion system caches its own data
+                $completiondata = $completion->get_data((object)array('id' => $cmid),
+                        $grabthelot, $userid, $modinfo);
+
+                $thisisok = true;
+                if ($expectedcompletion==COMPLETION_COMPLETE) {
+                    // 'Complete' also allows the pass, fail states
+                    switch ($completiondata->completionstate) {
+                        case COMPLETION_COMPLETE:
+                        case COMPLETION_COMPLETE_FAIL:
+                        case COMPLETION_COMPLETE_PASS:
+                            break;
+                        default:
+                            $thisisok = false;
+                    }
+                } else {
+                    // Other values require exact match
+                    if ($completiondata->completionstate!=$expectedcompletion) {
+                        $thisisok = false;
+                    }
+                }
+                if (!$thisisok) {
+                    $available = false;
+                    $information .= html_writer::start_tag('li');
+                    $information .= get_string(
+                        'requires_completion_' . $expectedcompletion,
+                        'condition', $modinfo->cms[$cmid]->name) . ' ';
+                    $information .= html_writer::end_tag('li');
+                }
+            }
+        }
+
+        // Check each grade condition
+        if (count($this->item->conditionsgrade)>0) {
+            foreach ($this->item->conditionsgrade as $gradeitemid => $minmax) {
+                $score = $this->get_cached_grade_score($gradeitemid, $grabthelot, $userid);
+                if ($score===false ||
+                        (!is_null($minmax->min) && $score<$minmax->min) ||
+                        (!is_null($minmax->max) && $score>=$minmax->max)) {
+                    // Grade fail
+                    $available = false;
+                    // String depends on type of requirement. We are coy about
+                    // the actual numbers, in case grades aren't released to
+                    // students.
+                    if (is_null($minmax->min) && is_null($minmax->max)) {
+                        $string = 'any';
+                    } else if (is_null($minmax->max)) {
+                        $string = 'min';
+                    } else if (is_null($minmax->min)) {
+                        $string = 'max';
+                    } else {
+                        $string = 'range';
+                    }
+                    $information .= html_writer::start_tag('li');
+                    $information .= get_string('requires_grade_' . $string, 'condition', $minmax->name) . ' ';
+                    $information .= html_writer::end_tag('li');
+                }
+            }
+        }
+
+        // Check if user field condition
+        if (count($this->item->conditionsfield) > 0) {
+            $context = $this->get_context();
+            foreach ($this->item->conditionsfield as $field => $details) {
+                $uservalue = $this->get_cached_user_profile_field($userid, $field);
+                if (!$this->is_field_condition_met($details->operator, $uservalue, $details->value)) {
+                    // Set available to false
+                    $available = false;
+                    // Display the fieldname into current lang.
+                    if (is_numeric($field)) {
+                        // Is a custom profile field (will use multilang).
+                        $translatedfieldname = $details->fieldname;
+                    } else {
+                        $translatedfieldname = get_user_field_name($details->fieldname);
+                    }
+                    $a = new stdClass();
+                    $a->field = format_string($translatedfieldname, true, array('context' => $context));
+                    $a->value = s($details->value);
+                    $information .= html_writer::start_tag('li');
+                    $information .= get_string('requires_user_field_'.$details->operator, 'condition', $a) . ' ';
+                    $information .= html_writer::end_tag('li');
+                }
+            }
+        }
+
+        // Test dates
+        if ($this->item->availablefrom) {
+            if (time() < $this->item->availablefrom) {
+                $available = false;
+
+                $information .= html_writer::start_tag('li');
+                $information .= get_string('requires_date', 'condition',
+                        self::show_time($this->item->availablefrom,
+                            self::is_midnight($this->item->availablefrom)));
+                $information .= html_writer::end_tag('li');
+            }
+        }
+
+        if ($this->item->availableuntil) {
+            if (time() >= $this->item->availableuntil) {
+                $available = false;
+                // But we don't display any information about this case. This is
+                // because the only reason to set a 'disappear' date is usually
+                // to get rid of outdated information/clutter in which case there
+                // is no point in showing it...
+
+                // Note it would be nice if we could make it so that the 'until'
+                // date appears below the item while the item is still accessible,
+                // unfortunately this is not possible in the current system. Maybe
+                // later, or if somebody else wants to add it.
+            }
+        }
+
+        // If the item is marked as 'not visible' then we don't change the available
+        // flag (visible/available are treated distinctly), but we remove any
+        // availability info. If the item is hidden with the eye icon, it doesn't
+        // make sense to show 'Available from <date>' or similar, because even
+        // when that date arrives it will still not be available unless somebody
+        // toggles the eye icon.
+        if (!$this->item->visible) {
+            $information = '';
+        }
+
+        // The information is in <li> tags, but to avoid taking up more space
+        // if there is only a single item, we strip out the list tags so that it
+        // is plain text in that case.
+        if (!empty($information)) {
+            $li = strpos($information, '<li>', 4);
+            if ($li === false) {
+                $information = preg_replace('~^\s*<li>(.*)</li>\s*$~s', '$1', $information);
+            } else {
+                $information = html_writer::tag('ul', $information);
+            }
+            $information = trim($information);
+        }
+        return $available;
+    }
+
+    /**
+     * Shows a time either as a date or a full date and time, according to
+     * user's timezone.
+     *
+     * @param int $time Time
+     * @param bool $dateonly If true, uses date only
+     * @return string Date
+     */
+    private function show_time($time, $dateonly) {
+        return userdate($time,
+                get_string($dateonly ? 'strftimedate' : 'strftimedatetime', 'langconfig'));
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**

@@ -9,7 +9,11 @@ Feature: People Block used on frontpage
       | username    | firstname | lastname | email            |
       | student1    | Sam       | Student  | student1@asd.com |
     And I log in as "admin"
+<<<<<<< HEAD
     And I navigate to "Turn editing on" node in "Front page settings"
+=======
+    And I follow "Turn editing on"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I add the "People" block
     And I log out
 

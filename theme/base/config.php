@@ -175,6 +175,10 @@ $THEME->hidefromselector = true;
 $THEME->javascripts = array();
 $THEME->javascripts_footer = array();
 
+<<<<<<< HEAD
 // Set this to the method you will use in your layout files for rendering blocks.
 // It should be either blocks (default) or blocks_for_region.
+=======
+// Set this to the method you will use in your layout files for
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 $THEME->blockrendermethod = 'blocks_for_region';

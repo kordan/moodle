@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_admin @_file_upload
+=======
+@core @core_admin @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Upload users
   In order to add users to the system
   As an admin
@@ -37,5 +41,9 @@ Feature: Upload users
     And I follow "Maths"
     And I expand "Users" node
     And I follow "Groups"
+<<<<<<< HEAD
     And I set the field "groups" to "Section 1 (1)"
+=======
+    And I select "Section 1 (1)" from "groups"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And the "members" select box should contain "Tom Jones"

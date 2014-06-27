@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
 /**
  * The secure layout.
  *
@@ -22,6 +23,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 // Get the HTML for the settings bits.
 $html = theme_clean_get_html_for_settings($OUTPUT, $PAGE);
 

@@ -148,16 +148,11 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
     $sectionid = course_add_cm_to_section($course, $moduleinfo->coursemodule, $moduleinfo->section);
 
     // Trigger event based on the action we did.
-    $event = \core\event\course_module_created::create(array(
-         'courseid' => $course->id,
-         'context'  => $modcontext,
-         'objectid' => $moduleinfo->coursemodule,
-         'other'    => array(
-             'modulename' => $moduleinfo->modulename,
-             'name'       => $moduleinfo->name,
-             'instanceid' => $moduleinfo->instance
-         )
-    ));
+    // Api create_from_cm expects modname and id property, and we don't want to modify $moduleinfo since we are returning it.
+    $eventdata = clone $moduleinfo;
+    $eventdata->modname = $eventdata->modulename;
+    $eventdata->id = $eventdata->coursemodule;
+    $event = \core\event\course_module_created::create_from_cm($eventdata, $modcontext);
     $event->trigger();
 
     $moduleinfo = edit_module_post_actions($moduleinfo, $course);
@@ -179,6 +174,7 @@ function add_moduleinfo($moduleinfo, $course, $mform = null) {
  */
 function edit_module_post_actions($moduleinfo, $course) {
     global $CFG;
+    require_once($CFG->libdir.'/gradelib.php');
 
     $modcontext = context_module::instance($moduleinfo->coursemodule);
     $hasgrades = plugin_supports('mod', $moduleinfo->modulename, FEATURE_GRADE_HAS_GRADE, false);
@@ -525,6 +521,13 @@ function update_moduleinfo($cm, $moduleinfo, $course, $mform = null) {
     }
     $cm->name = $moduleinfo->name;
     \core\event\course_module_updated::create_from_cm($cm, $modcontext)->trigger();
+<<<<<<< HEAD
+=======
+
+    add_to_log($course->id, $moduleinfo->modulename, "update",
+               "view.php?id=$moduleinfo->coursemodule",
+               "$moduleinfo->instance", $moduleinfo->coursemodule);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
     $moduleinfo = edit_module_post_actions($moduleinfo, $course);
 

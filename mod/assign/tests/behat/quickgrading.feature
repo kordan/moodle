@@ -6,15 +6,26 @@ Feature: In an assignment, teachers grade multiple students on one page
 
   @javascript
   Scenario: Grade multiple students on one page
+<<<<<<< HEAD
     Given the following "courses" exist:
       | fullname | shortname | category | groupmode |
       | Course 1 | C1 | 0 | 1 |
     And the following "users" exist:
+=======
+    Given the following "courses" exists:
+      | fullname | shortname | category | groupmode |
+      | Course 1 | C1 | 0 | 1 |
+    And the following "users" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher1@asd.com |
       | student1 | Student | 1 | student1@asd.com |
       | student2 | Student | 2 | student2@asd.com |
+<<<<<<< HEAD
     And the following "course enrolments" exist:
+=======
+    And the following "course enrolments" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | user | course | role |
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
@@ -29,7 +40,11 @@ Feature: In an assignment, teachers grade multiple students on one page
     And I follow "Edit outcomes"
     And I press "Add a new outcome"
     And I press "Continue"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Name | 1337dom scale |
       | Scale | Noob, Nub, 1337, HaXor |
     And I press "Save changes"
@@ -37,7 +52,11 @@ Feature: In an assignment, teachers grade multiple students on one page
     And I follow "Outcomes"
     And I follow "Edit outcomes"
     And I press "Add a new outcome"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Full name | M8d skillZ! |
       | Short name | skillZ! |
       | Scale | 1337dom scale |
@@ -55,7 +74,11 @@ Feature: In an assignment, teachers grade multiple students on one page
     And I follow "Course 1"
     And I follow "Test assignment name"
     And I press "Add submission"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Online text | I'm the student1 submission |
     And I press "Save changes"
     And I log out
@@ -63,7 +86,11 @@ Feature: In an assignment, teachers grade multiple students on one page
     And I follow "Course 1"
     And I follow "Test assignment name"
     When I press "Add submission"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Online text | I'm the student2 submission |
     And I press "Save changes"
     And I log out
@@ -72,14 +99,22 @@ Feature: In an assignment, teachers grade multiple students on one page
     And I follow "Test assignment name"
     And I follow "View/grade all submissions"
     And I click on "Grade Student 1" "link" in the "Student 1" "table_row"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Grade out of 100 | 50.0 |
       | M8d skillZ! | 1337 |
       | Feedback comments | I'm the teacher first feedback |
     And I press "Save changes"
     And I press "Continue"
     Then I click on "Quick grading" "checkbox"
+<<<<<<< HEAD
     And I set the field "User grade" to "60.0"
+=======
+    And I fill in "User grade" with "60.0"
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I press "Save all quick grading changes"
     And I should see "The grade changes were saved"
     And I press "Continue"

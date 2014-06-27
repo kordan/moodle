@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_group @_file_upload
+=======
+@core @core_group @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: Importing of groups and groupings
   In order to import groups and grouping
   As a teacher

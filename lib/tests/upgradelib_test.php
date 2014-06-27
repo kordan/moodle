@@ -200,6 +200,7 @@ class core_upgradelib_testcase extends advanced_testcase {
         // Verify the hash is correctly created.
         $this->assertSame($oldrecord->pathnamehash, $newrecord->pathnamehash);
     }
+<<<<<<< HEAD
 
     /**
      * Tests the upgrade of an individual course-module or section from the
@@ -307,4 +308,6 @@ class core_upgradelib_testcase extends advanced_testcase {
                     (object)array('userfield' => 'email', 'shortname' => null, 'operator' => 'isempty'),
                 )));
     }
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 }

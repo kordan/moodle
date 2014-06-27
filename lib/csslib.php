@@ -176,9 +176,15 @@ function css_chunk_by_selector_count($css, $importurl, $maxselectors = 4095, $bu
             }
         }
 
+<<<<<<< HEAD
         // Let's count the number of selectors, but only if we are not in a rule as they
         // can contain commas too.
         if (!$inrule && $char === ',') {
+=======
+        // Let's count the number of selectors, but only if we are not in a rule, or in
+        // the definition of a media query, as they can contain commas too.
+        if (!$mediacoming && !$inrule && $char === ',') {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $selectorcount++;
         }
 
@@ -192,6 +198,17 @@ function css_chunk_by_selector_count($css, $importurl, $maxselectors = 4095, $bu
                 } else {
                     // We were in a rule, in the media query.
                     $inrule--;
+<<<<<<< HEAD
+=======
+                }
+            } else {
+                $inrule--;
+                // Handle stupid broken CSS where there are too many } brackets,
+                // as this can cause it to break (with chunking) where it would
+                // coincidentally have worked otherwise.
+                if ($inrule < 0) {
+                    $inrule = 0;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
                 }
             } else {
                 $inrule--;
@@ -202,6 +219,15 @@ function css_chunk_by_selector_count($css, $importurl, $maxselectors = 4095, $bu
                 $lastvalidoffset = $offset;
                 $lastvalidoffsetselectorcount = $selectorcount;
             }
+<<<<<<< HEAD
+=======
+
+            // We are not in a media query, and there is no pending rule, it is safe to split here.
+            if (!$inmedia && !$inrule) {
+                $lastvalidoffset = $offset;
+                $lastvalidoffsetselectorcount = $selectorcount;
+            }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
 
         // Alright, this is splitting time...

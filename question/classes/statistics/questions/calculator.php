@@ -91,7 +91,11 @@ class calculator {
      */
     public function calculate($qubaids) {
 
+<<<<<<< HEAD
         $this->progress->start_progress('', 6);
+=======
+        list($lateststeps, $summarks) = $this->get_latest_steps($qubaids);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
         list($lateststeps, $summarks) = $this->get_latest_steps($qubaids);
 
@@ -210,12 +214,19 @@ class calculator {
             // Go through the records one more time.
             $this->progress->start_progress('', count($lateststeps), 1);
             foreach ($lateststeps as $step) {
+<<<<<<< HEAD
                 $this->progress->increment_progress();
                 $israndomquestion = ($this->stats->for_slot($step->slot)->question->qtype == 'random');
                 $this->secondary_steps_walker($step, $this->stats->for_slot($step->slot), $summarks);
 
                 if ($israndomquestion) {
                     $this->secondary_steps_walker($step, $this->stats->for_subq($step->questionid), $summarks);
+=======
+                $this->secondary_steps_walker($step, $this->questionstats[$step->slot], $summarks);
+
+                if ($this->questionstats[$step->slot]->subquestions) {
+                    $this->secondary_steps_walker($step, $this->subquestionstats[$step->questionid], $summarks);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
                 }
             }
             $this->progress->end_progress();
@@ -261,7 +272,36 @@ class calculator {
             // All finished.
             $this->progress->end_progress();
         }
+<<<<<<< HEAD
         return $this->stats;
+=======
+        $subquestions = question_load_questions($questionids);
+        foreach ($questionstatrecs as $fromdb) {
+            if ($fromdb->slot) {
+                $this->questionstats[$fromdb->slot]->populate_from_record($fromdb);
+                // Array created in constructor and populated from question.
+            } else {
+                $this->subquestionstats[$fromdb->questionid] = new calculated_for_subquestion();
+                $this->subquestionstats[$fromdb->questionid]->populate_from_record($fromdb);
+                $this->subquestionstats[$fromdb->questionid]->question = $subquestions[$fromdb->questionid];
+            }
+        }
+        return array($this->questionstats, $this->subquestionstats);
+    }
+
+    /**
+     * Find time of non-expired statistics in the database.
+     *
+     * @param $qubaids \qubaid_condition
+     * @return integer|boolean Time of cached record that matches this qubaid_condition or false is non found.
+     */
+    public function get_last_calculated_time($qubaids) {
+        global $DB;
+
+        $timemodified = time() - self::TIME_TO_CACHE;
+        return $DB->get_field_select('question_statistics', 'timemodified', 'hashcode = ? AND timemodified > ?',
+                                     array($qubaids->get_hash_code(), $timemodified), IGNORE_MULTIPLE);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     /**
@@ -274,9 +314,13 @@ class calculator {
     }
 
     /**
+<<<<<<< HEAD
      * Get the latest step data from the db, from which we will calculate stats.
      *
      * @param \qubaid_condition $qubaids Which question usages to get the latest steps for?
+=======
+     * @param $qubaids \qubaid_condition
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * @return array with two items
      *              - $lateststeps array of latest step data for the question usages
      *              - $summarks    array of total marks for each usage, indexed by usage id
@@ -381,7 +425,11 @@ class calculator {
      *
      * @param object $step        the state to add to the statistics.
      * @param calculated $stats       the question statistics we are accumulating.
+<<<<<<< HEAD
      * @param float[]  $summarks    of the sum of marks for each question usage, indexed by question usage id
+=======
+     * @param array  $summarks    of the sum of marks for each question usage, indexed by question usage id
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      */
     protected function secondary_steps_walker($step, $stats, $summarks) {
         $markdifference = $step->mark - $stats->markaverage;

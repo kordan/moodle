@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_filepicker @_file_upload
+=======
+@core @core_filepicker @_only_local @_file_upload
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 Feature: A selected file can be cancelled
   In order to refine the file manager contents
   As a user

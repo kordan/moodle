@@ -317,7 +317,11 @@ class behat_gradingform_rubric extends behat_base {
 
             // First we need to get the textarea name, then we can set the value.
             $textarea = $this->get_node_in_container('css_element', 'textarea', 'table_row', $name);
+<<<<<<< HEAD
             $steps[] = new Given('I set the field "' . $textarea->getAttribute('name') . '" to "' . $criterion[1] . '"');
+=======
+            $steps[] = new Given('I fill in "' . $textarea->getAttribute('name') . '" with "' . $criterion[1] . '"');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
 
         return $steps;

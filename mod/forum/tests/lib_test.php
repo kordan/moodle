@@ -588,7 +588,11 @@ class mod_forum_lib_testcase extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
         $users = array();
 
+<<<<<<< HEAD
         for ($i = 0; $i < $usercount; $i++) {
+=======
+        for($i = 0; $i < $usercount; $i++) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $user = $this->getDataGenerator()->create_user();
             $users[] = $user;
             $this->getDataGenerator()->enrol_user($user->id, $course->id);
@@ -616,7 +620,11 @@ class mod_forum_lib_testcase extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
         $users = array();
 
+<<<<<<< HEAD
         for ($i = 0; $i < $usercount; $i++) {
+=======
+        for($i = 0; $i < $usercount; $i++) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $user = $this->getDataGenerator()->create_user();
             $users[] = $user;
             $this->getDataGenerator()->enrol_user($user->id, $course->id);
@@ -644,7 +652,11 @@ class mod_forum_lib_testcase extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
         $users = array();
 
+<<<<<<< HEAD
         for ($i = 0; $i < $usercount; $i++) {
+=======
+        for($i = 0; $i < $usercount; $i++) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $user = $this->getDataGenerator()->create_user();
             $users[] = $user;
             $this->getDataGenerator()->enrol_user($user->id, $course->id);
@@ -673,7 +685,11 @@ class mod_forum_lib_testcase extends advanced_testcase {
         $course = $this->getDataGenerator()->create_course();
         $users = array();
 
+<<<<<<< HEAD
         for ($i = 0; $i < $usercount; $i++) {
+=======
+        for($i = 0; $i < $usercount; $i++) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             $user = $this->getDataGenerator()->create_user();
             $users[] = $user;
             $this->getDataGenerator()->enrol_user($user->id, $course->id);

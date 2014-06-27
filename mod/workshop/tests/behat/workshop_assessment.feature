@@ -5,24 +5,39 @@ Feature: Workshop submission and assessment
   I need to be able to add a submission and assess those of my peers
 
   Background:
+<<<<<<< HEAD
     Given the following "users" exist:
+=======
+    Given the following "users" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | username | firstname | lastname | email            |
       | student1 | Sam1      | Student1 | student1@asd.com |
       | student2 | Sam2      | Student2 | student2@asd.com |
       | student3 | Sam3      | Student3 | student3@asd.com |
       | student4 | Sam4      | Student4 | student3@asd.com |
       | teacher1 | Terry1    | Teacher1 | teacher1@asd.com |
+<<<<<<< HEAD
     And the following "courses" exist:
       | fullname  | shortname |
       | Course1   | c1        |
     And the following "course enrolments" exist:
+=======
+    And the following "courses" exists:
+      | fullname  | shortname |
+      | Course1   | c1        |
+    And the following "course enrolments" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | user     | course | role           |
       | student1 | c1     | student        |
       | student2 | c1     | student        |
       | student3 | c1     | student        |
       | student4 | c1     | student        |
       | teacher1 | c1     | editingteacher |
+<<<<<<< HEAD
     And the following "activities" exist:
+=======
+    And the following "activities" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | activity | name         | intro                     | course | idnumber  |
       | workshop | TestWorkshop | Test workshop description | c1     | workshop1 |
 # teacher1 sets up assessment form and changes the phase to submission
@@ -42,7 +57,11 @@ Feature: Workshop submission and assessment
     And I add a submission in workshop "TestWorkshop" as:"
       | Title              | Submission1  |
       | Submission content | Some content |
+<<<<<<< HEAD
     And "//div[@class='submission-full' and contains(.,'Submission1') and contains(.,'submitted on')]" "xpath_element" should exist
+=======
+    And "//div[@class='submission-full' and contains(.,'Submission1') and contains(.,'submitted on')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I log out
 # student2 submits
     And I log in as "student2"
@@ -82,14 +101,22 @@ Feature: Workshop submission and assessment
     And I log in as "student1"
     And I follow "Course1"
     And I follow "TestWorkshop"
+<<<<<<< HEAD
     And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 2') and contains(.,'total: 2')]" "xpath_element" should exist
+=======
+    And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 2') and contains(.,'total: 2')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I assess submission "Sam2" in workshop "TestWorkshop" as:"
       | grade__idx_0            | 5 / 10            |
       | peercomment__idx_0      | You can do better |
       | grade__idx_1            | 10 / 10           |
       | peercomment__idx_1      | Amazing           |
       | Feedback for the author | Good work         |
+<<<<<<< HEAD
     And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 1') and contains(.,'total: 2')]" "xpath_element" should exist
+=======
+    And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 1') and contains(.,'total: 2')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I follow "Course1"
     And I assess submission "Sam3" in workshop "TestWorkshop" as:"
       | grade__idx_0            | 9 / 10      |
@@ -97,20 +124,32 @@ Feature: Workshop submission and assessment
       | grade__idx_1            | 8 / 10      |
       | peercomment__idx_1      | Very good   |
       | Feedback for the author | No comments |
+<<<<<<< HEAD
     And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 0') and contains(.,'total: 2')]" "xpath_element" should exist
+=======
+    And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 0') and contains(.,'total: 2')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I log out
 # student2 assesses work of student1
     And I log in as "student2"
     And I follow "Course1"
     And I follow "TestWorkshop"
+<<<<<<< HEAD
     And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 1') and contains(.,'total: 1')]" "xpath_element" should exist
+=======
+    And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 1') and contains(.,'total: 1')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I assess submission "Sam1" in workshop "TestWorkshop" as:"
       | grade__idx_0            | 6 / 10     |
       | peercomment__idx_0      |            |
       | grade__idx_1            | 7 / 10     |
       | peercomment__idx_1      |            |
       | Feedback for the author | Keep it up |
+<<<<<<< HEAD
     And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 0') and contains(.,'total: 1')]" "xpath_element" should exist
+=======
+    And "//ul[@class='tasks']/li[div[@class='title' and contains(.,'Assess peers')]]/div[@class='details' and contains(.,'pending: 0') and contains(.,'total: 1')]" "xpath_element" should exists
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     And I log out
 # teacher1 makes sure he can see all peer grades
     And I log in as "teacher1"
@@ -128,7 +167,11 @@ Feature: Workshop submission and assessment
     And I should see "Amazing" in the "//fieldset[contains(.,'Aspect2')]" "xpath_element"
     And I should see "Good work" in the ".overallfeedback" "css_element"
 # teacher1 assesses the work on submission1 and assesses the assessment of peer
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | Override grade for assessment | 11 |
       | Feedback for the reviewer     |    |
     And I press "Save and close"
@@ -136,7 +179,11 @@ Feature: Workshop submission and assessment
     And I follow "Submission1"
     And I should see "Grade: 52 of 80" in the "//div[contains(concat(' ', normalize-space(@class), ' '), ' assessment-full ') and contains(.,'Sam2')]" "xpath_element"
     And I press "Assess"
+<<<<<<< HEAD
     And I set the following fields to these values:
+=======
+    And I fill the moodle form with:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | grade__idx_0            | 1 / 10                      |
       | peercomment__idx_0      | Extremely bad               |
       | grade__idx_1            | 2 / 10                      |

@@ -1232,6 +1232,7 @@ function portfolio_rewrite_pluginfile_url_callback($contextid, $component, $file
     // Loads the HTML.
     $dom = new DomDocument();
     if (!$dom->loadHTML($matches)) {
+<<<<<<< HEAD
         return $matches;
     }
 
@@ -1242,6 +1243,18 @@ function portfolio_rewrite_pluginfile_url_callback($contextid, $component, $file
         // Unexpected sequence, none or too many nodes.
         return $matches;
     }
+=======
+        return $matches;
+    }
+
+    // Navigates to the node.
+    $xpath = new DOMXPath($dom);
+    $nodes = $xpath->query('/html/body/child::*');
+    if (empty($nodes) || count($nodes) > 1) {
+        // Unexpected sequence, none or too many nodes.
+        return $matches;
+    }
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     $dom = $nodes->item(0);
 
     $attributes = array();

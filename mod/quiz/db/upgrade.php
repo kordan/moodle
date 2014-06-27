@@ -409,6 +409,7 @@ function xmldb_quiz_upgrade($oldversion) {
     // Moodle v2.6.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     if ($oldversion < 2014011300) {
 
         // Define key quiz (foreign) to be dropped form quiz_question_instances.
@@ -769,6 +770,8 @@ function xmldb_quiz_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2014022008, 'quiz');
     }
 
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     return true;
 }
 

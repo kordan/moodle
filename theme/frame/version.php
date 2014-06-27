@@ -31,6 +31,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->version   = 2014052701;
+$plugin->release = '1.3';
 $plugin->requires  = 2013110500;
 $plugin->component = 'theme_frame';
 $plugin->dependencies = array(

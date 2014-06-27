@@ -343,6 +343,10 @@ class restore_controller extends base_controller {
      * is called during restore, but not directly part of the restore system, may
      * need to behave differently during restore (e.g. do not bother resetting a
      * cache because we know it will be reset at end of operation).
+<<<<<<< HEAD
+=======
+     * @since Moodle 2.6.3
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      *
      * @return bool True if any restore is currently executing
      */

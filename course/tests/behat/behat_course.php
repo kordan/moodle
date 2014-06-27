@@ -102,10 +102,17 @@ class behat_course extends behat_base {
             // Adding a forced wait until editors are loaded as otherwise selenium sometimes tries clicks on the
             // format field when the editor is being rendered and the click misses the field coordinates.
             $steps[] = new Given('I expand all fieldsets');
+<<<<<<< HEAD
             $steps[] = new Given('I set the field "' . $formatfield . '" to "' . $formatvalue . '"');
             $steps[] = new Given('I set the following fields to these values:', $table);
         } else {
             $steps[] = new Given('I set the following fields to these values:', $table);
+=======
+            $steps[] = new Given('I select "' . $formatvalue . '" from "' . $formatfield . '"');
+            $steps[] = new Given('I fill the moodle form with:', $table);
+        } else {
+            $steps[] = new Given('I fill the moodle form with:', $table);
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         }
 
         $steps[] = new Given('I press "' . get_string('savechanges') . '"');
@@ -122,9 +129,13 @@ class behat_course extends behat_base {
     public function i_go_to_the_courses_management_page() {
         return array(
             new Given('I am on homepage'),
+<<<<<<< HEAD
             new Given('I expand "' . get_string('administrationsite') . '" node'),
             new Given('I expand "' . get_string('courses', 'admin') . '" node'),
             new Given('I follow "' . get_string('coursemgmt', 'admin') . '"')
+=======
+            new Given('I navigate to "' . get_string('coursemgmt', 'admin') . '" node in "' . get_string('administrationsite') . ' > ' . get_string('courses', 'admin') . '"')
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         );
     }
 
@@ -577,7 +588,11 @@ class behat_course extends behat_base {
         $activity = $this->escape($activityname);
         return array(
             new Given('I click on "' . get_string('edittitle') . '" "link" in the "' . $activity .'" activity'),
+<<<<<<< HEAD
             new Given('I set the field "title" to "' . $this->escape($newactivityname) . chr(10) . '"')
+=======
+            new Given('I fill in "title" with "' . $this->escape($newactivityname) . chr(10) . '"')
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         );
     }
 
@@ -635,6 +650,10 @@ class behat_course extends behat_base {
      * @Then /^"(?P<activity_name_string>(?:[^"]|\\")*)" actions menu should be open$/
      * @throws DriverException The step is not available when Javascript is disabled
      * @param string $activityname
+<<<<<<< HEAD
+=======
+     * @return Given
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      */
     public function actions_menu_should_be_open($activityname) {
 
@@ -710,7 +729,16 @@ class behat_course extends behat_base {
         // Not using chain steps here because the exceptions catcher have problems detecting
         // JS modal windows and avoiding interacting them at the same time.
         if ($this->running_javascript()) {
+<<<<<<< HEAD
             $steps[] = new Given('I click on "' . get_string('yes') . '" "button" in the "Confirm" "dialogue"');
+=======
+
+            $element = $this->get_activity_element($deletestring, 'link', $activityname);
+            $element->click();
+
+            $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         } else {
             $steps[] = new Given('I press "' . get_string('yes') . '"');
         }
@@ -1131,6 +1159,7 @@ class behat_course extends behat_base {
         if (!$node->isChecked()) {
             $node->click();
         }
+<<<<<<< HEAD
     }
 
     /**
@@ -1148,6 +1177,25 @@ class behat_course extends behat_base {
     }
 
     /**
+=======
+    }
+
+    /**
+     * Clicks on a category checkbox in the management interface, if checked.
+     *
+     * @Given /^I unselect category "(?P<name>[^"]*)" in the management interface$/
+     * @param string $name
+     */
+    public function i_unselect_category_in_the_management_interface($name) {
+        $node = $this->get_management_category_listing_node_by_name($name);
+        $node = $node->findField('bcat[]');
+        if ($node->isChecked()) {
+            $node->click();
+        }
+    }
+
+    /**
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * Clicks course checkbox in the management interface, if not checked.
      *
      * @Given /^I select course "(?P<name_string>(?:[^"]|\\")*)" in the management interface$/
@@ -1164,7 +1212,11 @@ class behat_course extends behat_base {
     /**
      * Clicks course checkbox in the management interface, if checked.
      *
+<<<<<<< HEAD
      * @Given /^I unselect course "(?P<name_string>(?:[^"]|\\")*)" in the management interface$/
+=======
+     * @Given /^I unselect course "(?P<name>[^"]*)" in the management interface$/
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * @param string $name
      */
     public function i_unselect_course_in_the_management_interface($name) {
@@ -1178,7 +1230,11 @@ class behat_course extends behat_base {
     /**
      * Move selected categories to top level in the management interface.
      *
+<<<<<<< HEAD
      * @Given /^I move category "(?P<name_string>(?:[^"]|\\")*)" to top level in the management interface$/
+=======
+     * @Given /^I move category "(?P<name>[^"]*)" to top level in the management interface$/
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
      * @param string $name
      * @return Given[]
      */

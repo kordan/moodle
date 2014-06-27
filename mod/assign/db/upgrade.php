@@ -462,6 +462,7 @@ function xmldb_assign_upgrade($oldversion) {
     // Moodle v2.6.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     if ($oldversion < 2014010801) {
 
         // Define field sendstudentnotifications to be added to assign.
@@ -482,6 +483,15 @@ function xmldb_assign_upgrade($oldversion) {
 
         // Assign savepoint reached.
         upgrade_mod_savepoint(true, 2014010801, 'assign');
+=======
+    if ($oldversion < 2013110501) {
+
+        // Cleanup bad database records where assignid is missing.
+
+        $DB->delete_records('assign_user_mapping', array('assignment'=>0));
+        // Assign savepoint reached.
+        upgrade_mod_savepoint(true, 2013110501, 'assign');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
     return true;

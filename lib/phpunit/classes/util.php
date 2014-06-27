@@ -112,8 +112,8 @@ class phpunit_util extends testing_util {
         // Stop any message redirection.
         phpunit_util::stop_event_redirection();
 
-        // Release memory and indirectly call destroy() methods to release resource handles, etc.
-        gc_collect_cycles();
+        // We used to call gc_collect_cycles here to ensure desctructors were called between tests.
+        // This accounted for 25% of the total time running phpunit - so we removed it.
 
         // Show any unhandled debugging messages, the runbare() could already reset it.
         self::display_debugging_messages();
@@ -207,6 +207,9 @@ class phpunit_util extends testing_util {
         core_text::reset_caches();
         get_message_processors(false, true);
         filter_manager::reset_caches();
+        // Reset internal users.
+        core_user::reset_internal_users();
+
         //TODO MDL-25290: add more resets here and probably refactor them to new core function
 
         // Reset course and module caches.
@@ -410,9 +413,12 @@ class phpunit_util extends testing_util {
 
         install_cli_database($options, false);
 
+<<<<<<< HEAD
         // Disable all logging for performance and sanity reasons.
         set_config('enabled_stores', '', 'tool_log');
 
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // We need to keep the installed dataroot filedir files.
         // So each time we reset the dataroot before running a test, the default files are still installed.
         self::save_original_data_files();

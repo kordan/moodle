@@ -2174,7 +2174,11 @@ class page_wiki_confirmrestore extends page_wiki_save {
         $version = wiki_get_version($this->version->id);
         $wiki = $PAGE->activityrecord;
         if (wiki_user_can_edit($this->subwiki, $wiki) &&
+<<<<<<< HEAD
                 wiki_restore_page($this->page, $version, $this->modcontext)) {
+=======
+                wiki_restore_page($this->page, $version->content, $version->userid)) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             redirect($CFG->wwwroot . '/mod/wiki/view.php?pageid=' . $this->page->id, get_string('restoring', 'wiki', $version->version), 3);
         } else {
             print_error('restoreerror', 'wiki', $version->version);

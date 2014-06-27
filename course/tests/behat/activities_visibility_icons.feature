@@ -42,6 +42,7 @@ Feature: Toggle activities visibility from the course page
 
   @javascript
   Scenario: Activities can be shown and hidden inside a hidden section
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher1@asd.com |
@@ -49,6 +50,15 @@ Feature: Toggle activities visibility from the course page
       | fullname | shortname | format | numsections |
       | Course 1 | C1 | topics | 2 |
     And the following "course enrolments" exist:
+=======
+    Given the following "users" exists:
+      | username | firstname | lastname | email |
+      | teacher1 | Teacher | 1 | teacher1@asd.com |
+    And the following "courses" exists:
+      | fullname | shortname | format | numsections |
+      | Course 1 | C1 | topics | 2 |
+    And the following "course enrolments" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | user | course | role |
       | teacher1 | C1 | editingteacher |
     And I log in as "teacher1"
@@ -69,6 +79,7 @@ Feature: Toggle activities visibility from the course page
 
   @javascript
   Scenario: Activities can be shown and hidden inside an orphaned section
+<<<<<<< HEAD
     Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher1@asd.com |
@@ -76,6 +87,15 @@ Feature: Toggle activities visibility from the course page
       | fullname | shortname | format | numsections |
       | Course 1 | C1 | topics | 2 |
     And the following "course enrolments" exist:
+=======
+    Given the following "users" exists:
+      | username | firstname | lastname | email |
+      | teacher1 | Teacher | 1 | teacher1@asd.com |
+    And the following "courses" exists:
+      | fullname | shortname | format | numsections |
+      | Course 1 | C1 | topics | 2 |
+    And the following "course enrolments" exists:
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
       | user | course | role |
       | teacher1 | C1 | editingteacher |
     And I log in as "teacher1"

@@ -240,6 +240,7 @@ $CFG->admin = 'admin';
 //      $CFG->session_memcached_acquire_lock_timeout = 120;
 //      $CFG->session_memcached_lock_expire = 7200;       // Ignored if memcached extension <= 2.1.0
 //
+<<<<<<< HEAD
 //   Memcache session handler (requires memcached server and memcache extension):
 //      $CFG->session_handler_class = '\core\session\memcache';
 //      $CFG->session_memcache_save_path = '127.0.0.1:11211';
@@ -247,6 +248,12 @@ $CFG->admin = 'admin';
 //      ** NOTE: Memcache extension has less features than memcached and may be
 //         less reliable. Use memcached where possible or if you encounter
 //         session problems. **
+=======
+// Please be aware that when selecting either Memcached or Memcache for sessions that it is advised to use a dedicated
+// memcache server. The memcache and memcached extensions do not provide isolated environments for individual uses.
+// Using the same server for other purposes (MUC for example) can lead to sessions being prematurely removed should
+// the other uses of the server purge the cache.
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 //
 // Following setting allows you to alter how frequently is timemodified updated in sessions table.
 //      $CFG->session_update_timemodified_frequency = 20; // In seconds.
@@ -625,6 +632,20 @@ $CFG->admin = 'admin';
 // $CFG->behat_prefix = 'bht_';
 // $CFG->behat_dataroot = '/home/example/bht_moodledata';
 //
+<<<<<<< HEAD
+=======
+// To set a seperate wwwroot for Behat to use, use $CFG->behat_wwwroot; this is set automatically
+// to http://localhost:8000 as it is the proposed PHP built-in server URL. Instead of that you can,
+// for example, use an alias, add a host to /etc/hosts or add a new virtual host having a URL
+// poiting to your production site and another one poiting to your test site. Note that you need
+// to ensure that this URL is not accessible from the www as the behat test site uses "sugar"
+// credentials (admin/admin) and can be easily hackable.
+//
+// Example:
+//   $CFG->behat_wwwroot = 'http://192.168.1.250:8000';
+//   $CFG->behat_wwwroot = 'http://localhost/moodlesitetesting';
+//
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 // You can override default Moodle configuration for Behat and add your own
 // params; here you can add more profiles, use different Mink drivers than Selenium...
 // These params would be merged with the default Moodle behat.yml, giving priority
@@ -682,6 +703,7 @@ $CFG->admin = 'admin';
 // Example:
 //   $CFG->behat_extraallowedsettings = array('logsql', 'dblogerror');
 //
+<<<<<<< HEAD
 // You should explicitly allow the usage of the deprecated behat steps, otherwise an exception will
 // be thrown when using them. The setting is disabled by default.
 // Example:
@@ -692,6 +714,8 @@ $CFG->admin = 'admin';
 // Example:
 //   $CFG->behat_additionalfeatures = array('/home/developer/code/wipfeatures');
 //
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 // You can make behat save several dumps when a scenario fails. The dumps currently saved are:
 // * a dump of the DOM in it's state at the time of failure; and
 // * a screenshot (JavaScript is required for the screenshot functionality, so not all browsers support this option)

@@ -130,6 +130,13 @@ $adminediting = optional_param('adminedit', -1, PARAM_BOOL);
 if ($PAGE->user_allowed_editing() && $adminediting != -1) {
     $USER->editing = $adminediting;
 }
+<<<<<<< HEAD
+=======
+
+if (!empty($chooselog)) {
+    $userinfo = get_string('allparticipants');
+    $dateinfo = get_string('alldays');
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 \core\session\manager::write_close();
 
@@ -146,6 +153,7 @@ $reportlog = new report_log_renderable($logreader, $course, $user, $modid, $moda
 $readers = $reportlog->get_readers();
 $output = $PAGE->get_renderer('report_log');
 
+<<<<<<< HEAD
 if (empty($readers)) {
     echo $output->header();
     echo $output->heading(get_string('nologreaderenabled', 'report_log'));
@@ -168,6 +176,38 @@ if (empty($readers)) {
             }
             if (!empty($course) && ($course->id != SITEID)) {
                 $PAGE->navbar->add("$userinfo, $dateinfo");
+=======
+            if ($hostid == $CFG->mnet_localhost_id) {
+                print_log($course, $user, $date, 'l.time DESC', $page, $perpage,
+                        "index.php?id=$course->id&amp;chooselog=1&amp;user=$user&amp;date=$date&amp;modid=$modid&amp;modaction=$modaction&amp;group=$group",
+                        $modname, $modid, $modaction, $group);
+            } else {
+                print_mnet_log($hostid, $id, $user, $date, 'l.time DESC', $page, $perpage, "", $modname, $modid, $modaction, $group);
+            }
+            break;
+        case 'downloadascsv':
+            \core\session\manager::write_close();
+            if (!print_log_csv($course, $user, $date, 'l.time DESC', $modname,
+                    $modid, $modaction, $group)) {
+                echo $OUTPUT->notification("No logs found!");
+                echo $OUTPUT->footer();
+            }
+            exit;
+        case 'downloadasods':
+            \core\session\manager::write_close();
+            if (!print_log_ods($course, $user, $date, 'l.time DESC', $modname,
+                    $modid, $modaction, $group)) {
+                echo $OUTPUT->notification("No logs found!");
+                echo $OUTPUT->footer();
+            }
+            exit;
+        case 'downloadasexcel':
+            \core\session\manager::write_close();
+            if (!print_log_xls($course, $user, $date, 'l.time DESC', $modname,
+                    $modid, $modaction, $group)) {
+                echo $OUTPUT->notification("No logs found!");
+                echo $OUTPUT->footer();
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
             }
             echo $output->render($reportlog);
         } else {

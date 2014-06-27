@@ -82,6 +82,7 @@ function xmldb_assignment_upgrade($oldversion) {
     // Moodle v2.6.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
     if ($oldversion < 2013121900) {
         // Define table assignment_upgrade to be created.
         $table = new xmldb_table('assignment_upgrade');
@@ -119,6 +120,8 @@ function xmldb_assignment_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2013121900, 'assignment');
     }
 
+=======
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     return true;
 }
 

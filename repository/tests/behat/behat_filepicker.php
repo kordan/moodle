@@ -28,7 +28,12 @@
 require_once(__DIR__ . '/../../../lib/behat/behat_files.php');
 
 use Behat\Mink\Exception\ExpectationException as ExpectationException,
+<<<<<<< HEAD
     Behat\Gherkin\Node\TableNode as TableNode;
+=======
+    Behat\Gherkin\Node\TableNode as TableNode,
+    Behat\Behat\Context\Step\Given as Given;
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
 
 /**
  * Steps definitions to deal with the filemanager and filepicker.
@@ -45,6 +50,33 @@ class behat_filepicker extends behat_files {
     /**
      * Creates a folder with specified name in the current folder and in the specified filemanager field.
      *
+<<<<<<< HEAD
+     * @Given /^I create "(?P<foldername_string>(?:[^"]|\\")*)" folder in "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
+=======
+     * Will be deprecated in 2.7
+     * @see behat_filepicker::i_create_folder_in_filemanager()
+     *
+     * @Given /^I create "(?P<foldername_string>(?:[^"]|\\")*)" folder in "(?P<filepicker_field_string>(?:[^"]|\\")*)" filepicker$/
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $foldername
+     * @param string $filemanagerelement
+     */
+<<<<<<< HEAD
+    public function i_create_folder_in_filemanager($foldername, $filemanagerelement) {
+
+        $fieldnode = $this->get_filepicker_node($filemanagerelement);
+
+=======
+    public function i_create_folder_in_filepicker($foldername, $filepickerelement) {
+        $alternative = 'I create "' . $this->escape($foldername) .
+                '" folder in "' . $this->escape($filepickerelement) . '" filemanager';
+        return array(new Given($alternative));
+    }
+
+    /**
+     * Creates a folder with specified name in the current folder and in the specified filemanager field.
+     *
      * @Given /^I create "(?P<foldername_string>(?:[^"]|\\")*)" folder in "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
      * @throws ExpectationException Thrown by behat_base::find
      * @param string $foldername
@@ -54,6 +86,7 @@ class behat_filepicker extends behat_files {
 
         $fieldnode = $this->get_filepicker_node($filemanagerelement);
 
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Looking for the create folder button inside the specified filemanager.
         $exception = new ExpectationException('No folders can be created in "'.$filemanagerelement.'" filemanager', $this->getSession());
         $newfolder = $this->find('css', 'div.fp-btn-mkdir a', $exception, $fieldnode);
@@ -73,6 +106,31 @@ class behat_filepicker extends behat_files {
     /**
      * Opens the contents of a filemanager folder. It looks for the folder in the current folder and in the path bar.
      *
+<<<<<<< HEAD
+     * @Given /^I open "(?P<foldername_string>(?:[^"]|\\")*)" folder from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
+=======
+     * Will be deprecated in 2.7
+     * @see behat_filepicker::i_open_folder_from_filemanager()
+     *
+     * @Given /^I open "(?P<foldername_string>(?:[^"]|\\")*)" folder from "(?P<filepicker_field_string>(?:[^"]|\\")*)" filepicker$/
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $foldername
+     * @param string $filemanagerelement
+     */
+<<<<<<< HEAD
+    public function i_open_folder_from_filemanager($foldername, $filemanagerelement) {
+
+=======
+    public function i_open_folder_from_filepicker($foldername, $filepickerelement) {
+        $alternative = 'I open "' . $this->escape($foldername) . '" folder from "' .
+                $this->escape($filepickerelement) . '" filemanager';
+        return array(new Given($alternative));
+    }
+
+    /**
+     * Opens the contents of a filemanager folder. It looks for the folder in the current folder and in the path bar.
+     *
      * @Given /^I open "(?P<foldername_string>(?:[^"]|\\")*)" folder from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
      * @throws ExpectationException Thrown by behat_base::find
      * @param string $foldername
@@ -80,6 +138,7 @@ class behat_filepicker extends behat_files {
      */
     public function i_open_folder_from_filemanager($foldername, $filemanagerelement) {
 
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         $fieldnode = $this->get_filepicker_node($filemanagerelement);
 
         $exception = new ExpectationException(
@@ -120,6 +179,31 @@ class behat_filepicker extends behat_files {
     /**
      * Unzips the specified file from the specified filemanager field. The zip file has to be visible in the current folder.
      *
+<<<<<<< HEAD
+     * @Given /^I unzip "(?P<filename_string>(?:[^"]|\\")*)" file from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
+=======
+     * Will be deprecated in 2.7
+     * @see behat_filepicker::i_unzip_file_from_filemanager()
+     *
+     * @Given /^I unzip "(?P<filename_string>(?:[^"]|\\")*)" file from "(?P<filepicker_field_string>(?:[^"]|\\")*)" filepicker$/
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $filename
+     * @param string $filemanagerelement
+     */
+<<<<<<< HEAD
+    public function i_unzip_file_from_filemanager($filename, $filemanagerelement) {
+
+=======
+    public function i_unzip_file_from_filepicker($filename, $filepickerelement) {
+        $alternative = 'I unzip "' . $this->escape($filename) . '" file from "' .
+                $this->escape($filepickerelement) . '" filemanager';
+        return array(new Given($alternative));
+    }
+
+    /**
+     * Unzips the specified file from the specified filemanager field. The zip file has to be visible in the current folder.
+     *
      * @Given /^I unzip "(?P<filename_string>(?:[^"]|\\")*)" file from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
      * @throws ExpectationException Thrown by behat_base::find
      * @param string $filename
@@ -127,6 +211,7 @@ class behat_filepicker extends behat_files {
      */
     public function i_unzip_file_from_filemanager($filename, $filemanagerelement) {
 
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Open the contextual menu of the filemanager element.
         $this->open_element_contextual_menu($filename, $filemanagerelement);
 
@@ -138,11 +223,34 @@ class behat_filepicker extends behat_files {
     /**
      * Zips the specified folder from the specified filemanager field. The folder has to be in the current folder.
      *
+<<<<<<< HEAD
+     * @Given /^I zip "(?P<filename_string>(?:[^"]|\\")*)" folder from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
+=======
+     * Will be deprecated in 2.7
+     *
+     * @Given /^I zip "(?P<filename_string>(?:[^"]|\\")*)" folder from "(?P<filepicker_field_string>(?:[^"]|\\")*)" filepicker$/
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $foldername
+     * @param string $filemanagerelement
+     */
+<<<<<<< HEAD
+=======
+    public function i_zip_folder_from_filepicker($foldername, $filepickerelement) {
+        $alternative = 'I zip "' . $this->escape($foldername) . '" folder from "' .
+                $this->escape($filepickerelement) . '" filemanager';
+        return array(new Given($alternative));
+    }
+
+    /**
+     * Zips the specified folder from the specified filemanager field. The folder has to be in the current folder.
+     *
      * @Given /^I zip "(?P<filename_string>(?:[^"]|\\")*)" folder from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
      * @throws ExpectationException Thrown by behat_base::find
      * @param string $foldername
      * @param string $filemanagerelement
      */
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     public function i_zip_folder_from_filemanager($foldername, $filemanagerelement) {
 
         // Open the contextual menu of the filemanager element.
@@ -156,6 +264,7 @@ class behat_filepicker extends behat_files {
     /**
      * Deletes the specified file or folder from the specified filemanager field.
      *
+<<<<<<< HEAD
      * @Given /^I delete "(?P<file_or_folder_name_string>(?:[^"]|\\")*)" from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
      * @throws ExpectationException Thrown by behat_base::find
      * @param string $name
@@ -163,6 +272,32 @@ class behat_filepicker extends behat_files {
      */
     public function i_delete_file_from_filemanager($name, $filemanagerelement) {
 
+=======
+     * Will be deprecated in 2.7
+     * @see behat_filepicker::i_delete_file_from_filemanager()
+     *
+     * @Given /^I delete "(?P<file_or_folder_name_string>(?:[^"]|\\")*)" from "(?P<filepicker_field_string>(?:[^"]|\\")*)" filepicker$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $name
+     * @param string $filepickerelement
+     */
+    public function i_delete_file_from_filepicker($name, $filepickerelement) {
+        $alternative = 'I delete "' . $this->escape($name) . '" from "' .
+                $this->escape($filepickerelement) . '" filemanager';
+        return array(new Given($alternative));
+    }
+
+    /**
+     * Deletes the specified file or folder from the specified filemanager field.
+     *
+     * @Given /^I delete "(?P<file_or_folder_name_string>(?:[^"]|\\")*)" from "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $name
+     * @param string $filemanagerelement
+     */
+    public function i_delete_file_from_filemanager($name, $filemanagerelement) {
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // Open the contextual menu of the filemanager element.
         $this->open_element_contextual_menu($name, $filemanagerelement);
 
@@ -175,6 +310,7 @@ class behat_filepicker extends behat_files {
         $okbutton = $this->find('css', 'div.fp-dlg button.fp-dlg-butconfirm');
         $okbutton->click();
     }
+<<<<<<< HEAD
 
 
     /**
@@ -302,6 +438,135 @@ class behat_filepicker extends behat_files {
             $this->getSession()->wait(self::TIMEOUT, self::PAGE_READY_JS);
         }
 
+=======
+
+
+    /**
+     * Makes sure user can see the exact number of elements (files in folders) in the filemanager.
+     *
+     * @Then /^I should see "(?P<elementscount_number>\d+)" elements in "(?P<filemanagerelement_string>(?:[^"]|\\")*)" filemanager$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param int $elementscount
+     * @param string $filemanagerelement
+     */
+    public function i_should_see_elements_in_filemanager($elementscount, $filemanagerelement) {
+        $filemanagernode = $this->get_filepicker_node($filemanagerelement);
+
+        // We count .fp-file elements inside a filemanager not being updated.
+        $xpath = "//div[contains(concat(' ', normalize-space(@class), ' '), ' filemanager ')]" .
+            "[not(contains(concat(' ', normalize-space(@class), ' '), ' fm-updating '))]" .
+            "//div[contains(concat(' ', normalize-space(@class), ' '), ' fp-content ')]" .
+            "//div[contains(concat(' ', normalize-space(@class), ' '), ' fp-file ')]";
+
+        $elements = $this->find_all('xpath', $xpath, false, $filemanagernode);
+        if (count($elements) != $elementscount) {
+            throw new ExpectationException('Found '.count($elements).' elements in filemanager instead of expected '.$elementscount, $this->getSession());
+        }
+    }
+
+    /**
+     * Picks the file from repository leaving default values in select file dialogue.
+     *
+     * @When /^I add "(?P<filepath_string>(?:[^"]|\\")*)" file from "(?P<repository_string>(?:[^"]|\\")*)" to "(?P<filemanagerelement_string>(?:[^"]|\\")*)" filemanager$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $filepath
+     * @param string $repository
+     * @param string $filemanagerelement
+     */
+    public function i_add_file_from_repository_to_filemanager($filepath, $repository, $filemanagerelement) {
+        $this->add_file_from_repository_to_filemanager($filepath, $repository, $filemanagerelement, new TableNode(), false);
+    }
+
+    /**
+     * Picks the file from repository leaving default values in select file dialogue and confirming to overwrite an existing file.
+     *
+     * @When /^I add and overwrite "(?P<filepath_string>(?:[^"]|\\")*)" file from "(?P<repository_string>(?:[^"]|\\")*)" to "(?P<filemanagerelement_string>(?:[^"]|\\")*)" filemanager$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $filepath
+     * @param string $repository
+     * @param string $filemanagerelement
+     */
+    public function i_add_and_overwrite_file_from_repository_to_filemanager($filepath, $repository, $filemanagerelement) {
+        $this->add_file_from_repository_to_filemanager($filepath, $repository, $filemanagerelement, new TableNode(),
+                get_string('overwrite', 'repository'));
+    }
+
+    /**
+     * Picks the file from repository filling the form in Select file dialogue.
+     *
+     * @When /^I add "(?P<filepath_string>(?:[^"]|\\")*)" file from "(?P<repository_string>(?:[^"]|\\")*)" to "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager as:$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $filepath
+     * @param string $repository
+     * @param string $filemanagerelement
+     * @param TableNode $data Data to fill the form in Select file dialogue
+     */
+    public function i_add_file_from_repository_to_filemanager_as($filepath, $repository, $filemanagerelement, TableNode $data) {
+        $this->add_file_from_repository_to_filemanager($filepath, $repository, $filemanagerelement, $data, false);
+    }
+
+    /**
+     * Picks the file from repository confirming to overwrite an existing file
+     *
+     * @When /^I add and overwrite "(?P<filepath_string>(?:[^"]|\\")*)" file from "(?P<repository_string>(?:[^"]|\\")*)" to "(?P<filemanager_field_string>(?:[^"]|\\")*)" filemanager as:$/
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $filepath
+     * @param string $repository
+     * @param string $filemanagerelement
+     * @param TableNode $data Data to fill the form in Select file dialogue
+     */
+    public function i_add_and_overwrite_file_from_repository_to_filemanager_as($filepath, $repository, $filemanagerelement, TableNode $data) {
+        $this->add_file_from_repository_to_filemanager($filepath, $repository, $filemanagerelement, $data,
+                get_string('overwrite', 'repository'));
+    }
+
+    /**
+     * Picks the file from private files repository
+     *
+     * @throws ExpectationException Thrown by behat_base::find
+     * @param string $filepath
+     * @param string $repository
+     * @param string $filemanagerelement
+     * @param TableNode $data Data to fill the form in Select file dialogue
+     * @param false|string $overwriteaction false if we don't expect that file with the same name already exists,
+     *     or button text in overwrite dialogue ("Overwrite", "Rename to ...", "Cancel")
+     */
+    protected function add_file_from_repository_to_filemanager($filepath, $repository, $filemanagerelement, TableNode $data,
+            $overwriteaction = false) {
+        $filemanagernode = $this->get_filepicker_node($filemanagerelement);
+
+        // Opening the select repository window and selecting the upload repository.
+        $this->open_add_file_window($filemanagernode, $repository);
+
+        $this->open_element_contextual_menu($filepath);
+
+        // Fill the form in Select window.
+        $datahash = $data->getRowsHash();
+
+        // The action depends on the field type.
+        foreach ($datahash as $locator => $value) {
+
+            $field = behat_field_manager::get_form_field_from_label($locator, $this);
+
+            // Delegates to the field class.
+            $field->set_value($value);
+        }
+
+        $this->find_button(get_string('getfile', 'repository'))->click();
+
+        // We wait for all the JS to finish as it is performing an action.
+        $this->getSession()->wait(self::TIMEOUT, self::PAGE_READY_JS);
+
+        if ($overwriteaction !== false) {
+            $overwritebutton = $this->find_button($overwriteaction);
+            $this->ensure_node_is_visible($overwritebutton);
+            $overwritebutton->click();
+
+            // We wait for all the JS to finish.
+            $this->getSession()->wait(self::TIMEOUT, self::PAGE_READY_JS);
+        }
+
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
     }
 
 }

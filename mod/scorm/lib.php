@@ -1445,7 +1445,11 @@ function scorm_check_mode($scorm, &$newattempt, &$attempt, $userid, &$mode) {
     if ($incomplete === true) {
         // The option to start a new attempt should never have been presented. Force false.
         $newattempt = 'off';
+<<<<<<< HEAD
     } else if (($attempt !== '1') && !empty($scorm->forcenewattempt)) {
+=======
+    } else if (!empty($scorm->forcenewattempt)) {
+>>>>>>> 5c1049f72bfc192420281551af7356cb5ec18ea3
         // A new attempt should be forced for already completed attempts.
         $newattempt = 'on';
     }
