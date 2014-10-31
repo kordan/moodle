@@ -144,7 +144,7 @@ function theme_frame_get_html_for_settings(renderer_base $output, moodle_page $p
 
     $return->footnote = '';
     if (!empty($page->theme->settings->footnote)) {
-        $return->footnote = '<div class="footnote text-center">'.$page->theme->settings->footnote.'</div>';
+        $return->footnote = '<div class="footnote text-center">'.format_text($page->theme->settings->footnote).'</div>';
     }
 
     return $return;
@@ -153,6 +153,11 @@ function theme_frame_get_html_for_settings(renderer_base $output, moodle_page $p
 function theme_frame_set_framemargin($css, $framemargin) {
     $tag = '[[setting:framemargin]]';
     $css = str_replace($tag, $framemargin.'px', $css);
+
+    // Set footerframetop top margin
+    $calculated = $framemargin - 15; // the top margin has to be shorter
+    $tag = '[[calculated:framemarginminus15]]';
+    $css = str_replace($tag, $calculated.'px', $css);
 
     // Set .headermenu margin
     $calculated = $framemargin + 22; // 17px is the width of the frame; 5px to avoid to have all stuck
@@ -180,6 +185,31 @@ function theme_frame_set_trendcolor($css, $trendcolor) {
             $css = str_replace($tag, '#EBFFFE', $css);
             $tag = '[[setting:endcolor]]';
             $css = str_replace($tag, '#CDE2F3', $css);
+
+            // styles for alert-info class
+            $tag = '[[setting:alert-info_color]]';
+            $css = str_replace($tag, '#3A87AD', $css);
+            $tag = '[[setting:alert-info_background]]';
+            $css = str_replace($tag, '#D9EDF7', $css);
+            $tag = '[[setting:alert-info_border]]';
+            $css = str_replace($tag, '#BCE8F1', $css);
+
+            // styles for alert-success class
+            $tag = '[[setting:alert-success_color]]';
+            $css = str_replace($tag, '#468847', $css);
+            $tag = '[[setting:alert-success_background]]';
+            $css = str_replace($tag, '#DFF0D8', $css);
+            $tag = '[[setting:alert-success_border]]';
+            $css = str_replace($tag, '#D6E9C6', $css);
+
+            // styles for alert-error class
+            $tag = '[[setting:alert-error_color]]';
+            $css = str_replace($tag, '#B94A48', $css);
+            $tag = '[[setting:alert-error_background]]';
+            $css = str_replace($tag, '#F2DEDE', $css);
+            $tag = '[[setting:alert-error_border]]';
+            $css = str_replace($tag, '#EED3D7', $css);
+
             break;
         case 'lemon':
             // page background
@@ -191,6 +221,31 @@ function theme_frame_set_trendcolor($css, $trendcolor) {
             $css = str_replace($tag, '#FFFAA6', $css);
             $tag = '[[setting:endcolor]]';
             $css = str_replace($tag, '#F7DA41', $css);
+
+            // styles for alert-info class
+            $tag = '[[setting:alert-info_color]]';
+            $css = str_replace($tag, '#3A87AD', $css);
+            $tag = '[[setting:alert-info_background]]';
+            $css = str_replace($tag, '#D9EDF7', $css);
+            $tag = '[[setting:alert-info_border]]';
+            $css = str_replace($tag, '#BCE8F1', $css);
+
+            // styles for alert-success class
+            $tag = '[[setting:alert-success_color]]';
+            $css = str_replace($tag, '#468847', $css);
+            $tag = '[[setting:alert-success_background]]';
+            $css = str_replace($tag, '#DFF0D8', $css);
+            $tag = '[[setting:alert-success_border]]';
+            $css = str_replace($tag, '#D6E9C6', $css);
+
+            // styles for alert-error class
+            $tag = '[[setting:alert-error_color]]';
+            $css = str_replace($tag, '#B94A48', $css);
+            $tag = '[[setting:alert-error_background]]';
+            $css = str_replace($tag, '#F2DEDE', $css);
+            $tag = '[[setting:alert-error_border]]';
+            $css = str_replace($tag, '#EED3D7', $css);
+
             break;
         case 'lime':
             // page background
@@ -202,6 +257,31 @@ function theme_frame_set_trendcolor($css, $trendcolor) {
             $css = str_replace($tag, '#FBFFDA', $css);
             $tag = '[[setting:endcolor]]';
             $css = str_replace($tag, '#E2E499', $css);
+
+            // styles for alert-info class
+            $tag = '[[setting:alert-info_color]]';
+            $css = str_replace($tag, '#3A87AD', $css);
+            $tag = '[[setting:alert-info_background]]';
+            $css = str_replace($tag, '#D9EDF7', $css);
+            $tag = '[[setting:alert-info_border]]';
+            $css = str_replace($tag, '#BCE8F1', $css);
+
+            // styles for alert-success class
+            $tag = '[[setting:alert-success_color]]';
+            $css = str_replace($tag, '#468847', $css);
+            $tag = '[[setting:alert-success_background]]';
+            $css = str_replace($tag, '#DFF0D8', $css);
+            $tag = '[[setting:alert-success_border]]';
+            $css = str_replace($tag, '#D6E9C6', $css);
+
+            // styles for alert-error class
+            $tag = '[[setting:alert-error_color]]';
+            $css = str_replace($tag, '#B94A48', $css);
+            $tag = '[[setting:alert-error_background]]';
+            $css = str_replace($tag, '#F2DEDE', $css);
+            $tag = '[[setting:alert-error_border]]';
+            $css = str_replace($tag, '#EED3D7', $css);
+
             break;
         case 'mink':
             // page background
@@ -213,6 +293,31 @@ function theme_frame_set_trendcolor($css, $trendcolor) {
             $css = str_replace($tag, '#FEFEFE', $css);
             $tag = '[[setting:endcolor]]';
             $css = str_replace($tag, '#E3DFD4', $css);
+
+            // styles for alert-info class
+            $tag = '[[setting:alert-info_color]]';
+            $css = str_replace($tag, '#3A87AD', $css);
+            $tag = '[[setting:alert-info_background]]';
+            $css = str_replace($tag, '#D9EDF7', $css);
+            $tag = '[[setting:alert-info_border]]';
+            $css = str_replace($tag, '#BCE8F1', $css);
+
+            // styles for alert-success class
+            $tag = '[[setting:alert-success_color]]';
+            $css = str_replace($tag, '#468847', $css);
+            $tag = '[[setting:alert-success_background]]';
+            $css = str_replace($tag, '#DFF0D8', $css);
+            $tag = '[[setting:alert-success_border]]';
+            $css = str_replace($tag, '#D6E9C6', $css);
+
+            // styles for alert-error class
+            $tag = '[[setting:alert-error_color]]';
+            $css = str_replace($tag, '#B94A48', $css);
+            $tag = '[[setting:alert-error_background]]';
+            $css = str_replace($tag, '#F2DEDE', $css);
+            $tag = '[[setting:alert-error_border]]';
+            $css = str_replace($tag, '#EED3D7', $css);
+
             break;
         case 'orange':
             // page background
@@ -224,6 +329,31 @@ function theme_frame_set_trendcolor($css, $trendcolor) {
             $css = str_replace($tag, '#FFE8D0', $css);
             $tag = '[[setting:endcolor]]';
             $css = str_replace($tag, '#FDC06D', $css);
+
+            // styles for alert-info class
+            $tag = '[[setting:alert-info_color]]';
+            $css = str_replace($tag, '#3A87AD', $css);
+            $tag = '[[setting:alert-info_background]]';
+            $css = str_replace($tag, '#D9EDF7', $css);
+            $tag = '[[setting:alert-info_border]]';
+            $css = str_replace($tag, '#BCE8F1', $css);
+
+            // styles for alert-success class
+            $tag = '[[setting:alert-success_color]]';
+            $css = str_replace($tag, '#468847', $css);
+            $tag = '[[setting:alert-success_background]]';
+            $css = str_replace($tag, '#DFF0D8', $css);
+            $tag = '[[setting:alert-success_border]]';
+            $css = str_replace($tag, '#D6E9C6', $css);
+
+            // styles for alert-error class
+            $tag = '[[setting:alert-error_color]]';
+            $css = str_replace($tag, '#B94A48', $css);
+            $tag = '[[setting:alert-error_background]]';
+            $css = str_replace($tag, '#F2DEDE', $css);
+            $tag = '[[setting:alert-error_border]]';
+            $css = str_replace($tag, '#EED3D7', $css);
+
             break;
         case 'peach':
             // page background
@@ -235,18 +365,67 @@ function theme_frame_set_trendcolor($css, $trendcolor) {
             $css = str_replace($tag, '#FFE6D7', $css);
             $tag = '[[setting:endcolor]]';
             $css = str_replace($tag, '#F7C099', $css);
+
+            // styles for alert-info class
+            $tag = '[[setting:alert-info_color]]';
+            $css = str_replace($tag, '#3A87AD', $css);
+            $tag = '[[setting:alert-info_background]]';
+            $css = str_replace($tag, '#D9EDF7', $css);
+            $tag = '[[setting:alert-info_border]]';
+            $css = str_replace($tag, '#BCE8F1', $css);
+
+            // styles for alert-success class
+            $tag = '[[setting:alert-success_color]]';
+            $css = str_replace($tag, '#468847', $css);
+            $tag = '[[setting:alert-success_background]]';
+            $css = str_replace($tag, '#DFF0D8', $css);
+            $tag = '[[setting:alert-success_border]]';
+            $css = str_replace($tag, '#D6E9C6', $css);
+
+            // styles for alert-error class
+            $tag = '[[setting:alert-error_color]]';
+            $css = str_replace($tag, '#B94A48', $css);
+            $tag = '[[setting:alert-error_background]]';
+            $css = str_replace($tag, '#F2DEDE', $css);
+            $tag = '[[setting:alert-error_border]]';
+            $css = str_replace($tag, '#EED3D7', $css);
+
             break;
         case 'silver':
             // page background
             $tag = '[[setting:pagebackground]]';
             $css = str_replace($tag, '#EFF0F2', $css);
 
-            // block header background
-            // block header background
+             // block header background
             $tag = '[[setting:begincolor]]';
             $css = str_replace($tag, '#FDFEFF', $css);
             $tag = '[[setting:endcolor]]';
             $css = str_replace($tag, '#E0DFDD', $css);
+
+            // styles for alert-info class
+            $tag = '[[setting:alert-info_color]]';
+            $css = str_replace($tag, '#3A87AD', $css);
+            $tag = '[[setting:alert-info_background]]';
+            $css = str_replace($tag, '#D9EDF7', $css);
+            $tag = '[[setting:alert-info_border]]';
+            $css = str_replace($tag, '#BCE8F1', $css);
+
+            // styles for alert-success class
+            $tag = '[[setting:alert-success_color]]';
+            $css = str_replace($tag, '#468847', $css);
+            $tag = '[[setting:alert-success_background]]';
+            $css = str_replace($tag, '#DFF0D8', $css);
+            $tag = '[[setting:alert-success_border]]';
+            $css = str_replace($tag, '#D6E9C6', $css);
+
+            // styles for alert-error class
+            $tag = '[[setting:alert-error_color]]';
+            $css = str_replace($tag, '#B94A48', $css);
+            $tag = '[[setting:alert-error_background]]';
+            $css = str_replace($tag, '#F2DEDE', $css);
+            $tag = '[[setting:alert-error_border]]';
+            $css = str_replace($tag, '#EED3D7', $css);
+
             break;
         default:
             debugging('It seems a colour has been added to the frame trend colours folder but was not fully managed. The code must be updated by a developer.');

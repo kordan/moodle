@@ -41,7 +41,9 @@ echo $OUTPUT->doctype() ?>
 <header role="banner" class="navbar navbar-fixed-top moodle-has-zindex">
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="<?php echo $CFG->wwwroot;?>"><?php echo $SITE->shortname; ?></a>
+            <a class="brand" href="<?php echo $CFG->wwwroot;?>">
+                <?php echo format_string($SITE->shortname, true, array('context' => context_course::instance(SITEID))); ?>
+            </a>
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -69,23 +71,23 @@ echo $OUTPUT->doctype() ?>
                         <div id="wrapper">
 <!-- begin of frame -->
 
-    <header id="page-header" class="clearfix">
-        <?php echo $html->heading; ?>
-    </header>
+                            <header id="page-header" class="clearfix">
+                                <?php echo $html->heading; ?>
+                            </header>
 
-    <div id="page-content" class="row-fluid">
-        <div id="region-bs-main-and-pre" class="span9">
-            <div class="row-fluid">
-                <section id="region-main" class="span8 pull-right">
-                    <?php echo $OUTPUT->main_content(); ?>
-                </section>
-                <?php echo $OUTPUT->blocks('side-pre', 'span4 desktop-first-column'); ?>
-            </div>
-        </div>
-        <?php echo $OUTPUT->blocks('side-post', 'span3'); ?>
-    </div>
+                            <div id="page-content" class="row-fluid">
+                                <div id="region-bs-main-and-pre" class="span9">
+                                    <div class="row-fluid">
+                                        <section id="region-main" class="span8 pull-right">
+                                            <?php echo $OUTPUT->main_content(); ?>
+                                        </section>
+                                        <?php echo $OUTPUT->blocks('side-pre', 'span4 desktop-first-column'); ?>
+                                    </div>
+                                </div>
+                                <?php echo $OUTPUT->blocks('side-post', 'span3'); ?>
+                            </div>
 
-    <?php echo $OUTPUT->standard_end_of_body_html() ?>
+                            <?php echo $OUTPUT->standard_end_of_body_html() ?>
 
 <!-- end of frame -->
                         </div> <!-- </wrapper> -->

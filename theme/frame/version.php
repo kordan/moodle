@@ -36,4 +36,5 @@ $plugin->requires  = 2013110500;
 $plugin->component = 'theme_frame';
 $plugin->dependencies = array(
     'theme_bootstrapbase'  => 2013110500,
+    'theme_clean'  => 2014051200
 );

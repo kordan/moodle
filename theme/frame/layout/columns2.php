@@ -42,17 +42,19 @@ echo $OUTPUT->doctype() ?>
 <header role="banner" class="navbar navbar-fixed-top<?php echo $html->navbarclass ?> moodle-has-zindex">
     <nav role="navigation" class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="<?php echo $CFG->wwwroot;?>"><?php echo $SITE->shortname; ?></a>
+            <a class="brand" href="<?php echo $CFG->wwwroot;?>">
+                <?php echo format_string($SITE->shortname, true, array('context' => context_course::instance(SITEID))); ?>
+            </a>
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
+            <?php echo $OUTPUT->user_menu(); ?>
             <div class="nav-collapse collapse">
                 <?php echo $OUTPUT->custom_menu(); ?>
                 <ul class="nav pull-right">
                     <li><?php echo $OUTPUT->page_heading_menu(); ?></li>
-                    <li class="navbar-text"><?php echo $OUTPUT->login_info() ?></li>
                 </ul>
             </div>
         </div>
@@ -116,6 +118,7 @@ echo $OUTPUT->doctype() ?>
         <p class="helplink"><?php echo $OUTPUT->page_doc_link(); ?></p>
         <?php
         echo $html->footnote;
+        echo $OUTPUT->login_info();
         echo $OUTPUT->home_link();
         echo $OUTPUT->standard_footer_html();
         ?>

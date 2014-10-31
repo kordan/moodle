@@ -37,7 +37,7 @@ $THEME->name = 'frame';
 //////////////////////////////////
 //
 $THEME->doctype = 'html5';
-$THEME->parents = array('bootstrapbase');
+$THEME->parents = array('clean', 'bootstrapbase');
 $THEME->sheets = array('frame', 'parseme', 'custom');
 $THEME->supportscssoptimisation = false;
 $THEME->yuicssmodules = array();

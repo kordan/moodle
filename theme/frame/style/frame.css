@@ -55,7 +55,7 @@
 #frametop,
 #footerframetop {
     background-image:url([[pix:theme|trend/__setting_trendcolor__/roundcorner/header]]);
-    margin:[[setting:framemargin]];
+    margin:[[calculated:framemarginminus15]] [[setting:framemargin]] [[setting:framemargin]] [[setting:framemargin]];
     background-position:0 0;
     background-repeat:repeat-x;
     min-width:[[calculated:minwidth]];
