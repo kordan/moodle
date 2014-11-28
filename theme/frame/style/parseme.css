@@ -51,3 +51,12 @@ table#defineroletable tr.rolecapheading,
     background-color: [[setting:alert-error_background]];
     border-color: [[setting:alert-error_border]];
 }
+
+.dir-ltr .usermenu {
+    padding-right: [[setting:framemargin]];
+}
+
+.dir-rtl .usermenu {
+    padding-left: [[setting:framemargin]];
+}
+
