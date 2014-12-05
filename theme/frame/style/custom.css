@@ -56,6 +56,10 @@ body.has_dock div#dock {
     background-image: linear-gradient(to bottom,[[setting:begincolor]],[[setting:endcolor]]); /* Standard syntax (must be last) */
 }
 
+#page-footer {
+    border-top: none;
+}
+
 /* ------------------- */
 /* Custom CSS Settings */
 /* ------------------- */
