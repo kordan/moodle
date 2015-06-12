@@ -49,7 +49,8 @@ class MoodleQuickForm_filemanager extends HTML_QuickForm_element {
     // We cannot do $_options = array('return_types'=> FILE_INTERNAL | FILE_REFERENCE);
     // So I have to set null here, and do it in constructor
     protected $_options = array('mainfile' => '', 'subdirs' => 1, 'maxbytes' => -1, 'maxfiles' => -1,
-            'accepted_types' => '*', 'return_types' =>  null, 'areamaxbytes' => FILE_AREA_MAX_BYTES_UNLIMITED);
+            'accepted_types' => '*', 'return_types' =>  null, 'areamaxbytes' => FILE_AREA_MAX_BYTES_UNLIMITED,
+            'class' => '');
 
     /**
      * Constructor
@@ -221,11 +222,7 @@ class MoodleQuickForm_filemanager extends HTML_QuickForm_element {
      * @return string
      */
     function getElementTemplateType() {
-        if ($this->_flagFrozen){
-            return 'nodisplay';
-        } else {
-            return 'default';
-        }
+        return 'default';
     }
 
     /**
@@ -275,6 +272,7 @@ class MoodleQuickForm_filemanager extends HTML_QuickForm_element {
         $options->return_types = $this->_options['return_types'];
         $options->context = $PAGE->context;
         $options->areamaxbytes = $this->_options['areamaxbytes'];
+        $options->class = $this->_options['class'];
 
         $html = $this->_getTabs();
         $fm = new form_filemanager($options);
@@ -286,6 +284,71 @@ class MoodleQuickForm_filemanager extends HTML_QuickForm_element {
         $html .= html_writer::empty_tag('input', array('value' => '', 'id' => 'id_'.$elname, 'type' => 'hidden'));
 
         return $html;
+    }
+
+    /**
+     * What to display when element is frozen.
+     *
+     * @return empty string
+     */
+    public function getFrozenHtml() {
+        global $CFG, $PAGE;
+
+        require_once("$CFG->dirroot/repository/lib.php");
+
+        $id = $this->_attributes['id'];
+        $elname = $this->_attributes['name'];
+        $subdirs = $this->_options['subdirs'];
+        $maxbytes = $this->_options['maxbytes'];
+        $draftitemid = $this->getValue();
+        $accepted_types = $this->_options['accepted_types'];
+
+        if (empty($draftitemid)) {
+            // no existing area info provided - let's use fresh new draft area
+            require_once("$CFG->libdir/filelib.php");
+            $this->setValue(file_get_unused_draft_itemid());
+            $draftitemid = $this->getValue();
+        }
+
+        $client_id = uniqid();
+
+        // filemanager options
+        $options = new stdClass();
+        $options->mainfile = $this->_options['mainfile'];
+        $options->maxbytes = $this->_options['maxbytes'];
+        $options->maxfiles = $this->getMaxfiles();
+        $options->client_id = $client_id;
+        $options->itemid = $draftitemid;
+        $options->subdirs = $this->_options['subdirs'];
+        $options->target = $id;
+        $options->accepted_types = $accepted_types;
+        $options->return_types = $this->_options['return_types'];
+        $options->context = $PAGE->context;
+        $options->areamaxbytes = $this->_options['areamaxbytes'];
+        $options->class = $this->_options['class'];
+
+        $fm = new form_filemanager($options);
+
+        $return = '';
+        $attachmentcount = count($fm->options->list);
+        $attachmentcount -= 1;
+        foreach ($fm->options->list as $k => $list) {
+            $return .= html_writer::start_tag('div', array('class' => $fm->options->class));
+
+            // $return .= '<a href="'.$list->url.'"><img src="'.$list->thumbnail.'" /></a>';
+            $return .= html_writer::start_tag('a', array('title' => s($list->filename), 'href' => $list->url));
+            $return .= html_writer::empty_tag('img', array('src' => $list->thumbnail));
+            $return .= html_writer::end_tag('a');
+
+            // $return .= '<a href="'.$list->url.'">'.s($list->filename).'</a><br />';
+            $return .= html_writer::start_tag('a', array('title' => s($list->filename), 'href' => $list->url));
+            $return .= s($list->filename);
+            $return .= html_writer::end_tag('a');
+
+            $return .= html_writer::end_tag('div');
+        }
+
+        return $return;
     }
 }
 
