@@ -270,11 +270,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element {
      * @return string
      */
     function getElementTemplateType() {
-        if ($this->_flagFrozen){
-            return 'nodisplay';
-        } else {
-            return 'default';
-        }
+        return 'default';
     }
 
     /**
@@ -294,6 +290,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element {
 
         $id           = $this->_attributes['id'];
         $elname       = $this->_attributes['name'];
+        $class        = isset($this->_attributes['class']) ? $this->_attributes['class'] : '';
 
         $subdirs      = $this->_options['subdirs'];
         $maxbytes     = $this->_options['maxbytes'];
@@ -311,7 +308,7 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element {
         }
 
         $str = $this->_getTabs();
-        $str .= '<div>';
+        $str .= '<div class="'.$class.'">';
 
         $editor = editors_get_preferred_editor($format);
         $strformats = format_text_menu();
@@ -441,7 +438,17 @@ class MoodleQuickForm_editor extends HTML_QuickForm_element {
      * @return empty string
      */
     function getFrozenHtml() {
+        $value = strlen($this->_values['text']) ? $this->_values['text'] : '&nbsp;';
 
-        return '';
+        $output = $this->_getTabs();
+        if (empty($this->_attributes['class'])) {
+            $output .= html_writer::tag('div', $value);
+        } else {
+            $class = array('class' => $this->_attributes['class']);
+            $output .= html_writer::tag('div', $value, $class);
+        }
+        $output .= $this->_getPersistantData();
+
+        return $output;
     }
 }
