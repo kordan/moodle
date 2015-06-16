@@ -120,7 +120,8 @@ class MoodleQuickForm_checkbox extends HTML_QuickForm_checkbox{
     function getFrozenHtml()
     {
         //$this->_generateId();
-        $output = '<input type="checkbox" disabled="disabled" id="'.$this->getAttribute('id').'" ';
+        $class = isset($this->_attributes['class']) ? $this->_attributes['class'] : '';
+        $output = '<input type="checkbox" disabled="disabled" id="'.$this->getAttribute('id').'" class="'.$class.'" ';
         if ($this->getChecked()) {
             $output .= 'checked="checked" />'.$this->_getPersistantData();
         } else {
