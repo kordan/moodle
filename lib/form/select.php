@@ -133,11 +133,7 @@ class MoodleQuickForm_select extends HTML_QuickForm_select{
      * @return string
      */
     function getElementTemplateType(){
-        if ($this->_flagFrozen){
-            return 'static';
-        } else {
-            return 'default';
-        }
+        return 'default';
     }
 
    /**
@@ -178,5 +174,52 @@ class MoodleQuickForm_select extends HTML_QuickForm_select{
         } else {
             return $this->_prepareValue($cleaned[0], $assoc);
         }
+    }
+
+    /**
+     * What to display when element is frozen.
+     *
+     * @return empty string
+     */
+    public function getFrozenHtml() {
+        $values = array();
+        if (is_array($this->_values)) {
+            foreach ($this->_values as $key => $val) {
+                for ($i = 0, $optCount = count($this->_options); $i < $optCount; $i++) {
+                    if ((string)$val == (string)$this->_options[$i]['attr']['value']) {
+                        $values[$key] = $this->_options[$i]['text'];
+                        break;
+                    }
+                }
+            }
+        }
+
+        $attributes = array('disabled' => 'disabled');
+        if (isset($this->_attributes['class'])) {
+            $attributes['class'] = $this->_attributes['class'];
+        }
+        if (isset($this->_attributes['multiple'])) {
+            $attributes['multiple'] = 'multiple';
+            $output = html_writer::start_tag('select', $attributes);
+            foreach ($this->_options as $option) {
+                if (in_array($option['text'], $values)) {
+                    $attributes = array('value' => $option['attr']['value']);
+                    $output .= html_writer::tag('option', $option['text'], $attributes);
+                }
+            }
+        } else {
+            $value = $values[0];
+            $output = html_writer::start_tag('select', $attributes);
+            foreach ($this->_options as $option) {
+                if ($option['text'] == $value) {
+                    $attributes = array('value' => $option['attr']['value']);
+                    $output .= html_writer::tag('option', $option['text'], $attributes);
+                    break;
+                }
+            }
+        }
+        $output .= html_writer::end_tag('select');
+
+        return $output;
     }
 }
