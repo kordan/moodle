@@ -51,8 +51,8 @@ class MoodleQuickForm_static extends HTML_QuickForm_static{
      * @param string $elementLabel (optional) text field label
      * @param string $text (optional) Text to put in text field
      */
-    function MoodleQuickForm_static($elementName=null, $elementLabel=null, $text=null) {
-        parent::HTML_QuickForm_static($elementName, $elementLabel, $text);
+    function MoodleQuickForm_static($elementName=null, $elementLabel=null, $text=null, $option=null) {
+        parent::HTML_QuickForm_static($elementName, $elementLabel, $text, $option);
     }
 
     /**
