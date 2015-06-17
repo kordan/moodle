@@ -85,7 +85,8 @@ class MoodleQuickForm_radio extends HTML_QuickForm_radio{
      */
     function getFrozenHtml()
     {
-        $output = '<input type="radio" disabled="disabled" id="'.$this->getAttribute('id').'" ';
+        $class = isset($this->_attributes['class']) ? $this->_attributes['class'] : '';
+        $output = '<input type="radio" disabled="disabled" id="'.$this->getAttribute('id').'" class="'.$class.'" ';
         if ($this->getChecked()) {
             $output .= 'checked="checked" />'.$this->_getPersistantData();
         } else {
